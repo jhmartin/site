@@ -1,0 +1,480 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>DNS as a Service Discovery Load Balancer - Toger Blog</title>
+  <meta name="author" content="Jason Martin jhmartin@toger.us">
+
+  
+  <meta name="description" content="DNS makes for a deceptively easy service-discovery platform. Various platforms (such as Docker swarm, Amazon Auto-Naming purport to provide a trivial &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="E6g-RygMY6w5OqT7qnwKg3eJJnGYWWhMysZEcgihuB8" />
+
+  
+  <link rel="canonical" href="http://jhmartin.github.io/site/blog/2018/08/19/dns-as-a-load-balancer">
+  <link href="/site/favicon.png" rel="icon">
+  <link href="/site/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/site/atom.xml" rel="alternate" title="Toger Blog" type="application/atom+xml">
+  <script src="/site/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/site/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-50432157-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/site/">Toger Blog</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/site/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jhmartin.github.io/site" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/site/">Blog</a></li>
+  <li><a href="/site/blog/archives">Archives</a></li>
+  <li><a href="/site/gpg-pgp-key">GPG/PGP Key</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">DNS as a Service Discovery Load Balancer</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2018-08-19T13:38:22-07:00" pubdate data-updated="true">Aug 19<sup>th</sup>, 2018</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>DNS makes for a deceptively easy service-discovery platform. Various platforms (such as  <a href="https://docs.docker.com/network/overlay/">Docker swarm</a>, <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/overview-service-discovery.html">Amazon Auto-Naming</a> purport to provide a trivial to use service discovery mechanism. DNS is handled in most applications, so has the allure of working with legacy applications with zero integration work. Contrast DNS with purpose-built service discovery mechanisms such as <a href="https://technologyconversations.com/2015/09/08/service-discovery-zookeeper-vs-etcd-vs-consul/">Consul, Zookeeper, and Etcd</a> or <a href="https://github.com/Netflix/eureka">Netflix Eureka</a>. These tools require additional effort on the part of developers to integrate, but the result is much more robust. I tested several platforms below as to how they handle DNS round-robin loadbalancing.</p>
+
+<!-- more -->
+
+
+<p></p>
+
+<p>DNS falls into the trap of being <em>too</em> easy to use. In this respects, DNS fails the <a href="https://en.wikipedia.org/wiki/Duck_test">Duck test</a> for service discovery. That is to say, while it walks and talks like a duck, it is not actually a duck.  Everyone &lsquo;knows&rsquo; DNS &mdash; every URL handling library is already capeable of handling DNS, so developers do not have to address discovery, or system integrators do not have to think about how to shim apps together.  The trap is a vicious badger masquerading as a duck. While all URL libraries handle DNS, they are not robust enough to replace the behavior of a full-fledged SD such as Consul. (I&rsquo;ll speak mostly to Consul as I am familiar with it, but this is not to say its competitor are insufficient). The DNS resolution libraries within various platforms differ significantly in behavior, causing sub-optimal application behavior. At small scale this is not an issue &mdash; all of them can competently resolve a name to a single address and connect.  They differ more when the resolution changes or returns multiple values.</p>
+
+<p>Take for example Java &mdash; its poor DNS caching behavior is <a href="http://mattryall.net/blog/2005/03/javas-awful-dns-caching">well</a> <a href="https://stackoverflow.com/questions/1256556/any-way-to-make-java-honor-the-dns-caching-timeout-ttl">documented</a> and still requires <a href="https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/java-dg-jvm-ttl.html">configuration changes</a> to even remotely reasonably handle changes in DNS responses at runtime.  We&rsquo;ll look at the current behavior in more detail.</p>
+
+<p>Imagine a client application that has a significant number of backends &mdash; 1:100 in the test case used here. Obviously, one backend cannot handle all of the load generated by the frontend, so the ideal behavior is for the traffic to be spread across the backends evenly.  This test examined the behavior of several popular business application languages and how they handled DNS resolution.</p>
+
+<p>Integrating a full-fledged SD system allows the developer to get the up-to-the-second state of the environment (such as when performing Consul long-polls), forces them to consider how they want to splay requests across the possible backends, and how to react to changes in the topology. Applications that do not want to perform this level of integration can take advantage of shim mechanisms such as <a href="https://www.consul.io/intro/getting-started/connect.html">Consul Connect</a>, <a href="https://github.com/fabiolb/fabio">FabioLB</a>, or external dynamic loadbalancers such as <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html">Amazon ALB</a>. While ALBs still utilize DNS, DNS for ALBs changes at a more &lsquo;normal&rsquo; DNS pace, and a given node&rsquo;s capacity is such that it is unlikely a single client can cause an overload.</p>
+
+<h2>Test setup</h2>
+
+<ul>
+<li>Single-node Docker Swarm on a CentOS 7.5.1804 VM, running Docker 18.06.0-ce</li>
+<li>100 <a href="https://github.com/jhmartin/iptest-nginx">Nginx</a> containers each configured to return their own ip address for <code>/</code>.</li>
+<li>Client images, each performing 10,000 requests first naively then with a connection pool.
+
+<ul>
+<li><a href="https://github.com/jhmartin/iptest-ruby">Ruby</a></li>
+<li><a href="https://github.com/jhmartin/iptest-python">Python</a></li>
+<li><a href="https://github.com/jhmartin/iptest-ruby">Ruby</a></li>
+<li><a href="https://github.com/jhmartin/iptest-java">Java</a></li>
+<li><a href="https://github.com/jhmartin/iptest-php">PHP</a></li>
+</ul>
+</li>
+</ul>
+
+
+<p>See the <a href="https://gist.github.com/jhmartin/3a0de7d705eed4b670146c60dfccdb3e">Docker stack definition</a></p>
+
+<div><script src='https://gist.github.com/3a0de7d705eed4b670146c60dfccdb3e.js?file=docker-compose.yml'></script>
+<noscript><pre><code>version: &quot;3.2&quot;
+networks:
+  net1:
+
+services:
+  nginx:
+    # replace username/repo:tag with your name and image details
+    image: jhmartin/iptest-nginx:latest
+    deploy:
+      endpoint_mode: dnsrr
+      replicas: 100
+      restart_policy:
+        condition: on-failure
+    networks:
+      net1:
+       aliases:
+         - ip
+  ruby:
+    # replace username/repo:tag with your name and image details
+    image: jhmartin/iptest-ruby:latest
+    depends_on:
+      - nginx
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: none
+    networks:
+      - net1
+  node:
+    # replace username/repo:tag with your name and image details
+    image: jhmartin/iptest-node:latest
+    depends_on:
+      - nginx
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: none
+    networks:
+      - net1
+  python:
+    # replace username/repo:tag with your name and image details
+    image: jhmartin/iptest-python:latest
+    depends_on:
+      - nginx
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: none
+    networks:
+      - net1
+  java:
+    # replace username/repo:tag with your name and image details
+    image: jhmartin/iptest-java:latest
+    depends_on:
+      - nginx
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: none
+    networks:
+      - net1
+  php:
+    # replace username/repo:tag with your name and image details
+    image: jhmartin/iptest-php:latest
+    depends_on:
+      - nginx
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: none
+    networks:
+      - net1</code></pre></noscript></div>
+
+
+<p>Docker swarm is configured in <code>endpoint_mode: dnsrr</code> mode such that DNS resolution of the nginx service returns 100 <code>A</code> records. Each application first users the generic URL request library to query nginx 10,000 times and outputs the result (the server ip address) each time. The next batch attempts to use the platform specific connection-pool mechanism, as employing persistent connections is a very frequent optimization for http-heavy applications. The results were filtered and the resulting ip addresses run through a ruby script to map them to a x/y array:</p>
+
+<div><script src='https://gist.github.com/3a0de7d705eed4b670146c60dfccdb3e.js?file=createpoints.rb'></script>
+<noscript><pre><code>#!/usr/bin/env ruby
+
+# Input is an ip address. Map it to a position in a list.
+positioncount=0
+linecount=0
+indexes=Hash.new
+
+STDIN.read.split(&quot;\n&quot;).each do |a|
+   a=a.chomp
+   if (! indexes.has_key?(a))
+     indexes[a]=positioncount
+     positioncount += 1
+  end
+
+  puts &quot;#{linecount}\t#{indexes[a]}\n&quot;
+  linecount += 1
+end
+</code></pre></noscript></div>
+
+
+<p>The client service logs were filtered into distinct files and transformed with <code>createpoints.rb</code> then passed through <a href="http://gnuplot.info/">gnuplot</a>:</p>
+
+<div><script src='https://gist.github.com/3a0de7d705eed4b670146c60dfccdb3e.js?file=gnuplot.script'></script>
+<noscript><pre><code>set term png
+
+set title &quot;Ruby Simple LB&quot;
+plot &quot;ruby.SIMPLE.dat&quot;
+
+set output &quot;ruby.persist.png
+plot &quot;ruby.PERSIST.dat&quot;
+
+set output &quot;python.simple.png&quot;
+plot &quot;python.SIMPLE.dat&quot;
+
+set output &quot;python.persist.png&quot;
+plot &quot;python.PERSIST.dat&quot;
+
+set output &quot;java.simple.png&quot;
+plot &quot;java.SIMPLE.dat&quot;
+
+set output &quot;java.persist.png&quot;
+plot &quot;java.PERSIST.dat&quot;
+
+set output &quot;php.simple.png&quot;
+plot &quot;php.SIMPLE.dat&quot;
+
+set output &quot;php.persist.png&quot;
+plot &quot;php.PERSIST.dat&quot;
+
+set output &quot;node.simple.png&quot;
+plot &quot;node.SIMPLE.dat&quot;
+
+set output &quot;node.persist.png&quot;
+plot &quot;node.PERSIST.dat&quot;
+</code></pre></noscript></div>
+
+
+<h2>Results</h2>
+
+<p>The ideal result is a uniformlly distributed graph such that backend requests are splayed across available nodes.</p>
+
+<p>Java Simple LB:<br/>
+<img src="/site/images/iptest/java.simple.png" width="240" height="160" title="Java Simple LB" ></p>
+
+<p>While not included here, setting the DNS cache to 0 resulted in all requests targeting one backend at a time, rotating every second.</p>
+
+<p>Java Persistent LB:<br/>
+<img src="/site/images/iptest/java.persist.png" width="240" height="160" title="Java Persistent LB" ></p>
+
+<p>NodeJS Simple LB:<br/>
+<img src="/site/images/iptest/node.simple.png" width="240" height="160" title="NodeJS Simple LB" ></p>
+
+<p>Great distribution here.</p>
+
+<p>NodeJS Persistent LB:<br/>
+<img src="/site/images/iptest/node.persist.png" width="240" height="160" title="NodeJS Persistent LB" ></p>
+
+<p>Node w/connection pooling generally selects one backend for a short period and sends all traffic to it.</p>
+
+<p>PHP Simple LB:<br/>
+<img src="/site/images/iptest/php.simple.png" width="240" height="160" title="PHP Simple LB" ></p>
+
+<p>PHP Persistent LB:<br/>
+<img src="/site/images/iptest/php.persist.png" width="240" height="160" title="PHP Persistent LB" ></p>
+
+<p>Python Simple LB:<br/>
+<img src="/site/images/iptest/python.simple.png" width="240" height="160" title="Python Simple LB" ></p>
+
+<p>Python Persistent LB:<br/>
+<img src="/site/images/iptest/python.persist.png" width="240" height="160" title="Python Persistent LB" ></p>
+
+<p>Ruby Simple LB:<br/>
+<img src="/site/images/iptest/ruby.simple.png" width="240" height="160" title="Ruby Simple LB" ></p>
+
+<p>Rubt Persistent LB:<br/>
+<img src="/site/images/iptest/ruby.persist.png" width="240" height="160" title="Ruby Persistent LB" ></p>
+
+<h2>Conclusion</h2>
+
+<p>Platform DNS behavior varies widely, and behaves poorly in a service-discovery environment unless specific care is taken.  DNS is normally not something a developer is concerned with, so in my opinion is likely to be overlooked.  A proper loadbalancer or service discovery integration is going to be more successful in the long run and avoid unexpected DNS pitfalls.</p>
+
+<p>If I&rsquo;ve missed something in how the client apps should behave, please submit a PR to the appropriate application repo and I&rsquo;ll integrate the changes into this post.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jason Martin jhmartin@toger.us</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2018-08-19T13:38:22-07:00" pubdate data-updated="true">Aug 19<sup>th</sup>, 2018</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/site/blog/categories/dns/'>dns</a>, <a class='category' href='/site/blog/categories/service-discovery/'>service-discovery</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/site/blog/2017/09/24/home-automation-ideas/" title="Previous Post: Home Automation Ideas">&laquo; Home Automation Ideas</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/site/blog/2018/08/19/dns-as-a-load-balancer/">DNS as a Service Discovery Load Balancer</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2017/09/24/home-automation-ideas/">Home Automation Ideas</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2017/06/17/jenkins-and-github-hooks/">Jenkinsfile and Github Hooks</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2017/04/20/aws-route53-failover-and-alb/">AWS Route53 Failover and ALB</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2016/06/08/cloud-init-with-centos7-and-chef/">Cloud-Init With CentOS7, Chef, and SELinux</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/jhmartin">@jhmartin</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'jhmartin',
+            count: 21,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/site/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section class="googleplus googleplus-hidden">
+  <h1>
+    <a href="https://plus.google.com/105964388252097959079?rel=author">
+      <img src="//www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - Jason Martin jhmartin@toger.us -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

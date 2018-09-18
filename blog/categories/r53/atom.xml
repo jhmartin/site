@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: R53 | Toger Blog]]></title>
+  <link href="http://jhmartin.github.io/site/blog/categories/r53/atom.xml" rel="self"/>
+  <link href="http://jhmartin.github.io/site/"/>
+  <updated>2018-09-18T06:55:48-07:00</updated>
+  <id>http://jhmartin.github.io/site/</id>
+  <author>
+    <name><![CDATA[Jason Martin jhmartin@toger.us]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[AWS Route53 Failover and ALB]]></title>
+    <link href="http://jhmartin.github.io/site/blog/2017/04/20/aws-route53-failover-and-alb/"/>
+    <updated>2017-04-20T08:51:25-07:00</updated>
+    <id>http://jhmartin.github.io/site/blog/2017/04/20/aws-route53-failover-and-alb</id>
+    <content type="html"><![CDATA[<p>I ran across this little gotcha recently.</p>
+
+<p>Scenario: A service hosted in two regions.  Each is fronted by either an ALB or ELB with an attached Autoscale group, that uses the LB healthcheck to determine instance health.  A Route53 configuration balances trafic between the two. Route53 &lsquo;Evaluate Target Health&rsquo; is set to yes and no healthcheck is attached.</p>
+
+<p>Under the ELB, if the backend application fails in a region, the ELB will trigger termination of the application nodes.  Route53 will consider the region unhealthy if all the backends are sick or unregistered and fail over to the remaining region.</p>
+
+<p>Under the ALB, the same occurs except Route53 does not consider an empty ALB as unhealthy and will continue to send traffic to a region with no registered backends.</p>
+
+<p>This is to a certain extent understandable, as ALBs allow attaching multiple target groups and its not immediately obvious what to do when there is a mix of statuses. I suspect the common case is that most ALBs have exactly one target group attached though and that could be used as the status, or allow Route53 to be bound to a specific target group.</p>
+
+<p>The current workaround is to use a Route53 Healthcheck (at an additional $1+ per month per check) to have Route53 perform an application healthcheck against each origin.</p>
+]]></content>
+  </entry>
+  
+</feed>

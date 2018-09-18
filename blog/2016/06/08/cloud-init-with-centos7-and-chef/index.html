@@ -1,0 +1,342 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Cloud-Init With CentOS7, Chef, and SELinux - Toger Blog</title>
+  <meta name="author" content="Jason Martin jhmartin@toger.us">
+
+  
+  <meta name="description" content="The CentOS 7 AMI in Amazon comes with Cloud-Init (cloud-init-0.7.5-10.el7.centos.1.x86_64). This is quite handy as it assists in automating several &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="E6g-RygMY6w5OqT7qnwKg3eJJnGYWWhMysZEcgihuB8" />
+
+  
+  <link rel="canonical" href="http://jhmartin.github.io/site/blog/2016/06/08/cloud-init-with-centos7-and-chef">
+  <link href="/site/favicon.png" rel="icon">
+  <link href="/site/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/site/atom.xml" rel="alternate" title="Toger Blog" type="application/atom+xml">
+  <script src="/site/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/site/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-50432157-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/site/">Toger Blog</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/site/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jhmartin.github.io/site" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/site/">Blog</a></li>
+  <li><a href="/site/blog/archives">Archives</a></li>
+  <li><a href="/site/gpg-pgp-key">GPG/PGP Key</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Cloud-Init With CentOS7, Chef, and SELinux</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2016-06-08T20:57:00-07:00" pubdate data-updated="true">Jun 8<sup>th</sup>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>The CentOS 7 AMI in Amazon comes with Cloud-Init (<code>cloud-init-0.7.5-10.el7.centos.1.x86_64</code>). This is quite handy as it assists in automating several bootup tasks. One of these tasks is to install and bootstrap Chef.  Unforunately, when SELinux is installed the Chef handler will fail.</p>
+
+<p>Sample error:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[CLOUDINIT] util.py[DEBUG]: Restoring selinux mode for /var/lib (recursive=True)
+</span><span class='line'>[CLOUDINIT] util.py[DEBUG]: Running chef (&lt;module 'cloudinit.config.cc_chef' from '/usr/lib/python2.7/site-packages/cloudinit/config/cc_chef.py'&gt;) failed
+</span><span class='line'>       Traceback (most recent call last):
+</span><span class='line'>         File "/usr/lib/python2.7/site-packages/cloudinit/stages.py", line 658, in _run_modules
+</span><span class='line'>           cc.run(run_name, mod.handle, func_args, freq=freq)
+</span><span class='line'>         File "/usr/lib/python2.7/site-packages/cloudinit/cloud.py", line 63, in run
+</span><span class='line'>           return self._runners.run(name, functor, args, freq, clear_on_fail)
+</span><span class='line'>         File "/usr/lib/python2.7/site-packages/cloudinit/helpers.py", line 197, in run
+</span><span class='line'>           results = functor(*args)
+</span><span class='line'>         File "/usr/lib/python2.7/site-packages/cloudinit/config/cc_chef.py", line 54, in handle
+</span><span class='line'>           util.ensure_dir(d)
+</span><span class='line'>         File "/usr/lib/python2.7/site-packages/cloudinit/util.py", line 1291, in ensure_dir
+</span><span class='line'>           os.makedirs(path)
+</span><span class='line'>         File "/usr/lib/python2.7/site-packages/cloudinit/util.py", line 167, in __exit__
+</span><span class='line'>           self.selinux.restorecon(path, recursive=self.recursive)
+</span><span class='line'>         File "/usr/lib64/python2.7/site-packages/selinux/__init__.py", line 95, in restorecon
+</span><span class='line'>           for fname in fnames]), None)
+</span><span class='line'>         File "/usr/lib64/python2.7/posixpath.py", line 246, in walk
+</span><span class='line'>           walk(name, func, arg)
+</span><span class='line'>         File "/usr/lib64/python2.7/posixpath.py", line 238, in walk
+</span><span class='line'>           func(arg, top, names)
+</span><span class='line'>         File "/usr/lib64/python2.7/site-packages/selinux/__init__.py", line 95, in &lt;lambda&gt;
+</span><span class='line'>           for fname in fnames]), None)
+</span><span class='line'>         File "/usr/lib64/python2.7/site-packages/selinux/__init__.py", line 85, in restorecon
+</span><span class='line'>           status, context = matchpathcon(path, mode)
+</span><span class='line'>       OSError: [Errno 2] No such file or directory</span></code></pre></td></tr></table></div></figure>
+
+
+<!-- more -->
+
+
+<p>This proved to be most frustrating.  It was obviously failing while it was fixing the SELinux parameters under <code>/var/lib</code>, but it was not clear why.  There were no denied messages in the audit log. Of course <code>/var/lib</code> and <code>/var/lib/chef</code> existed. <code>/var/lib/chef</code> is a default directory listed in <code>/usr/lib/python2.7/site-packages/cloudinit/config/cc_chef.py</code>.</p>
+
+<p>Adding in several debug statements led to determining that the issue was specific to <code>/var/lib/nfs/rpc_pipefs</code>. The file existed and had no special permissions, although it had a generic SELinux label as opposed to a nfs-specific value.  Further investigation showed that the root of the issue was in libselinux, which is looking up the intended label in <code>/etc/selinux/targeted/contexts/files/file_contents</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/usr/share/Modules/init(/.*)?   system_u:object_r:bin_t:s0
+</span><span class='line'>/var/lib/nfs/rpc_pipefs(/.*)?   &lt;&lt;none&gt;&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The selinux python library is expecting a label as above, and returns a Errno 2 &lsquo;No such file or directory&rsquo; if it hits the &lsquo;none&rsquo; value.  This error is returned to cloud-init and causes the chef handler to bomb out.
+Adding a label to the file_contents file works around the issue but likely breaks NFS (if it were in use). The better approach would be for <code>util.py</code> to ignore the case where a new label cannot be found. If CentOS7 updated to the latest cloud-init there is a decent chance this is fixed.</p>
+
+<p>Filed as <a href="https://bugs.centos.org/view.php?id=10990.">https://bugs.centos.org/view.php?id=10990.</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jason Martin jhmartin@toger.us</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2016-06-08T20:57:00-07:00" pubdate data-updated="true">Jun 8<sup>th</sup>, 2016</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/site/blog/categories/aws/'>aws</a>, <a class='category' href='/site/blog/categories/chef/'>chef</a>, <a class='category' href='/site/blog/categories/cloud-init/'>cloud-init</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/site/blog/2016/06/05/extending-aws-instance-trust/" title="Previous Post: Extending AWS Instance trust">&laquo; Extending AWS Instance trust</a>
+      
+      
+        <a class="basic-alignment right" href="/site/blog/2017/04/20/aws-route53-failover-and-alb/" title="Next Post: AWS Route53 Failover and ALB">AWS Route53 Failover and ALB &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/site/blog/2018/08/19/dns-as-a-load-balancer/">DNS as a Service Discovery Load Balancer</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2017/09/24/home-automation-ideas/">Home Automation Ideas</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2017/06/17/jenkins-and-github-hooks/">Jenkinsfile and Github Hooks</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2017/04/20/aws-route53-failover-and-alb/">AWS Route53 Failover and ALB</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2016/06/08/cloud-init-with-centos7-and-chef/">Cloud-Init With CentOS7, Chef, and SELinux</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/jhmartin">@jhmartin</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'jhmartin',
+            count: 21,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/site/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section class="googleplus googleplus-hidden">
+  <h1>
+    <a href="https://plus.google.com/105964388252097959079?rel=author">
+      <img src="//www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - Jason Martin jhmartin@toger.us -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

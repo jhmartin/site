@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>AWS ECS and Docker Exit (137) - Toger Blog</title>
+  <meta name="author" content="Jason Martin jhmartin@toger.us">
+
+  
+  <meta name="description" content="I ran into this the other day, my ECS instances were dieing off and docker ps showed Exited (137) About a minute ago. Looking at docker inspect I &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="E6g-RygMY6w5OqT7qnwKg3eJJnGYWWhMysZEcgihuB8" />
+
+  
+  <link rel="canonical" href="http://jhmartin.github.io/site/blog/2015/09/22/aws-ecs-and-docker-exit-137">
+  <link href="/site/favicon.png" rel="icon">
+  <link href="/site/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/site/atom.xml" rel="alternate" title="Toger Blog" type="application/atom+xml">
+  <script src="/site/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/site/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-50432157-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/site/">Toger Blog</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/site/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jhmartin.github.io/site" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/site/">Blog</a></li>
+  <li><a href="/site/blog/archives">Archives</a></li>
+  <li><a href="/site/gpg-pgp-key">GPG/PGP Key</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">AWS ECS and Docker Exit (137)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-09-22T19:19:40-07:00" pubdate data-updated="true">Sep 22<sup>nd</sup>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I ran into this the other day, my ECS instances were dieing off and <code>docker ps</code> showed <code>Exited (137) About a minute ago</code>. Looking at <code>docker inspect</code> I noticed:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>"State": {
+</span><span class='line'> "FinishedAt": "2015-09-20T21:38:58.188768082Z",
+</span><span class='line'>    "OOMKilled": true
+</span><span class='line'>  },</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This tells me that ECS / Docker enforced the memory limit for the container, and the out-of-memory-killer killed off the contained processes.  Raising the ECS memory limit for this process resolved the issue.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jason Martin jhmartin@toger.us</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-09-22T19:19:40-07:00" pubdate data-updated="true">Sep 22<sup>nd</sup>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/site/blog/categories/aws/'>aws</a>, <a class='category' href='/site/blog/categories/docker/'>docker</a>, <a class='category' href='/site/blog/categories/ecs/'>ecs</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/site/blog/2015/09/20/carl-jrs/" title="Previous Post: Carl's Jr, SPF and AWS">&laquo; Carl's Jr, SPF and AWS</a>
+      
+      
+        <a class="basic-alignment right" href="/site/blog/2016/04/18/chef-too-big-for-the-kitchen/" title="Next Post: Chef too big for the Kitchen">Chef too big for the Kitchen &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/site/blog/2018/08/19/dns-as-a-load-balancer/">DNS as a Service Discovery Load Balancer</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2017/09/24/home-automation-ideas/">Home Automation Ideas</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2017/06/17/jenkins-and-github-hooks/">Jenkinsfile and Github Hooks</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2017/04/20/aws-route53-failover-and-alb/">AWS Route53 Failover and ALB</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2016/06/08/cloud-init-with-centos7-and-chef/">Cloud-Init With CentOS7, Chef, and SELinux</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/jhmartin">@jhmartin</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'jhmartin',
+            count: 21,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/site/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section class="googleplus googleplus-hidden">
+  <h1>
+    <a href="https://plus.google.com/105964388252097959079?rel=author">
+      <img src="//www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - Jason Martin jhmartin@toger.us -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

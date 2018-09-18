@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Jenkins | Toger Blog]]></title>
+  <link href="http://jhmartin.github.io/site/blog/categories/jenkins/atom.xml" rel="self"/>
+  <link href="http://jhmartin.github.io/site/"/>
+  <updated>2018-09-18T06:55:48-07:00</updated>
+  <id>http://jhmartin.github.io/site/</id>
+  <author>
+    <name><![CDATA[Jason Martin jhmartin@toger.us]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Jenkinsfile and Github Hooks]]></title>
+    <link href="http://jhmartin.github.io/site/blog/2017/06/17/jenkins-and-github-hooks/"/>
+    <updated>2017-06-17T14:58:34-07:00</updated>
+    <id>http://jhmartin.github.io/site/blog/2017/06/17/jenkins-and-github-hooks</id>
+    <content type="html"><![CDATA[<p>Jenkins is the juggernaut of the build pipeline ecosystem.  Its roots go back to bespoke local build pipelines and dedicated build engineers.  In present days the likes of CircleCI, CodeShip, Drone.io have started nipping at Jenkins heels.</p>
+
+<p>One of the significant differences is that, historically, Jenkins builds are configured inside Jenkins. The contemporary alternatives generally favor a SCM-managed configuration file (often YAML format).  This is useful as it removes the specialness of the Golden Build Host (ever had someone corrupt a Jenkins configuration? Getting back to par is a pain).</p>
+
+<p>Jenkins has joined the in-repo build configuration with their Jenkinsfile.  Unfortunately the documentation for this format is abysmal. Truly wretched.  The other day I was trying to make use of the Multibranch Workflow aka Pipelines function in Jenkins and attempted to get a Github-triggered build hook working. Hours of googling around to try to find what this should look like and I eventually stumbled across the sample below.  Having found it I&rsquo;ve further looked to see if there was any location in any sort of official documentation such that I should have been able to discern this as the correct answer, and come up empty.  I truly do not know how anyone makes all but the most trivial Jenkinsfile&rsquo;s function.</p>
+
+<p>Having ranted about that, the resulting sample is:
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Jenkinsfile </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">properties</span><span class="o">([&lt;</span><span class="s">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;pipelineTriggers([</span>
+</span><span class='line'><span class="s">  [$class: &quot;GitHubPushTrigger&quot;]</span>
+</span><span class='line'><span class="s">])</span>
+</span><span class='line'><span class="s">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="s">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">&lt;p&gt;  ])&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">node</span><span class="o">(&amp;</span><span class="n">lsquo</span><span class="o">;</span><span class="n">docker</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="o">;)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">checkout</span> <span class="n">scm</span><span class="o">&lt;</span><span class="s">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">&lt;p&gt;  stage(&amp;lsquo;Create Docker Image&amp;rsquo;) {</span>
+</span><span class='line'><span class="s">   sh &amp;lsquo;docker build -t dockerhub.example.com/</span><span class="nl">example:</span><span class="n">latest</span> <span class="o">.&amp;</span><span class="n">rsquo</span><span class="o">;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,17 @@
+<p>&mdash;assiclink-and-elbs.markdown
+layout: post
+title: &ldquo;EC2 ClassicLink and ELBs&rdquo;
+date: 2015-01-09 16:08:02 -0800
+comments: true</p>
+
+<h2>categories:  AWS VPC</h2>
+
+<p>I was looking at <a href="https://aws.amazon.com/blogs/aws/classiclink-private-communication-between-classic-ec2-instances-vpc-resources/">EC2 ClassicLink</a> today. It is going to make VPC migrations much easier.  Some things I noticed:</p>
+
+<ul>
+<li>Connectivity to external-facing ELBs only works if the ELBs have &lsquo;world&rsquo; incoming access, or specifically mention the public IPs of the source. That is because the ELB IP resolves to its public IP.</li>
+<li>Connectivity to internal-facing ELBs work fine, assuming the source security group has access.</li>
+<li>My default-VPC IP space overlapped with my EC2 Classic node&rsquo;s DNS resolver in /etc/resolv.conf, so attaching it to the VPC broke DNS. <em>Update 1/25/15</em>: I retested this and it is working now, so I&rsquo;m not sure that this is a problem anymore.</li>
+<li>The ReInvent session says that instance-DNS won&rsquo;t resolve, so you won&rsquo;t be able to use ec2-* domain names to reach specific instances &mdash; it&rsquo;ll have to be IPs.</li>
+</ul>
+

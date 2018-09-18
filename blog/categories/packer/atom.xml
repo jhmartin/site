@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Packer | Toger Blog]]></title>
+  <link href="http://jhmartin.github.io/site/blog/categories/packer/atom.xml" rel="self"/>
+  <link href="http://jhmartin.github.io/site/"/>
+  <updated>2018-09-18T06:55:48-07:00</updated>
+  <id>http://jhmartin.github.io/site/</id>
+  <author>
+    <name><![CDATA[Jason Martin jhmartin@toger.us]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Chef Too Big for the Kitchen]]></title>
+    <link href="http://jhmartin.github.io/site/blog/2016/04/18/chef-too-big-for-the-kitchen/"/>
+    <updated>2016-04-18T06:39:08-07:00</updated>
+    <id>http://jhmartin.github.io/site/blog/2016/04/18/chef-too-big-for-the-kitchen</id>
+    <content type="html"><![CDATA[<p>While pondering running a full &lsquo;ride-the-wave&rsquo; auto-scaling solution in AWS, I looked closely at my Chef installation.  The environment is very Chef-heavy with fairly generic AMI that runs a slew of Chef recipes to bring it up to the needs of that particular role. The nodes are in Autoscale groups and get their role designation from the Launch Configuration.</p>
+
+<p>On average a node invoked approximately 55 recipes (as recorded by seen_recipes in the audit cookbook).  Several of those recipes bring in resources from (authenticated) remote locations that have very good availability but are not in my direct control. Ignoring the remote-based recipes there is still a significant number of moving parts that can be disrupted unexpectedly, such as by other cookbook / role / KV store changes.  This is acceptable-if-not-ideal when nodes are generally brought into being under the supervision of an operator who can resolve any issues, or for when the odd 1-of-x00 pooled nodes dies and is automatically replaced. This risk is manageable when the environment is perpetually scaled for peak traffic.</p>
+
+<p>However, when critical nodes are riding the wave of capacity then the chance that something will eventually break during scale-up and cause the &lsquo;wave&rsquo; to swamp the application becomes 100%. That requires an operator to adjust the problem under a significant time crunch as the application is overwhelmed by traffic &mdash; hardly a recipe for success.  The more likely scenario is breakage at some odd hour of the morning as users wake up, and the application fails before an operator can intervene to keep the application alive.</p>
+
+<p>I looked at my Chef construction and realized it was less Infrastructure As Code (IaC) and more like Compile In Production (CIP).</p>
+
+<!-- more -->
+
+
+<p>IaC makes evokes the image that an application is manipulating infrastructure as though it were a reliable running probram, while CIP is more equivalent since it hits live repositories / pulls in dependencies that may need resolution at build time.  Running Chef based off of a generic AMI at machine provision time is akin to running maven build / maven install on each production machine as it is built. This is a slow and dangerous way to provision machines as any number of factors could prevent its success.  In development groups a build failure is significant but not a &lsquo;wake the VP&rsquo; level issue, unlike an application that cannot scale in time and fails.</p>
+
+<p>With this in mind it is unfathomable to implement ride-the-wave on top of a lengthy Chef run.  It will eventually fail in a very messy and public manner.  Sound cookbook development and promotion practices can mitigate some of this, as can careful curation and mirroring of all external dependencies.  This impedes keeping up with security patches and diminishes the utility of community cookbooks that tend to fetch objects from canonical repositories.</p>
+
+<p>Instead of Compile In Production, the standard development process of creating a build / deployable artifact should be followed, and in the same manner rely on minimal runtime configuration.  Tools like Packer and Docker (with a repo under my own control) go a long way towards this. In a Packer environment I have prebuilt AMIs. There is essentially nothing to fail at runtime. Similarly, in a Docker environment I need the full set of dependencies at build time and only a Docker repo at runtime.  A Docker repo is comparatively simple and much easier to monitor / control then of external dependencies.</p>
+
+<p>With my provision-time dependencies narrowed done to essentially nothing or only a Docker repo, I can move forward with ride-the-wave capacity and still sleep at night not worrying about a random external failure causing my application to fail.</p>
+]]></content>
+  </entry>
+  
+</feed>

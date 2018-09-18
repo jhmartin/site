@@ -1,1 +1,775 @@
-My Octopress Page is coming soon &hellip;
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Toger Blog</title>
+  <meta name="author" content="Jason Martin jhmartin@toger.us">
+
+  
+  <meta name="description" content="DNS makes for a deceptively easy service-discovery platform. Various platforms (such as Docker swarm, Amazon Auto-Naming purport to provide a trivial &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="E6g-RygMY6w5OqT7qnwKg3eJJnGYWWhMysZEcgihuB8" />
+
+  
+  <link rel="canonical" href="http://jhmartin.github.io/site">
+  <link href="/site/favicon.png" rel="icon">
+  <link href="/site/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/site/atom.xml" rel="alternate" title="Toger Blog" type="application/atom+xml">
+  <script src="/site/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/site/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-50432157-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/site/">Toger Blog</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/site/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jhmartin.github.io/site" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/site/">Blog</a></li>
+  <li><a href="/site/blog/archives">Archives</a></li>
+  <li><a href="/site/gpg-pgp-key">GPG/PGP Key</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/site/blog/2018/08/19/dns-as-a-load-balancer/">DNS as a Service Discovery Load Balancer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2018-08-19T13:38:22-07:00" pubdate data-updated="true">Aug 19<sup>th</sup>, 2018</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>DNS makes for a deceptively easy service-discovery platform. Various platforms (such as  <a href="https://docs.docker.com/network/overlay/">Docker swarm</a>, <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/overview-service-discovery.html">Amazon Auto-Naming</a> purport to provide a trivial to use service discovery mechanism. DNS is handled in most applications, so has the allure of working with legacy applications with zero integration work. Contrast DNS with purpose-built service discovery mechanisms such as <a href="https://technologyconversations.com/2015/09/08/service-discovery-zookeeper-vs-etcd-vs-consul/">Consul, Zookeeper, and Etcd</a> or <a href="https://github.com/Netflix/eureka">Netflix Eureka</a>. These tools require additional effort on the part of developers to integrate, but the result is much more robust. I tested several platforms below as to how they handle DNS round-robin loadbalancing.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/site/blog/2018/08/19/dns-as-a-load-balancer/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/site/blog/2017/09/24/home-automation-ideas/">Home Automation Ideas</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2017-09-24T15:25:21-07:00" pubdate data-updated="true">Sep 24<sup>th</sup>, 2017</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>My house has a bevy of Z-Wave devices, plus a few LiFX bulbs. This has allowed for some fairly fun automations:</p>
+
+<ul>
+<li><p>When the garage door opens, a tilt sensor attached to the door turns the external bulbs on to bright-white, and activates the garage internal lights.  The outside lights revert to normal &lsquo;dim 2700K&rsquo; after 3 minutes, and the garage lights goes off after about 10 minutes.</p></li>
+<li><p>A chime sounds upstairs whenever an exterior door is opened.</p></li>
+<li><p>The exterior lights come on at &lsquo;civil twilight&rsquo; and extinguish at &lsquo;civil dawn&rsquo;</p></li>
+<li><p>The exterior doors lock whenever the garage door closes. No more &lsquo;Did I lock the front door?&rsquo; doubts.</p></li>
+<li><p>The exterior doors lock at a certain time each night.</p></li>
+<li><p>The kids&#8217; room and desk lamps turn off at midnight.  Sometimes they get up after bedtime and &lsquo;play&rsquo; then fall asleep.</p></li>
+<li><p>The bathroom and downstairs hallway lights turn on concurrent with my morning alarm. It is much easier to get up and walk into a lit room then in pitch black.</p></li>
+<li><p>Telling Alexa to &lsquo;tell my house its bedtime&rsquo; locks all exterior doors, turns off all lights not in the kids rooms, turns on the stairway and master bath lights, then turns off the stairs light in 5 minutes.</p></li>
+<li><p>Alexa can be instructed to turn on or off any or all of the downstairs lights; individually or collectively.</p></li>
+<li><p>The Roku in the master bedroom, which inexplicibly has an audible fan, turns off at midnight.</p></li>
+<li><p>The outlet adjacent to the master bedroom turns off at 4am.  This used to control a window fan with the goal of pulling in cool air at night but turning off before anyone gets up to avoid blasting them with frigid air. This rule has been rendered moot with the installation of an AirScape whole-house fan.</p></li>
+<li><p>The pantry and coat-closet lights turn off after 5 minutes.</p></li>
+<li><p>A notification is sent each day during the summer when the exterior temperature crosses over the interior temperature, to either open or close the windows and to turn on the house fan.</p></li>
+</ul>
+
+
+<p>This is all accomplished with a combination of ZWave devices, a Zwave.me Razberry Pi, a few LiFX bulbs, Amazon Echo, and AirScape fan w/2nd gen controls.</p>
+
+<p>Home automation can be quite addicting &mdash; its impossible to install just one device!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/site/blog/2017/06/17/jenkins-and-github-hooks/">Jenkinsfile and Github Hooks</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2017-06-17T14:58:34-07:00" pubdate data-updated="true">Jun 17<sup>th</sup>, 2017</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Jenkins is the juggernaut of the build pipeline ecosystem.  Its roots go back to bespoke local build pipelines and dedicated build engineers.  In present days the likes of CircleCI, CodeShip, Drone.io have started nipping at Jenkins heels.</p>
+
+<p>One of the significant differences is that, historically, Jenkins builds are configured inside Jenkins. The contemporary alternatives generally favor a SCM-managed configuration file (often YAML format).  This is useful as it removes the specialness of the Golden Build Host (ever had someone corrupt a Jenkins configuration? Getting back to par is a pain).</p>
+
+<p>Jenkins has joined the in-repo build configuration with their Jenkinsfile.  Unfortunately the documentation for this format is abysmal. Truly wretched.  The other day I was trying to make use of the Multibranch Workflow aka Pipelines function in Jenkins and attempted to get a Github-triggered build hook working. Hours of googling around to try to find what this should look like and I eventually stumbled across the sample below.  Having found it I&rsquo;ve further looked to see if there was any location in any sort of official documentation such that I should have been able to discern this as the correct answer, and come up empty.  I truly do not know how anyone makes all but the most trivial Jenkinsfile&rsquo;s function.</p>
+
+<p>Having ranted about that, the resulting sample is:</p>
+
+<figure class='code'><figcaption><span>Jenkinsfile </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">properties</span><span class="o">([</span>
+</span><span class='line'>    <span class="n">pipelineTriggers</span><span class="o">([</span>
+</span><span class='line'>      <span class="o">[</span><span class="n">$class</span><span class="o">:</span> <span class="s2">&quot;GitHubPushTrigger&quot;</span><span class="o">]</span>
+</span><span class='line'>    <span class="o">])</span>
+</span><span class='line'>  <span class="o">])</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="n">node</span><span class="o">(</span><span class="s1">&#39;docker&#39;</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">checkout</span> <span class="n">scm</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nf">stage</span><span class="o">(</span><span class="s1">&#39;Create Docker Image&#39;</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>   <span class="n">sh</span> <span class="s1">&#39;docker build -t dockerhub.example.com/example:latest .&#39;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/site/blog/2017/04/20/aws-route53-failover-and-alb/">AWS Route53 Failover and ALB</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2017-04-20T08:51:25-07:00" pubdate data-updated="true">Apr 20<sup>th</sup>, 2017</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I ran across this little gotcha recently.</p>
+
+<p>Scenario: A service hosted in two regions.  Each is fronted by either an ALB or ELB with an attached Autoscale group, that uses the LB healthcheck to determine instance health.  A Route53 configuration balances trafic between the two. Route53 &lsquo;Evaluate Target Health&rsquo; is set to yes and no healthcheck is attached.</p>
+
+<p>Under the ELB, if the backend application fails in a region, the ELB will trigger termination of the application nodes.  Route53 will consider the region unhealthy if all the backends are sick or unregistered and fail over to the remaining region.</p>
+
+<p>Under the ALB, the same occurs except Route53 does not consider an empty ALB as unhealthy and will continue to send traffic to a region with no registered backends.</p>
+
+<p>This is to a certain extent understandable, as ALBs allow attaching multiple target groups and its not immediately obvious what to do when there is a mix of statuses. I suspect the common case is that most ALBs have exactly one target group attached though and that could be used as the status, or allow Route53 to be bound to a specific target group.</p>
+
+<p>The current workaround is to use a Route53 Healthcheck (at an additional $1+ per month per check) to have Route53 perform an application healthcheck against each origin.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/site/blog/2016/06/08/cloud-init-with-centos7-and-chef/">Cloud-Init With CentOS7, Chef, and SELinux</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2016-06-08T20:57:00-07:00" pubdate data-updated="true">Jun 8<sup>th</sup>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The CentOS 7 AMI in Amazon comes with Cloud-Init (<code>cloud-init-0.7.5-10.el7.centos.1.x86_64</code>). This is quite handy as it assists in automating several bootup tasks. One of these tasks is to install and bootstrap Chef.  Unforunately, when SELinux is installed the Chef handler will fail.</p>
+
+<p>Sample error:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[CLOUDINIT] util.py[DEBUG]: Restoring selinux mode for /var/lib (recursive=True)
+</span><span class='line'>[CLOUDINIT] util.py[DEBUG]: Running chef (&lt;module 'cloudinit.config.cc_chef' from '/usr/lib/python2.7/site-packages/cloudinit/config/cc_chef.py'&gt;) failed
+</span><span class='line'>       Traceback (most recent call last):
+</span><span class='line'>         File "/usr/lib/python2.7/site-packages/cloudinit/stages.py", line 658, in _run_modules
+</span><span class='line'>           cc.run(run_name, mod.handle, func_args, freq=freq)
+</span><span class='line'>         File "/usr/lib/python2.7/site-packages/cloudinit/cloud.py", line 63, in run
+</span><span class='line'>           return self._runners.run(name, functor, args, freq, clear_on_fail)
+</span><span class='line'>         File "/usr/lib/python2.7/site-packages/cloudinit/helpers.py", line 197, in run
+</span><span class='line'>           results = functor(*args)
+</span><span class='line'>         File "/usr/lib/python2.7/site-packages/cloudinit/config/cc_chef.py", line 54, in handle
+</span><span class='line'>           util.ensure_dir(d)
+</span><span class='line'>         File "/usr/lib/python2.7/site-packages/cloudinit/util.py", line 1291, in ensure_dir
+</span><span class='line'>           os.makedirs(path)
+</span><span class='line'>         File "/usr/lib/python2.7/site-packages/cloudinit/util.py", line 167, in __exit__
+</span><span class='line'>           self.selinux.restorecon(path, recursive=self.recursive)
+</span><span class='line'>         File "/usr/lib64/python2.7/site-packages/selinux/__init__.py", line 95, in restorecon
+</span><span class='line'>           for fname in fnames]), None)
+</span><span class='line'>         File "/usr/lib64/python2.7/posixpath.py", line 246, in walk
+</span><span class='line'>           walk(name, func, arg)
+</span><span class='line'>         File "/usr/lib64/python2.7/posixpath.py", line 238, in walk
+</span><span class='line'>           func(arg, top, names)
+</span><span class='line'>         File "/usr/lib64/python2.7/site-packages/selinux/__init__.py", line 95, in &lt;lambda&gt;
+</span><span class='line'>           for fname in fnames]), None)
+</span><span class='line'>         File "/usr/lib64/python2.7/site-packages/selinux/__init__.py", line 85, in restorecon
+</span><span class='line'>           status, context = matchpathcon(path, mode)
+</span><span class='line'>       OSError: [Errno 2] No such file or directory</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/site/blog/2016/06/08/cloud-init-with-centos7-and-chef/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/site/blog/2016/06/05/extending-aws-instance-trust/">Extending AWS Instance Trust</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2016-06-05T20:39:53-07:00" pubdate data-updated="true">Jun 5<sup>th</sup>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>All nodes in EC2 can fetch their <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-identity-documents.html">Instance Identity Documents</a>. This returns an AWS-signed block containing data about the instance that requested it.  This data is only available to the instance that fetched it, so if it turns around and presents it to some other service you can be confident it originated from the machine in question.</p>
+
+<p>This is useful for secrets-enrollment processes where you want a node to be able to attest to its own identity in a secure fashion.  Your enrollment mechanism can ensure that the node is &lsquo;young&rsquo; enough to be making the request, and that the enrollment has never occured before.   Your enrollment tool can also look up other data about the instance (autoscale group, CloudFormation stack, etc) to determine what privileges it should be granted.</p>
+
+<p>In this manner you can pivot on the security features AWS offers for identifying a particular node to another tool.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/site/blog/2016/06/05/passing-host-ip-to-ecs/">Passing Host IP to ECS</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2016-06-05T20:11:55-07:00" pubdate data-updated="true">Jun 5<sup>th</sup>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve been looking for a way to run Consul &lsquo;standalone&rsquo; on a host and let multiple ECS containers connect to it.  I was hoping to find a macro I could put in a container definition but such does not yet exist.  Instead I realized that I can have my Docker instance query the <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html#instancedata-data-retrieval">instance metadata</a> service and get this information.  It is not quite as elegant docker-wise but it should work until something better comes along.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/site/blog/2016/04/18/chef-too-big-for-the-kitchen/">Chef Too Big for the Kitchen</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2016-04-18T06:39:08-07:00" pubdate data-updated="true">Apr 18<sup>th</sup>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>While pondering running a full &lsquo;ride-the-wave&rsquo; auto-scaling solution in AWS, I looked closely at my Chef installation.  The environment is very Chef-heavy with fairly generic AMI that runs a slew of Chef recipes to bring it up to the needs of that particular role. The nodes are in Autoscale groups and get their role designation from the Launch Configuration.</p>
+
+<p>On average a node invoked approximately 55 recipes (as recorded by seen_recipes in the audit cookbook).  Several of those recipes bring in resources from (authenticated) remote locations that have very good availability but are not in my direct control. Ignoring the remote-based recipes there is still a significant number of moving parts that can be disrupted unexpectedly, such as by other cookbook / role / KV store changes.  This is acceptable-if-not-ideal when nodes are generally brought into being under the supervision of an operator who can resolve any issues, or for when the odd 1-of-x00 pooled nodes dies and is automatically replaced. This risk is manageable when the environment is perpetually scaled for peak traffic.</p>
+
+<p>However, when critical nodes are riding the wave of capacity then the chance that something will eventually break during scale-up and cause the &lsquo;wave&rsquo; to swamp the application becomes 100%. That requires an operator to adjust the problem under a significant time crunch as the application is overwhelmed by traffic &mdash; hardly a recipe for success.  The more likely scenario is breakage at some odd hour of the morning as users wake up, and the application fails before an operator can intervene to keep the application alive.</p>
+
+<p>I looked at my Chef construction and realized it was less Infrastructure As Code (IaC) and more like Compile In Production (CIP).</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/site/blog/2016/04/18/chef-too-big-for-the-kitchen/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/site/blog/2015/09/22/aws-ecs-and-docker-exit-137/">AWS ECS and Docker Exit (137)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-09-22T19:19:40-07:00" pubdate data-updated="true">Sep 22<sup>nd</sup>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I ran into this the other day, my ECS instances were dieing off and <code>docker ps</code> showed <code>Exited (137) About a minute ago</code>. Looking at <code>docker inspect</code> I noticed:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>"State": {
+</span><span class='line'> "FinishedAt": "2015-09-20T21:38:58.188768082Z",
+</span><span class='line'>    "OOMKilled": true
+</span><span class='line'>  },</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This tells me that ECS / Docker enforced the memory limit for the container, and the out-of-memory-killer killed off the contained processes.  Raising the ECS memory limit for this process resolved the issue.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/site/blog/2015/09/20/carl-jrs/">Carl&#8217;s Jr, SPF and AWS</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-09-20T20:34:01-07:00" pubdate data-updated="true">Sep 20<sup>th</sup>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Carl&rsquo;s Jr has a nifty nutritional calculator / order planner at <a href="http://www.carlsjr.com/menu/nutritional_calculator.">http://www.carlsjr.com/menu/nutritional_calculator.</a>  It lets you fully customize your meal, then lets you print or email your order to yourself with all the magic words to say to get your meal as planned (subbing cheese, extra / 2x / no onion, etc).</p>
+
+<p>Tonight I used this to pre-assemble a highly customized meal for my family.  I triggered it to send me an email (easier to read on my phone at the order window) and anxiously awaited.</p>
+
+<p>No email was received.</p>
+
+<p>I host my own email and use <a href="http://rollernet.us">http://rollernet.us</a> for my public incoming MX relays; they are nifty as they have a ton of highly configurable anti-spam features that I can apply &lsquo;at the edge&rsquo; and lets my actual mailserver run much leaner since SpamAssassin et all are resource intensive.</p>
+
+<p>Rollernet logs stated:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Connection from 54.236.226.113 rejected by mail.rollernet.us
+</span><span class='line'>From: carlsjr@carlsjr.com
+</span><span class='line'>To: my_email  
+</span><span class='line'>Reason: SPF fail (Mechanism -all matched)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Oh ho! I temporarily disabled SPF checking (and greylisting) and sent another meal through, and the email header said:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Received-SPF: fail (carlsjr.com: Sender is not authorized by default to use 'carlsjr@carlsjr.com' in 'mfrom' identity (mechanism '-all' matched)) receiver=mail2.rollernet.us; identity=mailfrom; envelope-from="carlsjr@carlsjr.com";
+</span><span class='line'>        helo=ip-10-198-0-85.localdomain; client-ip=54.236.168.30</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I fetched their SPF record at with <a href="http://www.kitterman.com/spf/validate.html">http://www.kitterman.com/spf/validate.html</a> (though any DNS fetching tool would work) and received:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>v=spf1 ip4:63.168.109.0/24 ip4:67.203.173.0/26 ip4:216.87.35.224/27 mx include:spf.protection.outlook.com -all</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This tells me they use outlook.com for their internal email, and only allow a few subnets to originate mail from them &mdash; and the source IP I got was not one of them. 54.236.168.30 resolves to ec2-54-236-168-30.compute-1.amazonaws.com. www.carlsjr.com resolves to what appears to be a Cloudformation-based AWS environment:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ host www.carlsjr.com
+</span><span class='line'>www.carlsjr.com is an alias for CKEMKTPRDLB-20130419-1810707626.us-east-1.elb.amazonaws.com.
+</span><span class='line'>CKEMKTPRDLB-20130419-1810707626.us-east-1.elb.amazonaws.com has address 54.236.231.179
+</span><span class='line'>CKEMKTPRDLB-20130419-1810707626.us-east-1.elb.amazonaws.com has address 52.1.95.39</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I suspect their Carl&rsquo;s AWS-based web farm is generating the outgoing mails directly, and they have not accounted for that in their SPF configuration. Using Amazon Simple Email Service (SPF) would have accounted for this already (<a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/authenticate-domain.html">http://docs.aws.amazon.com/ses/latest/DeveloperGuide/authenticate-domain.html</a>). This could also be handled by designating a outgoing mail host from their AWS environment with an Elastic IP attached and add it to their SPF record.</p>
+
+<p>I sent them an email detailing the issue at their corporate email address. I&rsquo;ll update if I hear back, but I don&rsquo;t expect it will ever reach anyone who knows what to do with it.</p>
+
+<p>Update: I got an email back stating the issue was being routed &lsquo;to the appropriate department&rsquo;.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/site/posts/2">&larr; Older</a>
+    
+    <a href="/site/blog/archives">Blog Archives</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/site/blog/2018/08/19/dns-as-a-load-balancer/">DNS as a Service Discovery Load Balancer</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2017/09/24/home-automation-ideas/">Home Automation Ideas</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2017/06/17/jenkins-and-github-hooks/">Jenkinsfile and Github Hooks</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2017/04/20/aws-route53-failover-and-alb/">AWS Route53 Failover and ALB</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2016/06/08/cloud-init-with-centos7-and-chef/">Cloud-Init With CentOS7, Chef, and SELinux</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/jhmartin">@jhmartin</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'jhmartin',
+            count: 21,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/site/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section class="googleplus googleplus-hidden">
+  <h1>
+    <a href="https://plus.google.com/105964388252097959079?rel=author">
+      <img src="//www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - Jason Martin jhmartin@toger.us -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

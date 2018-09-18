@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Cloud-init | Toger Blog]]></title>
+  <link href="http://jhmartin.github.io/site/blog/categories/cloud-init/atom.xml" rel="self"/>
+  <link href="http://jhmartin.github.io/site/"/>
+  <updated>2018-09-18T06:55:48-07:00</updated>
+  <id>http://jhmartin.github.io/site/</id>
+  <author>
+    <name><![CDATA[Jason Martin jhmartin@toger.us]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Cloud-Init With CentOS7, Chef, and SELinux]]></title>
+    <link href="http://jhmartin.github.io/site/blog/2016/06/08/cloud-init-with-centos7-and-chef/"/>
+    <updated>2016-06-08T20:57:00-07:00</updated>
+    <id>http://jhmartin.github.io/site/blog/2016/06/08/cloud-init-with-centos7-and-chef</id>
+    <content type="html"><![CDATA[<p>The CentOS 7 AMI in Amazon comes with Cloud-Init (<code>cloud-init-0.7.5-10.el7.centos.1.x86_64</code>). This is quite handy as it assists in automating several bootup tasks. One of these tasks is to install and bootstrap Chef.  Unforunately, when SELinux is installed the Chef handler will fail.</p>
+
+<p>Sample error:
+```
+[CLOUDINIT] util.py[DEBUG]: Restoring selinux mode for /var/lib (recursive=True)
+[CLOUDINIT] util.py[DEBUG]: Running chef (<module 'cloudinit.config.cc_chef' from '/usr/lib/python2.7/site-packages/cloudinit/config/cc_chef.py'>) failed</p>
+
+<pre><code>   Traceback (most recent call last):
+     File "/usr/lib/python2.7/site-packages/cloudinit/stages.py", line 658, in _run_modules
+       cc.run(run_name, mod.handle, func_args, freq=freq)
+     File "/usr/lib/python2.7/site-packages/cloudinit/cloud.py", line 63, in run
+       return self._runners.run(name, functor, args, freq, clear_on_fail)
+     File "/usr/lib/python2.7/site-packages/cloudinit/helpers.py", line 197, in run
+       results = functor(*args)
+     File "/usr/lib/python2.7/site-packages/cloudinit/config/cc_chef.py", line 54, in handle
+       util.ensure_dir(d)
+     File "/usr/lib/python2.7/site-packages/cloudinit/util.py", line 1291, in ensure_dir
+       os.makedirs(path)
+     File "/usr/lib/python2.7/site-packages/cloudinit/util.py", line 167, in __exit__
+       self.selinux.restorecon(path, recursive=self.recursive)
+     File "/usr/lib64/python2.7/site-packages/selinux/__init__.py", line 95, in restorecon
+       for fname in fnames]), None)
+     File "/usr/lib64/python2.7/posixpath.py", line 246, in walk
+       walk(name, func, arg)
+     File "/usr/lib64/python2.7/posixpath.py", line 238, in walk
+       func(arg, top, names)
+     File "/usr/lib64/python2.7/site-packages/selinux/__init__.py", line 95, in &lt;lambda&gt;
+       for fname in fnames]), None)
+     File "/usr/lib64/python2.7/site-packages/selinux/__init__.py", line 85, in restorecon
+       status, context = matchpathcon(path, mode)
+   OSError: [Errno 2] No such file or directory
+</code></pre>
+
+<p>```</p>
+
+<!-- more -->
+
+
+<p>This proved to be most frustrating.  It was obviously failing while it was fixing the SELinux parameters under <code>/var/lib</code>, but it was not clear why.  There were no denied messages in the audit log. Of course <code>/var/lib</code> and <code>/var/lib/chef</code> existed. <code>/var/lib/chef</code> is a default directory listed in <code>/usr/lib/python2.7/site-packages/cloudinit/config/cc_chef.py</code>.</p>
+
+<p>Adding in several debug statements led to determining that the issue was specific to <code>/var/lib/nfs/rpc_pipefs</code>. The file existed and had no special permissions, although it had a generic SELinux label as opposed to a nfs-specific value.  Further investigation showed that the root of the issue was in libselinux, which is looking up the intended label in <code>/etc/selinux/targeted/contexts/files/file_contents</code>:</p>
+
+<p><code>
+/usr/share/Modules/init(/.*)?   system_u:object_r:bin_t:s0
+/var/lib/nfs/rpc_pipefs(/.*)?   &lt;&lt;none&gt;&gt;
+</code></p>
+
+<p>The selinux python library is expecting a label as above, and returns a Errno 2 &lsquo;No such file or directory&rsquo; if it hits the &lsquo;none&rsquo; value.  This error is returned to cloud-init and causes the chef handler to bomb out.
+Adding a label to the file_contents file works around the issue but likely breaks NFS (if it were in use). The better approach would be for <code>util.py</code> to ignore the case where a new label cannot be found. If CentOS7 updated to the latest cloud-init there is a decent chance this is fixed.</p>
+
+<p>Filed as <a href="https://bugs.centos.org/view.php?id=10990.">https://bugs.centos.org/view.php?id=10990.</a></p>
+]]></content>
+  </entry>
+  
+</feed>

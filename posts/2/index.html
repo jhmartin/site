@@ -1,0 +1,755 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Toger Blog</title>
+  <meta name="author" content="Jason Martin jhmartin@toger.us">
+
+  
+  <meta name="description" content="An odd issue I ran into the other day: I had a Varnish 3 instance that had logic hinging on req.backend.healthy to show a special error page if all &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="E6g-RygMY6w5OqT7qnwKg3eJJnGYWWhMysZEcgihuB8" />
+
+  
+  <link rel="canonical" href="http://jhmartin.github.io/site/posts/2">
+  <link href="/site/favicon.png" rel="icon">
+  <link href="/site/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/site/atom.xml" rel="alternate" title="Toger Blog" type="application/atom+xml">
+  <script src="/site/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/site/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-50432157-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/site/">Toger Blog</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/site/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jhmartin.github.io/site" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/site/">Blog</a></li>
+  <li><a href="/site/blog/archives">Archives</a></li>
+  <li><a href="/site/gpg-pgp-key">GPG/PGP Key</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/site/blog/2015/06/27/varnish-cache-and-req-dot-backend-dot-healthy/">Varnish Cache and req.backend.healthy</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-06-27T15:39:50-07:00" pubdate data-updated="true">Jun 27<sup>th</sup>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>An odd issue I ran into the other day: I had a <a href="https://www.varnish-cache.org">Varnish 3</a> instance that had logic hinging on <code>req.backend.healthy</code> to show a special error page if all the backends were down. That logic inexpliciably triggered even though all my backends were up! After much head-scratching I identified the issue: one of my historical VCLs was still loaded that no longer had any healthy backends (due to repeated autoscaling up / down), and although the <em>current</em> definition of that director had healthy backends, the historical one did not.  Varnish has a habit of not letting go of old VCLs even if you specify <code>vcl.discard</code> on them.  So, <code>req.backend.healthy</code> will show the director as down if any prior definition of that director is down.  Since the only way to definitively remove VCLs from memory is a restart (which flushes the memory cache), this makes <code>req.backend.healthy</code> fairly unreliable.</p>
+
+<p>This is in v3 and may not apply to v4 anymore.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/site/blog/2015/06/27/2fa-and-minecraft-server/">2FA and Minecraft Server</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-06-27T14:57:41-07:00" pubdate data-updated="true">Jun 27<sup>th</sup>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Two Factor Authentication (2FA) is an additional layer of protection you can add to your Minecraft server. You should already be relying on SSH keys to access your server, but those keys can be lost or leaked if you use them on untrusted machines.  2FA protects you from hacks resulting from someone gaining access to your password or SSH key.</p>
+
+<p><a href="http://DuoSecurity.com">DuoSecurity</a> is a company that provides a 2FA service that is free for personal use. A Mobile Push notification is sent via their Android / iOS app whenever a login is attempted and requires an affirmative response before login can proceed.  There is also SMS and computer-generated voice calls, but those consume credits that have a cost to refill. There is also a cost for going over 10 users, which should not be an issue for adminstation of a Minecraft server.</p>
+
+<p>I performed a source install to get the latest version, there are also packages for RHEL/CentOS/Debian/Ubuntu on their website.</p>
+
+<p>They offer a SSH-specific installation and a PAM installation that covers all auth on the machine. PAM is likely the more comprehensive solution but is a more involved process, plus requires a SELinux policy update (and the server resulting from this series has SELinux enabled). Their website tells you how to install the relevant SELinux policy but the necessary objects are missing from their download. I&rsquo;ve send them a mail and will update if I get clarification. For the record, the error I got was:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>make: Entering directory `/home/centos/duo_unix-1.9.14/pam_duo'
+</span><span class='line'>checkmodule -M -m -o authlogin_duo.mod authlogin_duo.te
+</span><span class='line'>checkmodule:  loading policy configuration from authlogin_duo.te
+</span><span class='line'>checkmodule:  unable to open authlogin_duo.te
+</span><span class='line'>make: [semodule] Error 1 (ignored)
+</span><span class='line'>semodule_package -o authlogin_duo.pp -m authlogin_duo.mod
+</span><span class='line'>semodule_package:  Could not open file No such file or directory:  authlogin_duo.mod
+</span><span class='line'>make: [semodule] Error 1 (ignored)
+</span><span class='line'>semodule -i authlogin_duo.pp
+</span><span class='line'>semodule:  Failed on authlogin_duo.pp!
+</span><span class='line'>make: [semodule] Error 1 (ignored)
+</span><span class='line'>make: Leaving directory `/home/centos/duo_unix-1.9.14/pam_duo'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>SSH setup is straightforward. Install the DuoSecurity app on your mobile device. Create an account on their website. Navigate their portal and select Applications, then <code>+New Application</code>.  Give it name of Minecraft SSH. This will result in a window showing a Integration key, Secret key (requiring a click to show), and an API hostname. Collect those and store them to the side (securely!)</p>
+
+<p><a href="https://www.duosecurity.com/docs/duounix#instructions">https://www.duosecurity.com/docs/duounix#instructions</a> describes the compile process:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>wget https://dl.duosecurity.com/duo_unix-latest.tar.gz
+</span><span class='line'>tar zxf duo_unix-latest.tar.gz
+</span><span class='line'><span class="nb">cd </span>duo_unix-1.9.14
+</span><span class='line'>./configure --prefix<span class="o">=</span>/usr <span class="o">&amp;&amp;</span> make <span class="o">&amp;&amp;</span> sudo make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After installing the binaries, modify /etc/duo/login_duo.conf and fill in the ikey/skey/host values from above. Uncomment pushinfo as well so that more details about the login are sent to you.</p>
+
+<p><a href="https://www.duosecurity.com/docs/duounix#centos">https://www.duosecurity.com/docs/duounix#centos</a> describes modifying SSH to work with the new system. <strong>Keep an alternate root-logged in session open in an alternate window</strong> while attempting this so you can back out if you make a mistake.  Do not log out of the &lsquo;backup&rsquo; window until you&rsquo;ve thoroughly exercised the system. I will not be responsible if you lock yourself out.</p>
+
+<p>Add <code>ForceCommand /usr/sbin/login_duo</code> to the end of /etc/sshd/sshd_config, then restart sshd (which does not kick out existing sessions) with <code>systemctl restart sshd.service</code></p>
+
+<p>Now attempt to log in to your account. You will be prompted to enroll in 2FA. Upon logging in again you will be prompted for your 2FA method, which will look like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span> ssh minecraft.example.com -i ~/.ssh/minecraft.pem -l centos
+</span><span class='line'>Duo two-factor login <span class="k">for </span>centos
+</span><span class='line'>
+</span><span class='line'>Enter a passcode or <span class="k">select </span>one of the following options:
+</span><span class='line'>
+</span><span class='line'> 1. Duo Push to XXX-XXX-1234
+</span><span class='line'> 2. Phone call to XXX-XXX-1234
+</span><span class='line'> 3. SMS passcodes to XXX-XXX-1234
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I always choose #1 as I do not want to expend credits, though if push failed I could resort to the other two. When I choose #1 I get a popup on my phone asking me to accept / deny the login, and after choosing Accept I am able to log in.</p>
+
+<p>Now I do not have to worry someone will get ahold of my minecraft.pem and gain access to the server. Further, if I get a login-request on my phone and haven&rsquo;t attemped to log in, I know my key has been compromised.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/site/blog/2015/01/27/dsl-modem-and-power-strips/">DSL Modem and Power Strips</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-01-27T20:18:56-08:00" pubdate data-updated="true">Jan 27<sup>th</sup>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I had cause to call CenturyLink support recently. As one of the troubleshooting steps they seriously claimed that a power strip is not capeable of providing sufficient power to a DSL modem, and that it <em>must</em> be connected directly to the wall to receive sufficient power.</p>
+
+<p>I suspect this was to force me to unplug and powercycle the modem, but I had done that several times already.  The idea that a DSL modem draws more power than will flow through a power strip is ridiculous.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/site/blog/2015/01/26/minecraft-and-datadog-monitoring/">Minecraft and Datadog Monitoring</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-01-26T16:53:08-08:00" pubdate data-updated="true">Jan 26<sup>th</sup>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.datadoghq.com">DataDog</a> is a nifty monitoring / statistics gathering system. It is something like a akin to a combination of Graphite / Grafana, but with a social aspect so that your team can attach discussions to a given point in time. They have a free tier that retains data for a day, which is handy for visualizing the state of the Minecraft server.</p>
+
+<p>Java applications normally expose their statistics via JMX.  I did not see anything Minecraft-specific in my stock instance, but Java itself exposes several counters that are informative.</p>
+
+<p>I created my Datadog account, procured my API key, and installed the agent with:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">DD_API_KEY</span><span class="o">=</span>MyAPIKey  bash -c <span class="s2">&quot;$(curl -L https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/install_agent.sh)&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>JMX is not enabled by default for Java processes, so I updated my systemd unit file in <code>/etc/systemd/system/minecraft.service</code> to include the JMX configuration:</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/site/blog/2015/01/26/minecraft-and-datadog-monitoring/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/site/blog/2015/01/16/minecraft-and-newrelic/">Minecraft and NewRelic</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-01-16T20:27:21-08:00" pubdate data-updated="true">Jan 16<sup>th</sup>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.newrelic.com">NewRelic</a> is an exceptionally useful tool for monitoring java applications, or at least those that deal with web or other transational workloads. I tried hooking it up to MineCraft and it doesn&rsquo;t report anything. The free version doesn&rsquo;t let me look at the JVM stats (threads and such) so it appears to be a waste. However, they also provide a general unix server agent that does provide some nifty dashboards. The procedure to install it is:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rpm -Uvh https://yum.newrelic.com/pub/newrelic/el5/x86_64/newrelic-repo-5-3.noarch.rpm
+</span><span class='line'>yum install newrelic-sysmond
+</span><span class='line'>nrsysmond-config --set <span class="nv">license_key</span><span class="o">=</span>YourLicenseKey
+</span><span class='line'>/etc/init.d/
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The RPM is EL5-era so doesn&rsquo;t understand SystemD, so I created a unit file:</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/site/blog/2015/01/16/minecraft-and-newrelic/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/site/blog/2015/01/11/minecraft-and-systemd/">Minecraft and SystemD</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-01-11T20:21:33-08:00" pubdate data-updated="true">Jan 11<sup>th</sup>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In the first installment I launched a basic Minecraft service on CentOS7. However, a proper service should not be run from the command line, instead it should be controlled by the system service daemon. In years past this would be by writing a &lsquo;sysV init script&rsquo; which would try to determine if the process was running, if not launch it and capture its PID for future reference, and capture its output to a file.  CentOS-7 has switched away from that model to one called SystemD which makes much of that easier.  There is some controversy over the SystemD model (is it UNIX-y? Too monolithic? Taking over everything?) but seems pretty handy for what it needs to do, plus has some nice security features.</p>
+
+<p>So I will create a Minecraft service definition for SystemD. I used <a href="http://0pointer.de/blog/projects/systemd-for-admins-3.html">http://0pointer.de/blog/projects/systemd-for-admins-3.html</a> to help me with this. The unit file will look like:</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/site/blog/2015/01/11/minecraft-and-systemd/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/site/blog/2015/01/10/minecraft-server-in-aws-done-too-well/">Minecraft Server in AWS Done Too Well</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-01-10T22:03:40-08:00" pubdate data-updated="true">Jan 10<sup>th</sup>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>A new Server</h1>
+
+<p>This series will go through how to host a MineCraft server, and go totally overboard on the configuration/management of it. I&rsquo;ll be integrating a variety of management/monitoring tools that go far beyond the needs of the average &lsquo;friends &amp; family&rsquo; server, because it is fun.  I&rsquo;ll starting the basics and build up from there.</p>
+
+<p>So, first we need a machine. I&rsquo;m going to use a Amazon AWS machine for this.  I&rsquo;ll be using some AWS-specific features, but I don&rsquo;t think any of them will be critical.  In some cases I&rsquo;ll show the non-AWS alternative.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/site/blog/2015/01/10/minecraft-server-in-aws-done-too-well/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/site/blog/2015/01/09/ec2-classiclink-and-elbs/">Ec2 Classiclink and Elbs</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-01-09T00:00:00-08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>&mdash;assiclink-and-elbs.markdown
+layout: post
+title: &ldquo;EC2 ClassicLink and ELBs&rdquo;
+date: 2015-01-09 16:08:02 -0800
+comments: true</p>
+
+<h2>categories:  AWS VPC</h2>
+
+<p>I was looking at <a href="https://aws.amazon.com/blogs/aws/classiclink-private-communication-between-classic-ec2-instances-vpc-resources/">EC2 ClassicLink</a> today. It is going to make VPC migrations much easier.  Some things I noticed:</p>
+
+<ul>
+<li>Connectivity to external-facing ELBs only works if the ELBs have &lsquo;world&rsquo; incoming access, or specifically mention the public IPs of the source. That is because the ELB IP resolves to its public IP.</li>
+<li>Connectivity to internal-facing ELBs work fine, assuming the source security group has access.</li>
+<li>My default-VPC IP space overlapped with my EC2 Classic node&rsquo;s DNS resolver in /etc/resolv.conf, so attaching it to the VPC broke DNS. <em>Update 1/25/15</em>: I retested this and it is working now, so I&rsquo;m not sure that this is a problem anymore.</li>
+<li>The ReInvent session says that instance-DNS won&rsquo;t resolve, so you won&rsquo;t be able to use ec2-* domain names to reach specific instances &mdash; it&rsquo;ll have to be IPs.</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/site/blog/2015/01/07/papertrailapp-and-routerboard/">PaperTrailApp and RouterBOARD 750GL</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-01-07T20:07:02-08:00" pubdate data-updated="true">Jan 7<sup>th</sup>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://papertrailapp.com/?thank=ee28e2">PaperTrailApp</a> (Referral link) is a SaaS RSyslog host that currently offers 100MB/mo of capacity free.  In setting up my home network and servers I wanted to have my RouterBOARD 750GL send its logs to PaperTrail.  The RouterBoard supports syslog, so configuring it is pretty straightforward &mdash; with one exception. My ISP utilizes PPPoE and so I have an additional interface configured in my RouterBOARD for it.  It seems to get confused as to what source IP to use when talking to PaperTrail and the syslog packets go into the bitbucket.  I resolved this by hardcoding my source IP into the src-address for the syslog.  The resulting configuation is:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># jan/07/2015 20:12:24 by RouterOS 6.22
+</span><span class='line'># software id = 2JL8-DKGT
+</span><span class='line'>#
+</span><span class='line'>/system logging action
+</span><span class='line'>set 3 remote=&lt;IP by resolving your log*.papertailapp.com address&gt; remote-port=&lt;port defined in the console&gt;
+</span><span class='line'>add bsd-syslog=yes name=papertrail remote==&lt;IP by resolving your log*.papertailapp.com address&gt; remote-port=&lt;port defined in papertrail console&gt; src-address=&lt;pppoe address&gt; target=remote
+</span><span class='line'>/system logging
+</span><span class='line'>add action=papertrail topics=!async,!packet,!ddns,!debug</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/site/blog/2015/01/07/mesos/">Mesos, Docker and Consul</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-01-07T19:55:10-08:00" pubdate data-updated="true">Jan 7<sup>th</sup>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I was playing with Mesos/Marathon + Docker recently and tried to integrate Consul.  Mesos sets the Docker container &lsquo;name&rsquo; to a internal value that messes with the Consul <a href="https://github.com/progrium/registrator">Registrator</a>, something like <code>mesos-aa998abcabab</code>. Registrator can accept an environmental variable telling it what service name to register as instead. The format for that is:</p>
+
+<div><script src='https://gist.github.com/12209f78a592eaf98cfd.js'></script>
+<noscript><pre><code>curl -v -X POST http://localhost:8080/v2/apps \
+  -H Content-Type:application/json -d &#39;{
+    &quot;id&quot;: &quot;some-nginx&quot;,
+      &quot;container&quot;: {
+        &quot;docker&quot;: {
+          &quot;parameters&quot; : {
+            &quot;env&quot;: &quot;SERVICE_NAME=nginx-xyz&quot;
+          },
+        &quot;image&quot;: &quot;nginx&quot;,
+        &quot;network&quot;: &quot;BRIDGE&quot;,
+        &quot;portMappings&quot;: [
+          { &quot;containerPort&quot;: 80, &quot;hostPort&quot;: 0, &quot;protocol&quot;: &quot;tcp&quot; }
+        ]
+      },
+      &quot;type&quot;: &quot;DOCKER&quot;,
+      &quot;volumes&quot;: []
+      },
+    &quot;cpus&quot;: 0.2,
+    &quot;mem&quot;: 128.0,
+    &quot;instances&quot;: 1
+  }&#39; </code></pre></noscript></div>
+
+
+<p>Registrator will register the instance with a service name of <code>nginx-xyz</code></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/site/posts/3">&larr; Older</a>
+    
+    <a href="/site/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/site/index.html">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/site/blog/2018/08/19/dns-as-a-load-balancer/">DNS as a Service Discovery Load Balancer</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2017/09/24/home-automation-ideas/">Home Automation Ideas</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2017/06/17/jenkins-and-github-hooks/">Jenkinsfile and Github Hooks</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2017/04/20/aws-route53-failover-and-alb/">AWS Route53 Failover and ALB</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2016/06/08/cloud-init-with-centos7-and-chef/">Cloud-Init With CentOS7, Chef, and SELinux</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/jhmartin">@jhmartin</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'jhmartin',
+            count: 21,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/site/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section class="googleplus googleplus-hidden">
+  <h1>
+    <a href="https://plus.google.com/105964388252097959079?rel=author">
+      <img src="//www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - Jason Martin jhmartin@toger.us -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,496 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>GPG / PGP Key - Toger Blog</title>
+  <meta name="author" content="Jason Martin jhmartin@toger.us">
+
+  
+  <meta name="description" content="GPG / PGP Key Jan 3rd, 2015 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="E6g-RygMY6w5OqT7qnwKg3eJJnGYWWhMysZEcgihuB8" />
+
+  
+  <link rel="canonical" href="http://jhmartin.github.io/site/gpg-pgp-key">
+  <link href="/site/favicon.png" rel="icon">
+  <link href="/site/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/site/atom.xml" rel="alternate" title="Toger Blog" type="application/atom+xml">
+  <script src="/site/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/site/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-50432157-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/site/">Toger Blog</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/site/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jhmartin.github.io/site" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/site/">Blog</a></li>
+  <li><a href="/site/blog/archives">Archives</a></li>
+  <li><a href="/site/gpg-pgp-key">GPG/PGP Key</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">GPG / PGP Key</h1>
+    <p class="meta">
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-01-03T20:33:00-08:00" pubdate data-updated="true">Jan 3<sup>rd</sup>, 2015</time></p>
+  </header>
+  
+  <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>-----BEGIN PGP PUBLIC KEY BLOCK-----
+</span><span class='line'>
+</span><span class='line'>mQINBFdTS/oBEACtwdTJpBPQfSuxxJW+rPVxyiY/TnchZN6LXVthFIPvfX6DCIra
+</span><span class='line'>iJGwvTJS6woOW9vuF7JPQs6z2awkDe5lOyV45iqiHLb2vOEHv4/XJQzPspxAL5B5
+</span><span class='line'>1EnkOCCiDW3mfTErrvdK7XAm6QTKGkV+qCrB8B4lvOjwvUmpS8gkpOapG0lYhBH2
+</span><span class='line'>TnOcmvzT4XedvNz+Le6LlhaiBOHmZnPUyBTdFfVgnbau7Ut1jnb7aY9QcxTwgnIg
+</span><span class='line'>UTlzSR/QjhxstjdNu9DJVAXIf30fL7hPQLHFATua3RbWdHynD8sITGnvELMyVRkm
+</span><span class='line'>YJ3YvTsbBbdRbN0kS0EZWvCdpBtoNQM8zkFT4IrASwViVWEcggsIlMSuLWVp1hkQ
+</span><span class='line'>ytDuOVjDkuXOiW6qBfX1kxKuBsdklwLO+NzK4gXKcvc0D2GSPJQCou1Af3+cFMtY
+</span><span class='line'>omPa8HxhCM1OR51Eh+8oMyGJrF1R8STX08MOaaJqNaJNfvkLsTQKWbH0tL/3SUG7
+</span><span class='line'>XN/RYWfa4V99VzwCCxnClj0vHfQD9aA0uVBlFgmB3Hta2+wbycP2xkf624GNkTq4
+</span><span class='line'>/xIsMga2JuB9klqKpToIbmc1eBhhJHlAEpOmferNUfurB98kzLmSINRBMU+LQLjj
+</span><span class='line'>bdgNDJpWyifXcYdloUkoO7Oh616Z0yBSdicB+YsNobaO8e3otdMRDdDUGQARAQAB
+</span><span class='line'>tCBKYXNvbiBNYXJ0aW4gPGpobWFydGluQHRvZ2VyLnVzPokCPQQTAQoAJwIbAQUL
+</span><span class='line'>CQgHAwUVCgkICwUWAgMBAAIeAQIXgAUCWxiC/QUJB4ed/QAKCRDYHJMmqXmECrwQ
+</span><span class='line'>D/0ePEkTtDTzgFltdUX46oQu7Ha6b2Cm8M9FFPAIynwvwEA/gAg7Lo2aogEY+2Oz
+</span><span class='line'>/new8aFKl9Gt48Z85AJkdg9w2kfYixP40pCqbAK12ckcANADwZ9j0x65HYPyrj09
+</span><span class='line'>5s3S+32SpN1DYyUCuPIFuWkv02CkYoncgZlHoRSxiYNvNmXR/xA82aXpib+RYjsE
+</span><span class='line'>xvrUewi441igXZs+gwNlLNAu2RrCqvTAOi1lHYzKHIqcpajHr1A31AbrJK1aEQF8
+</span><span class='line'>f5djZoD7BOpAbvz+2D5t0TaqXf6fk1i3Is3rZfJr+9g2YGSGlqXG6RPU4qndVgpj
+</span><span class='line'>+7B/5Oct8AyB5UKe+o6gDPT9vFdQNO4ZrNm7xNUHfsi1wmv4kVnUMgxMFpZA71HH
+</span><span class='line'>423/yM7KJqLZJOLmxL84Z+g9OeKshssCSiDZzNnb/s71b+n18x6YjfwjXOhcm0D2
+</span><span class='line'>04zfRnGM1nhZ4bhVeEBxrYDwxhEC5OLlc9xftg4VXL5mtDFPR02rDXyzeMMKgntb
+</span><span class='line'>QrMLnVZk+Z6MuLrUn36l/+XGOKBrEufiuR20JedU5CPcVp5c9kTLjzbacbK/3yd3
+</span><span class='line'>4/0Pu+pLkFvOE2oB4DH1CoaARfUObdiLiYvodYVdMGMnGGT7f98Vldb+f+EAU9vm
+</span><span class='line'>UmTgVNvImjQF4pqTHAh8WguvvietrjcDLR+kfHUWCmtl47kCDQRXU0wFARAAwBPe
+</span><span class='line'>GQXACT0oS/qVpqL0ZDbddwMEIOXqBlwtBWCW97J+3RlxDuPnuRSE/PyfoJUu99Da
+</span><span class='line'>KKp6n60+DLaPHSluoO/QYjN8JxToF53aX2NCN97dpALpxIMoqHcB25MGz07+PiP0
+</span><span class='line'>QF/HGYFBsCGCIKxD3VUwjnbYrkmSnN/K+oJu6UX4Qz99YodXpQ4W6In8vYlzZmi2
+</span><span class='line'>wwft+S0/fMzPBZ/MDhXd/j+NtpPBI4uUS15qvYJ3vvJgT3diLcZUw8uPCH/ZQ/gW
+</span><span class='line'>rZcWSvP1EUdYOkWnn+ZB2tNme+MO7zddhUSXNhd3GXMq/wvOUV5ADzZZPfZquSaY
+</span><span class='line'>32f0OZRJbMNc+adSvb3mYDJh4uRVKcpc4WOsV515YyWwJwcYKM6dN5ydMiIGP/BZ
+</span><span class='line'>ToXs2CeEV31W2gyt54qniaTVHUh8lnsaxqTPSKIFFkWZl9gbG9KI6lptYTndF0B/
+</span><span class='line'>aepnmydGvZV7pl1W6hrCdkX2p040LvX+no4jNtxOuaVc9cHbu+Pr8uo6vDpJEe8A
+</span><span class='line'>mKKZs7+pqCqGFCBST9zT/tn6PJcc4E5bk1pbzMQjaOWhDy3DGab6WEpcKZqktR9R
+</span><span class='line'>npcWZAHdJCtBCLIC9zMX4pDiDK6enH4A9fIppk6noAO87K9gEW2yiLk/dOtiOpOe
+</span><span class='line'>bF9tkvtljtjjrw84wPLBjdmon+zzsyUS+VBLeTMAEQEAAYkERAQYAQoADwIbAgUC
+</span><span class='line'>WxiDFQUJB4eeDAIpwV0gBBkBCgAGBQJXU0wFAAoJEKMvuCLzbM9D+MQQAK2SpdnQ
+</span><span class='line'>8yf6A9m7QHrw9QILj5jSMuv9ag/4DsG9aeunVZqM4hV/y0U/l39ys+KqPEyvEA7T
+</span><span class='line'>q4k/sGyF9dhnQ8UomfXguxssubfbboVybJLCUXmV3p5GGXSlsaw/0YYMoRzNiAIh
+</span><span class='line'>564EZb3IDKnUpoLIOHM25zqN5qXfKWBkAG9a1DhSxWWk6Our5bC1NEonscGDWqdc
+</span><span class='line'>NBC292c/bix/W9CyvZFK2TALxoGd6TOIEGEG2RVKHwBnkQxkQ8F4paBf5QRx6vhE
+</span><span class='line'>ukqu8SWlRgOsKyKbQv/jecY384dpkCvylTtuyE9RAsAP3kiVJKj5IjNlCn+EQbOV
+</span><span class='line'>4JhueeuEcBcSmWy0vYdmCfZWGf0rSyNneU/5yGkJ/QAsvtzt8JUm+TA26aPeuydk
+</span><span class='line'>zwYuKFQQsoy/I7ukMrf2Afd2EVTEHEQ0MGBi7M/SZNAY8sJJibzpBYtW9Y2GGXDj
+</span><span class='line'>3l0v/zqrYlNxRRHYknpN04HBq9Eug05XYyy+Ea7jPR6SZXsbuxpP0BSVNywoqTrK
+</span><span class='line'>KhVsljF3+dDKyfLvx8cxGSC0k1AMqp0GFDQYQzo04lno3PulWG13aVFBw2ejgTek
+</span><span class='line'>/GCOrd0MlEY7dpgJ5tES+s/ZYDJks63wfVeKxS8LyUIh6NxVeL7IRkK18meefdOr
+</span><span class='line'>jUXpzWk+WygYKFjidQU6XYULHPCy0lv+zrsyCRDYHJMmqXmECjyWEACP52PwU8AE
+</span><span class='line'>rq0qDak3W/HIFjfQ/mkGxCd6S+w+HEfHoWEkrwpENBl3KEtVbKLtzUmFikdGgDpd
+</span><span class='line'>mKPrh6YM6mPJPR5IqXViDiIBz4tHkEgC6Vh5BT07tF1T++AT7qDHAVUj2KBjAvV7
+</span><span class='line'>FDf5PwA83H+tDRLkKNxJyDQ8z2CAqsqnS/G6OM1d740+M0wGoZJX5cIkpRmS/3Dv
+</span><span class='line'>5QwTOmPdS92IZT7rV/WRApDqrY3sJS2qYa8UKlGihj3Qt3RxXesAxYj4uX3H/WwP
+</span><span class='line'>ol0a8ZNEeMQdgnHZeFAAT1HE59o4HTgI8zKzk4Sie949OjdUdyQf5UZm9EBgGUnI
+</span><span class='line'>/EqddeHpHwQE/eqyj1RcipUwiOl20kz9d96kNVvoMvkuh/HxOABoBSKGacdjStT4
+</span><span class='line'>hN+L6qJDiDxf8jrf+ndoythNQ0ukxGQRbQ9/6LDek+3TW7Yf2Uwe2jCrdjJfX2uw
+</span><span class='line'>AYDsSK9AmSBLj7CYdUkgBJPtyx671p27ZnEqPyvLYr/anvVzJK9Zfstytz+1lD4C
+</span><span class='line'>z6SbO+pu/WuoYXoh3rE3unZUmqUcseSj5e19KJxNWwEwzvQjP6c3vauHNezF84fr
+</span><span class='line'>puY4jtIyjIixPvqW1oztZCSUMTf4JlhR7KwzAuY4eRN12NHU+mXhEaKLxy+S86Lv
+</span><span class='line'>vziYvgnMd1T32fUX3P2RYRnHXmAIRMcc4bkCDQRXU0wiARAAy374xWkj4EAKkjSw
+</span><span class='line'>TnOMVxQwh6WA7aKytJuBCPERyyfj2pycxVBQvgtmHBwxoHlTW5312uAvwsR3tRe4
+</span><span class='line'>TrOKVWAmq/ehWX49FbPGP7cIHvTYOqW/OO84BMF2+9cdSNPuOpvsmbUkBAbfsNzn
+</span><span class='line'>nP/NG9uq6xHs5+erldQ3g5BBRSPiYX9ZKwY/t4JqW5NOZG2Md87LPf0jcIfJ79Zd
+</span><span class='line'>g88WISD8eaNe6Uk+2YehcVVAobDIbjjC/1pjM1NF4Pl4fcC3Z1+dKJ33snPRVZou
+</span><span class='line'>8v8ksdAL/hd9kk9EQQOiL+/FsUJ/nUQAr6jkw1xfVI0myG3UzeMNykJQKklQO++P
+</span><span class='line'>dRBZywQ92l9iHu3Inovhl6oBUm5NTxNt0RGXvYbzajEHkaf4Cbd3YRantKlIviT0
+</span><span class='line'>ABsTDIKCK7jze7BBNFyA/yebsfxJ/Y3Jc0HqaLJ8cW22QnLBWIH87gozyBj0Wiwn
+</span><span class='line'>tKKMpbrEwCtE7PFepBgrRyFjwuovzCToS3TaA8LnTA7AMdVJW5jdHOh78ngG0UP+
+</span><span class='line'>V9FIYRq8xS9wv7uuzKLkzrzV3BSFEoS3dvJvYOv2YarHQAT2hPjTJ3y4EFFlhCoZ
+</span><span class='line'>z1VqyXR27FWUKV8PEVmnuSENUfu68cKqmEdWjgNJMdKWieI0C85GTQebSUZP9qXJ
+</span><span class='line'>LsjFFq5rCf/vkCuUrQu0j5JR/7sAEQEAAYkCJQQYAQoADwIbDAUCWxiDJAUJB4ed
+</span><span class='line'>/gAKCRDYHJMmqXmECuHQD/9oGB9PH4lw0KPfoFM40LHAherL+/cjFZIK9EBOse2o
+</span><span class='line'>OmneaeNDVmciWDl0UftiOL6qrosW6Qoi2ENT8amPIC5BA0XiXYh1gWYqPGOKfvPE
+</span><span class='line'>aHt01/kYeKzfvkkljWENR+RnTT53VmB21xUfsxqA2rxLhPkgXoBimOH1FhCFJhDU
+</span><span class='line'>v2b7xO1c0LMFWFbDKrwFoMyi9E99SpRpxvzXiE0Rks9XVeBPyJ7BlTr9HCVQUSfo
+</span><span class='line'>g47lPhHsAhj1AhORwLkSODZ+alsNDkHmocMV/iT5DtNiBi37UXfXaiaCH2feMnH9
+</span><span class='line'>UASb808tofZbwxQBNE4kCdeJCSedbvEbVNQ2zMFfvrKIRD5dGtLErwJmVHV+LHgx
+</span><span class='line'>qsRt/y9iCfQhQ1taNXb5WUUB/aTi44kxi30pXTfc+WYxrIP3HM3oJ3DWi2l9iOKC
+</span><span class='line'>Bg/cozeg0Eb37tx6J+z5xb1R4pKnrbQjrsEoqXyzNATSkrbTJS773ydzY9V6oBcr
+</span><span class='line'>KWoyutzRcBt3rsGBZgft6o++cPD+4gmGc4JjmWXCcYyuSXgZlIQpWsx0QQLAHBm9
+</span><span class='line'>lBbeDIbCSb0w+AbHJWZ8q+ayhWgVh+JLV1/J9X2BW3pTu2WMeTqiIeQLNDh8bA/l
+</span><span class='line'>vQu1tRadxtfMxQEtsvkbtJxyxrWZNV0vQq7wWlzExlUpErtLHCufr/cL/rYdzWcI
+</span><span class='line'>xLkCDQRXU0xAARAA2suV/OipbKpF7HP2xJeVnftKlFFMwUd4Iagsiq1YYi57sS/n
+</span><span class='line'>E0fZKg4zcm6TYkVl+FdQ/mzuJtWjif+rJoHs529haiQ4/Rzrpts3D0q2y177/hwQ
+</span><span class='line'>KL9oRLbBC56fgDt/JfbRiBkD+MSdR/EG423WnpJ7mLzgN3kr4EmcRc6dN2Gtm/kz
+</span><span class='line'>yqbSCyDgQuskatDBbd+iYihm/aShVizgVUC4dRYXUVj6J5btej8PC8JeFewPFuOY
+</span><span class='line'>8HMO63KX9V3XRvEMSX1DBmedN761SAtEIc9UdGvUUrPJcsa20sMB1grvj/a5LLkr
+</span><span class='line'>k81V8plQo2VFhut9b/0hN4PPc2b8TqmDk/T0laer/XgtqjIiocobR3tGLF/UeEt+
+</span><span class='line'>Julp0ZmbTMrV3/3ZGfCQFiEZ4LHBvgxKO+FYa3b2sa8oDegWelsfQBrpYDv7YsPW
+</span><span class='line'>Lcpnh4cLflotJdL42MuuF7lLzn2qnAHDF48k1QY3cf5ehsHk7GBblIIakP/03m4S
+</span><span class='line'>vOVBBLXz+zLyQszL2qTyW6oIsD+6ykKohHY2HJy5Fjr6FJGKf6+jqXT8NyhS20+3
+</span><span class='line'>64Utg9o5WAQUv8BHbjUHxxufbtgYlaKQFiQCHnWU+e2QSo6bPbodyReE705ewnYN
+</span><span class='line'>s07PRgPlOXLmans3ZeVfopS4pChSVrVfSQ6av/bPSQQL9WM90NaSjyFiuLMAEQEA
+</span><span class='line'>AYkCJQQYAQoADwIbIAUCWxiDLQUJB4ed6QAKCRDYHJMmqXmECjd/EACPAB1vzBs4
+</span><span class='line'>yGNIspqJghlqkingKTa8qVcfwXhIC/JqP5Pt4QAmczhjFUkZ50M6NnFjRTeScTXv
+</span><span class='line'>ROCT2tiLYiFp0dXZG1fIR+xDfu507erPtXxh8If0n1ljpg1WZIC5p/T6b2ErHvcz
+</span><span class='line'>iqKdZ4a3suDxngAouvyIR0+qUkc0Uc+U32CnixoXyvO6b9qGlhkBfJ8gzx4L8mZp
+</span><span class='line'>FU2vTi59sXBv9rEixkSpCGoDkp84T7GU/zPejzaMWOEVX8fs4L0EReRT4nCL5Njy
+</span><span class='line'>7T2JfR1s/cXOzyMmRn/VpYQfca9hSJ+bG3xEc9tbOZNK46eIMjd9wk0nmTxH2HLq
+</span><span class='line'>1ONkUX6uCILsRYUgwyihyrC519NGzDnqt2Eo/rWKE/ONAldPm/eHKdTwTDVjKUHh
+</span><span class='line'>Pv7Wq2G2ZJta9jUy6hvNS23slI9YVWwliQnelZ5Q57zygSGSF1M5zM8lZK1uXKP9
+</span><span class='line'>ycIRKAuugHKu4CGLVQq1AguDImRNxV1b9uWSEVHp+84eFNaa2oyZ+0rmE8zyndic
+</span><span class='line'>jxR6T0gZPLZ+rLfcG2UJMrSoA34JCfMbPk0It7A5i60WHesvwoKyxLisn5jPlhCN
+</span><span class='line'>sbW9zfgCPAJv9iRWlSizg0XOk4Pno4QDAVAGNsz2TACJTKPn/OyJXZcAnpcRxEil
+</span><span class='line'>953Pm+86jFpaj53+53g9TaRmSWpYXX69ug==
+</span><span class='line'>=Qd+C
+</span><span class='line'>-----END PGP PUBLIC KEY BLOCK-----</span></code></pre></td></tr></table></div></figure>
+
+
+  
+    <footer>
+      <p class="meta">
+        
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-01-03T20:33:00-08:00" pubdate data-updated="true">Jan 3<sup>rd</sup>, 2015</time>
+        
+      </p>
+      
+        <div class="sharing">
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/site/blog/2018/08/19/dns-as-a-load-balancer/">DNS as a Service Discovery Load Balancer</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2017/09/24/home-automation-ideas/">Home Automation Ideas</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2017/06/17/jenkins-and-github-hooks/">Jenkinsfile and Github Hooks</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2017/04/20/aws-route53-failover-and-alb/">AWS Route53 Failover and ALB</a>
+      </li>
+    
+      <li class="post">
+        <a href="/site/blog/2016/06/08/cloud-init-with-centos7-and-chef/">Cloud-Init With CentOS7, Chef, and SELinux</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/jhmartin">@jhmartin</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'jhmartin',
+            count: 21,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/site/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section class="googleplus googleplus-hidden">
+  <h1>
+    <a href="https://plus.google.com/105964388252097959079?rel=author">
+      <img src="//www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2018 - Jason Martin jhmartin@toger.us -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

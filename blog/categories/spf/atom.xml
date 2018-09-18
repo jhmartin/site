@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Spf | Toger Blog]]></title>
+  <link href="http://jhmartin.github.io/site/blog/categories/spf/atom.xml" rel="self"/>
+  <link href="http://jhmartin.github.io/site/"/>
+  <updated>2018-09-18T06:55:48-07:00</updated>
+  <id>http://jhmartin.github.io/site/</id>
+  <author>
+    <name><![CDATA[Jason Martin jhmartin@toger.us]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Carl's Jr, SPF and AWS]]></title>
+    <link href="http://jhmartin.github.io/site/blog/2015/09/20/carl-jrs/"/>
+    <updated>2015-09-20T20:34:01-07:00</updated>
+    <id>http://jhmartin.github.io/site/blog/2015/09/20/carl-jrs</id>
+    <content type="html"><![CDATA[<p>Carl&rsquo;s Jr has a nifty nutritional calculator / order planner at <a href="http://www.carlsjr.com/menu/nutritional_calculator.">http://www.carlsjr.com/menu/nutritional_calculator.</a>  It lets you fully customize your meal, then lets you print or email your order to yourself with all the magic words to say to get your meal as planned (subbing cheese, extra / 2x / no onion, etc).</p>
+
+<p>Tonight I used this to pre-assemble a highly customized meal for my family.  I triggered it to send me an email (easier to read on my phone at the order window) and anxiously awaited.</p>
+
+<p>No email was received.</p>
+
+<p>I host my own email and use <a href="http://rollernet.us">http://rollernet.us</a> for my public incoming MX relays; they are nifty as they have a ton of highly configurable anti-spam features that I can apply &lsquo;at the edge&rsquo; and lets my actual mailserver run much leaner since SpamAssassin et all are resource intensive.</p>
+
+<p>Rollernet logs stated:
+<code>
+Connection from 54.236.226.113 rejected by mail.rollernet.us
+From: carlsjr@carlsjr.com
+To: my_email    
+Reason: SPF fail (Mechanism -all matched)
+</code></p>
+
+<p>Oh ho! I temporarily disabled SPF checking (and greylisting) and sent another meal through, and the email header said:</p>
+
+<p>```
+Received-SPF: fail (carlsjr.com: Sender is not authorized by default to use &lsquo;<a href="&#109;&#x61;&#105;&#x6c;&#x74;&#x6f;&#58;&#x63;&#x61;&#114;&#x6c;&#x73;&#x6a;&#x72;&#64;&#99;&#97;&#x72;&#x6c;&#115;&#106;&#x72;&#46;&#x63;&#x6f;&#x6d;">&#x63;&#97;&#114;&#x6c;&#115;&#x6a;&#114;&#64;&#99;&#x61;&#x72;&#108;&#115;&#x6a;&#114;&#x2e;&#99;&#x6f;&#109;</a>&rsquo; in &lsquo;mfrom&rsquo; identity (mechanism &lsquo;-all&rsquo; matched)) receiver=mail2.rollernet.us; identity=mailfrom; envelope-from=&ldquo;<a href="&#109;&#x61;&#x69;&#108;&#116;&#x6f;&#58;&#x63;&#x61;&#x72;&#108;&#x73;&#106;&#x72;&#x40;&#x63;&#x61;&#114;&#108;&#x73;&#106;&#x72;&#x2e;&#x63;&#111;&#109;">&#x63;&#x61;&#114;&#x6c;&#115;&#x6a;&#114;&#x40;&#x63;&#x61;&#114;&#x6c;&#115;&#106;&#114;&#x2e;&#x63;&#111;&#109;</a>&rdquo;;</p>
+
+<pre><code>    helo=ip-10-198-0-85.localdomain; client-ip=54.236.168.30
+</code></pre>
+
+<p>```</p>
+
+<p>I fetched their SPF record at with <a href="http://www.kitterman.com/spf/validate.html">http://www.kitterman.com/spf/validate.html</a> (though any DNS fetching tool would work) and received:
+<code>
+v=spf1 ip4:63.168.109.0/24 ip4:67.203.173.0/26 ip4:216.87.35.224/27 mx include:spf.protection.outlook.com -all
+</code></p>
+
+<p>This tells me they use outlook.com for their internal email, and only allow a few subnets to originate mail from them &mdash; and the source IP I got was not one of them. 54.236.168.30 resolves to ec2-54-236-168-30.compute-1.amazonaws.com. www.carlsjr.com resolves to what appears to be a Cloudformation-based AWS environment:
+<code>
+$ host www.carlsjr.com
+www.carlsjr.com is an alias for CKEMKTPRDLB-20130419-1810707626.us-east-1.elb.amazonaws.com.
+CKEMKTPRDLB-20130419-1810707626.us-east-1.elb.amazonaws.com has address 54.236.231.179
+CKEMKTPRDLB-20130419-1810707626.us-east-1.elb.amazonaws.com has address 52.1.95.39
+</code></p>
+
+<p>I suspect their Carl&rsquo;s AWS-based web farm is generating the outgoing mails directly, and they have not accounted for that in their SPF configuration. Using Amazon Simple Email Service (SPF) would have accounted for this already (<a href="http://docs.aws.amazon.com/ses/latest/DeveloperGuide/authenticate-domain.html">http://docs.aws.amazon.com/ses/latest/DeveloperGuide/authenticate-domain.html</a>). This could also be handled by designating a outgoing mail host from their AWS environment with an Elastic IP attached and add it to their SPF record.</p>
+
+<p>I sent them an email detailing the issue at their corporate email address. I&rsquo;ll update if I hear back, but I don&rsquo;t expect it will ever reach anyone who knows what to do with it.</p>
+
+<p>Update: I got an email back stating the issue was being routed &lsquo;to the appropriate department&rsquo;.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Aws | Toger Blog]]></title>
+  <link href="http://jhmartin.github.io/site/blog/categories/aws/atom.xml" rel="self"/>
+  <link href="http://jhmartin.github.io/site/"/>
+  <updated>2018-09-18T06:55:48-07:00</updated>
+  <id>http://jhmartin.github.io/site/</id>
+  <author>
+    <name><![CDATA[Jason Martin jhmartin@toger.us]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[AWS Route53 Failover and ALB]]></title>
+    <link href="http://jhmartin.github.io/site/blog/2017/04/20/aws-route53-failover-and-alb/"/>
+    <updated>2017-04-20T08:51:25-07:00</updated>
+    <id>http://jhmartin.github.io/site/blog/2017/04/20/aws-route53-failover-and-alb</id>
+    <content type="html"><![CDATA[<p>I ran across this little gotcha recently.</p>
+
+<p>Scenario: A service hosted in two regions.  Each is fronted by either an ALB or ELB with an attached Autoscale group, that uses the LB healthcheck to determine instance health.  A Route53 configuration balances trafic between the two. Route53 &lsquo;Evaluate Target Health&rsquo; is set to yes and no healthcheck is attached.</p>
+
+<p>Under the ELB, if the backend application fails in a region, the ELB will trigger termination of the application nodes.  Route53 will consider the region unhealthy if all the backends are sick or unregistered and fail over to the remaining region.</p>
+
+<p>Under the ALB, the same occurs except Route53 does not consider an empty ALB as unhealthy and will continue to send traffic to a region with no registered backends.</p>
+
+<p>This is to a certain extent understandable, as ALBs allow attaching multiple target groups and its not immediately obvious what to do when there is a mix of statuses. I suspect the common case is that most ALBs have exactly one target group attached though and that could be used as the status, or allow Route53 to be bound to a specific target group.</p>
+
+<p>The current workaround is to use a Route53 Healthcheck (at an additional $1+ per month per check) to have Route53 perform an application healthcheck against each origin.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Cloud-Init With CentOS7, Chef, and SELinux]]></title>
+    <link href="http://jhmartin.github.io/site/blog/2016/06/08/cloud-init-with-centos7-and-chef/"/>
+    <updated>2016-06-08T20:57:00-07:00</updated>
+    <id>http://jhmartin.github.io/site/blog/2016/06/08/cloud-init-with-centos7-and-chef</id>
+    <content type="html"><![CDATA[<p>The CentOS 7 AMI in Amazon comes with Cloud-Init (<code>cloud-init-0.7.5-10.el7.centos.1.x86_64</code>). This is quite handy as it assists in automating several bootup tasks. One of these tasks is to install and bootstrap Chef.  Unforunately, when SELinux is installed the Chef handler will fail.</p>
+
+<p>Sample error:
+```
+[CLOUDINIT] util.py[DEBUG]: Restoring selinux mode for /var/lib (recursive=True)
+[CLOUDINIT] util.py[DEBUG]: Running chef (<module 'cloudinit.config.cc_chef' from '/usr/lib/python2.7/site-packages/cloudinit/config/cc_chef.py'>) failed</p>
+
+<pre><code>   Traceback (most recent call last):
+     File "/usr/lib/python2.7/site-packages/cloudinit/stages.py", line 658, in _run_modules
+       cc.run(run_name, mod.handle, func_args, freq=freq)
+     File "/usr/lib/python2.7/site-packages/cloudinit/cloud.py", line 63, in run
+       return self._runners.run(name, functor, args, freq, clear_on_fail)
+     File "/usr/lib/python2.7/site-packages/cloudinit/helpers.py", line 197, in run
+       results = functor(*args)
+     File "/usr/lib/python2.7/site-packages/cloudinit/config/cc_chef.py", line 54, in handle
+       util.ensure_dir(d)
+     File "/usr/lib/python2.7/site-packages/cloudinit/util.py", line 1291, in ensure_dir
+       os.makedirs(path)
+     File "/usr/lib/python2.7/site-packages/cloudinit/util.py", line 167, in __exit__
+       self.selinux.restorecon(path, recursive=self.recursive)
+     File "/usr/lib64/python2.7/site-packages/selinux/__init__.py", line 95, in restorecon
+       for fname in fnames]), None)
+     File "/usr/lib64/python2.7/posixpath.py", line 246, in walk
+       walk(name, func, arg)
+     File "/usr/lib64/python2.7/posixpath.py", line 238, in walk
+       func(arg, top, names)
+     File "/usr/lib64/python2.7/site-packages/selinux/__init__.py", line 95, in &lt;lambda&gt;
+       for fname in fnames]), None)
+     File "/usr/lib64/python2.7/site-packages/selinux/__init__.py", line 85, in restorecon
+       status, context = matchpathcon(path, mode)
+   OSError: [Errno 2] No such file or directory
+</code></pre>
+
+<p>```</p>
+
+<!-- more -->
+
+
+<p>This proved to be most frustrating.  It was obviously failing while it was fixing the SELinux parameters under <code>/var/lib</code>, but it was not clear why.  There were no denied messages in the audit log. Of course <code>/var/lib</code> and <code>/var/lib/chef</code> existed. <code>/var/lib/chef</code> is a default directory listed in <code>/usr/lib/python2.7/site-packages/cloudinit/config/cc_chef.py</code>.</p>
+
+<p>Adding in several debug statements led to determining that the issue was specific to <code>/var/lib/nfs/rpc_pipefs</code>. The file existed and had no special permissions, although it had a generic SELinux label as opposed to a nfs-specific value.  Further investigation showed that the root of the issue was in libselinux, which is looking up the intended label in <code>/etc/selinux/targeted/contexts/files/file_contents</code>:</p>
+
+<p><code>
+/usr/share/Modules/init(/.*)?   system_u:object_r:bin_t:s0
+/var/lib/nfs/rpc_pipefs(/.*)?   &lt;&lt;none&gt;&gt;
+</code></p>
+
+<p>The selinux python library is expecting a label as above, and returns a Errno 2 &lsquo;No such file or directory&rsquo; if it hits the &lsquo;none&rsquo; value.  This error is returned to cloud-init and causes the chef handler to bomb out.
+Adding a label to the file_contents file works around the issue but likely breaks NFS (if it were in use). The better approach would be for <code>util.py</code> to ignore the case where a new label cannot be found. If CentOS7 updated to the latest cloud-init there is a decent chance this is fixed.</p>
+
+<p>Filed as <a href="https://bugs.centos.org/view.php?id=10990.">https://bugs.centos.org/view.php?id=10990.</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Extending AWS Instance Trust]]></title>
+    <link href="http://jhmartin.github.io/site/blog/2016/06/05/extending-aws-instance-trust/"/>
+    <updated>2016-06-05T20:39:53-07:00</updated>
+    <id>http://jhmartin.github.io/site/blog/2016/06/05/extending-aws-instance-trust</id>
+    <content type="html"><![CDATA[<p>All nodes in EC2 can fetch their <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-identity-documents.html">Instance Identity Documents</a>. This returns an AWS-signed block containing data about the instance that requested it.  This data is only available to the instance that fetched it, so if it turns around and presents it to some other service you can be confident it originated from the machine in question.</p>
+
+<p>This is useful for secrets-enrollment processes where you want a node to be able to attest to its own identity in a secure fashion.  Your enrollment mechanism can ensure that the node is &lsquo;young&rsquo; enough to be making the request, and that the enrollment has never occured before.   Your enrollment tool can also look up other data about the instance (autoscale group, CloudFormation stack, etc) to determine what privileges it should be granted.</p>
+
+<p>In this manner you can pivot on the security features AWS offers for identifying a particular node to another tool.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Passing Host IP to ECS]]></title>
+    <link href="http://jhmartin.github.io/site/blog/2016/06/05/passing-host-ip-to-ecs/"/>
+    <updated>2016-06-05T20:11:55-07:00</updated>
+    <id>http://jhmartin.github.io/site/blog/2016/06/05/passing-host-ip-to-ecs</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve been looking for a way to run Consul &lsquo;standalone&rsquo; on a host and let multiple ECS containers connect to it.  I was hoping to find a macro I could put in a container definition but such does not yet exist.  Instead I realized that I can have my Docker instance query the <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html#instancedata-data-retrieval">instance metadata</a> service and get this information.  It is not quite as elegant docker-wise but it should work until something better comes along.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AWS ECS and Docker Exit (137)]]></title>
+    <link href="http://jhmartin.github.io/site/blog/2015/09/22/aws-ecs-and-docker-exit-137/"/>
+    <updated>2015-09-22T19:19:40-07:00</updated>
+    <id>http://jhmartin.github.io/site/blog/2015/09/22/aws-ecs-and-docker-exit-137</id>
+    <content type="html"><![CDATA[<p>I ran into this the other day, my ECS instances were dieing off and <code>docker ps</code> showed <code>Exited (137) About a minute ago</code>. Looking at <code>docker inspect</code> I noticed:</p>
+
+<p>```</p>
+
+<pre><code>"State": {
+ "FinishedAt": "2015-09-20T21:38:58.188768082Z",
+    "OOMKilled": true
+  },
+</code></pre>
+
+<p>```</p>
+
+<p>This tells me that ECS / Docker enforced the memory limit for the container, and the out-of-memory-killer killed off the contained processes.  Raising the ECS memory limit for this process resolved the issue.</p>
+]]></content>
+  </entry>
+  
+</feed>

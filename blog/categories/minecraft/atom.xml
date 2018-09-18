@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Minecraft | Toger Blog]]></title>
+  <link href="http://jhmartin.github.io/site/blog/categories/minecraft/atom.xml" rel="self"/>
+  <link href="http://jhmartin.github.io/site/"/>
+  <updated>2018-09-18T06:55:48-07:00</updated>
+  <id>http://jhmartin.github.io/site/</id>
+  <author>
+    <name><![CDATA[Jason Martin jhmartin@toger.us]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[2FA and Minecraft Server]]></title>
+    <link href="http://jhmartin.github.io/site/blog/2015/06/27/2fa-and-minecraft-server/"/>
+    <updated>2015-06-27T14:57:41-07:00</updated>
+    <id>http://jhmartin.github.io/site/blog/2015/06/27/2fa-and-minecraft-server</id>
+    <content type="html"><![CDATA[<p>Two Factor Authentication (2FA) is an additional layer of protection you can add to your Minecraft server. You should already be relying on SSH keys to access your server, but those keys can be lost or leaked if you use them on untrusted machines.  2FA protects you from hacks resulting from someone gaining access to your password or SSH key.</p>
+
+<p><a href="http://DuoSecurity.com">DuoSecurity</a> is a company that provides a 2FA service that is free for personal use. A Mobile Push notification is sent via their Android / iOS app whenever a login is attempted and requires an affirmative response before login can proceed.  There is also SMS and computer-generated voice calls, but those consume credits that have a cost to refill. There is also a cost for going over 10 users, which should not be an issue for adminstation of a Minecraft server.</p>
+
+<p>I performed a source install to get the latest version, there are also packages for RHEL/CentOS/Debian/Ubuntu on their website.</p>
+
+<p>They offer a SSH-specific installation and a PAM installation that covers all auth on the machine. PAM is likely the more comprehensive solution but is a more involved process, plus requires a SELinux policy update (and the server resulting from this series has SELinux enabled). Their website tells you how to install the relevant SELinux policy but the necessary objects are missing from their download. I&rsquo;ve send them a mail and will update if I get clarification. For the record, the error I got was:
+<code>
+make: Entering directory `/home/centos/duo_unix-1.9.14/pam_duo'
+checkmodule -M -m -o authlogin_duo.mod authlogin_duo.te
+checkmodule:  loading policy configuration from authlogin_duo.te
+checkmodule:  unable to open authlogin_duo.te
+make: [semodule] Error 1 (ignored)
+semodule_package -o authlogin_duo.pp -m authlogin_duo.mod
+semodule_package:  Could not open file No such file or directory:  authlogin_duo.mod
+make: [semodule] Error 1 (ignored)
+semodule -i authlogin_duo.pp
+semodule:  Failed on authlogin_duo.pp!
+make: [semodule] Error 1 (ignored)
+make: Leaving directory `/home/centos/duo_unix-1.9.14/pam_duo'
+</code></p>
+
+<p>SSH setup is straightforward. Install the DuoSecurity app on your mobile device. Create an account on their website. Navigate their portal and select Applications, then <code>+New Application</code>.  Give it name of Minecraft SSH. This will result in a window showing a Integration key, Secret key (requiring a click to show), and an API hostname. Collect those and store them to the side (securely!)</p>
+
+<p><a href="https://www.duosecurity.com/docs/duounix#instructions">https://www.duosecurity.com/docs/duounix#instructions</a> describes the compile process:
+<code>bash
+wget https://dl.duosecurity.com/duo_unix-latest.tar.gz
+tar zxf duo_unix-latest.tar.gz
+cd duo_unix-1.9.14
+./configure --prefix=/usr &amp;&amp; make &amp;&amp; sudo make install
+</code></p>
+
+<p>After installing the binaries, modify /etc/duo/login_duo.conf and fill in the ikey/skey/host values from above. Uncomment pushinfo as well so that more details about the login are sent to you.</p>
+
+<p><a href="https://www.duosecurity.com/docs/duounix#centos">https://www.duosecurity.com/docs/duounix#centos</a> describes modifying SSH to work with the new system. <strong>Keep an alternate root-logged in session open in an alternate window</strong> while attempting this so you can back out if you make a mistake.  Do not log out of the &lsquo;backup&rsquo; window until you&rsquo;ve thoroughly exercised the system. I will not be responsible if you lock yourself out.</p>
+
+<p>Add <code>ForceCommand /usr/sbin/login_duo</code> to the end of /etc/sshd/sshd_config, then restart sshd (which does not kick out existing sessions) with <code>systemctl restart sshd.service</code></p>
+
+<p>Now attempt to log in to your account. You will be prompted to enroll in 2FA. Upon logging in again you will be prompted for your 2FA method, which will look like:
+```
+$  ssh minecraft.example.com -i ~/.ssh/minecraft.pem -l centos
+Duo two-factor login for centos</p>
+
+<p>Enter a passcode or select one of the following options:</p>
+
+<ol>
+<li>Duo Push to XXX-XXX-1234</li>
+<li>Phone call to XXX-XXX-1234</li>
+<li>SMS passcodes to XXX-XXX-1234
+```</li>
+</ol>
+
+
+<p>I always choose #1 as I do not want to expend credits, though if push failed I could resort to the other two. When I choose #1 I get a popup on my phone asking me to accept / deny the login, and after choosing Accept I am able to log in.</p>
+
+<p>Now I do not have to worry someone will get ahold of my minecraft.pem and gain access to the server. Further, if I get a login-request on my phone and haven&rsquo;t attemped to log in, I know my key has been compromised.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Minecraft and Datadog Monitoring]]></title>
+    <link href="http://jhmartin.github.io/site/blog/2015/01/26/minecraft-and-datadog-monitoring/"/>
+    <updated>2015-01-26T16:53:08-08:00</updated>
+    <id>http://jhmartin.github.io/site/blog/2015/01/26/minecraft-and-datadog-monitoring</id>
+    <content type="html"><![CDATA[<p><a href="http://www.datadoghq.com">DataDog</a> is a nifty monitoring / statistics gathering system. It is something like a akin to a combination of Graphite / Grafana, but with a social aspect so that your team can attach discussions to a given point in time. They have a free tier that retains data for a day, which is handy for visualizing the state of the Minecraft server.</p>
+
+<p>Java applications normally expose their statistics via JMX.  I did not see anything Minecraft-specific in my stock instance, but Java itself exposes several counters that are informative.</p>
+
+<p>I created my Datadog account, procured my API key, and installed the agent with:
+<code>bash
+DD_API_KEY=MyAPIKey  bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/install_agent.sh)"
+</code></p>
+
+<p>JMX is not enabled by default for Java processes, so I updated my systemd unit file in <code>/etc/systemd/system/minecraft.service</code> to include the JMX configuration:</p>
+
+<!-- more -->
+
+
+<p>```ini
+[Unit]
+Description=Daemon to detect crashing apps
+After=syslog.target
+RequiresMountsFor=/minecraft</p>
+
+<p>[Service]
+ExecStart=/bin/java -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -javaagent:../newrelic/newrelic.jar -Xmx1024M -Xms1024M -jar /minecraft/bin/minecraft_server.jar nogui
+WorkingDirectory=/minecraft/var
+User=minecraft
+Group=minecraft
+PrivateTmp=true
+NoNewPrivileges=true
+InaccessibleDirectories=/home
+ReadOnlyDirectories=/bin /lib /usr /etc /
+ReadWriteDirectories=/minecraft/var</p>
+
+<p>[Install]
+WantedBy=multi-user.target
+```</p>
+
+<p>This opens JMX on port 9010 and allows remote access, though I don&rsquo;t need it for this. My AWS security group will prevent any other machines from accessing jmx.  I may come back to this later and implement authentication.</p>
+
+<p>Datadog stores its java configuration in <code>/etc/dd-agent/conf.d/jmx.conf</code>, so I added the list of counters to store:
+```yaml
+init_config:</p>
+
+<pre><code>  conf:
+        - include:
+            domain: java.lang
+            type: MemoryPool
+        - include:
+            domain: java.lang
+            type: Threading
+        - include:
+            domain: java.lang
+            type: GarbageCollector
+        - include:
+            domain: java.lang
+            type: Threading
+        - include:
+            domain: java.nio
+            type: BufferPool
+</code></pre>
+
+<p>instances:</p>
+
+<pre><code> - host: localhost
+   port: 9010
+</code></pre>
+
+<p>```</p>
+
+<p>The list of counters is available after the instance is configured in the yaml file by running <code>/etc/rc.d/init.d/datadog-agent jmx list_everything</code>:</p>
+
+<p>The output looks like:
+```</p>
+
+<pre><code>   Not Matching: Bean name: java.lang:type=Compilation - Attribute name: TotalCompilationTime  - Attribute type: long
+   Not Matching: Bean name: java.lang:type=Compilation - Attribute name: CompilationTimeMonitoringSupported  - Attribute type: boolean
+   Not Matching: Bean name: java.lang:type=Compilation - Attribute name: Name  - Attribute type: java.lang.String
+   Not Matching: Bean name: java.lang:type=OperatingSystem - Attribute name: OpenFileDescriptorCount  - Attribute type: long
+   Not Matching: Bean name: java.lang:type=OperatingSystem - Attribute name: MaxFileDescriptorCount  - Attribute type: long
+   Not Matching: Bean name: java.lang:type=OperatingSystem - Attribute name: CommittedVirtualMemorySize  - Attribute type: long
+   Not Matching: Bean name: java.lang:type=OperatingSystem - Attribute name: TotalSwapSpaceSize  - Attribute type: long
+   Not Matching: Bean name: java.lang:type=OperatingSystem - Attribute name: FreeSwapSpaceSize  - Attribute type: long
+   Not Matching: Bean name: java.lang:type=OperatingSystem - Attribute name: ProcessCpuTime  - Attribute type: long
+   Not Matching: Bean name: java.lang:type=OperatingSystem - Attribute name: FreePhysicalMemorySize  - Attribute type: long
+   Not Matching: Bean name: java.lang:type=OperatingSystem - Attribute name: TotalPhysicalMemorySize  - Attribute type: long
+   Not Matching: Bean name: java.lang:type=OperatingSystem - Attribute name: SystemCpuLoad  - Attribute type: double
+   Not Matching: Bean name: java.lang:type=OperatingSystem - Attribute name: ProcessCpuLoad  - Attribute type: double
+   Not Matching: Bean name: java.lang:type=OperatingSystem - Attribute name: Version  - Attribute type: java.lang.String
+   Not Matching: Bean name: java.lang:type=OperatingSystem - Attribute name: AvailableProcessors  - Attribute type: int
+   Not Matching: Bean name: java.lang:type=OperatingSystem - Attribute name: SystemLoadAverage  - Attribute type: double
+   Not Matching: Bean name: java.lang:type=OperatingSystem - Attribute name: Arch  - Attribute type: java.lang.String
+   Not Matching: Bean name: java.lang:type=OperatingSystem - Attribute name: Name  - Attribute type: java.lang.String
+   Matching: 4/350. Bean name: java.lang:type=MemoryPool,name=Perm Gen - Attribute name: Usage  - Attribute type: javax.management.openmbean.CompositeData
+   Matching: 8/350. Bean name: java.lang:type=MemoryPool,name=Perm Gen - Attribute name: PeakUsage  - Attribute type: javax.management.openmbean.CompositeData
+   Matching: 9/350. Bean name: java.lang:type=MemoryPool,name=Perm Gen - Attribute name: UsageThreshold  - Attribute type: long
+   Matching: 10/350. Bean name: java.lang:type=MemoryPool,name=Perm Gen - Attribute name: UsageThresholdExceeded  - Attribute type: boolean
+   Matching: 11/350. Bean name: java.lang:type=MemoryPool,name=Perm Gen - Attribute name: UsageThresholdCount  - Attribute type: long
+   Matching: 12/350. Bean name: java.lang:type=MemoryPool,name=Perm Gen - Attribute name: UsageThresholdSupported  - Attribute type: boolean
+   Matching: 13/350. Bean name: java.lang:type=MemoryPool,name=Perm Gen - Attribute name: CollectionUsageThreshold  - Attribute type: long
+   Matching: 14/350. Bean name: java.lang:type=MemoryPool,name=Perm Gen - Attribute name: CollectionUsageThresholdExceeded  - Attribute type: boolean
+   Matching: 15/350. Bean name: java.lang:type=MemoryPool,name=Perm Gen - Attribute name: CollectionUsageThresholdCount  - Attribute type: long
+   Matching: 19/350. Bean name: java.lang:type=MemoryPool,name=Perm Gen - Attribute name: CollectionUsage  - Attribute type: javax.management.openmbean.CompositeData
+   Matching: 20/350. Bean name: java.lang:type=MemoryPool,name=Perm Gen - Attribute name: CollectionUsageThresholdSupported  - Attribute type: boolean
+</code></pre>
+
+<p>```</p>
+
+<p>The domain is the portion before the first : in the bean name.</p>
+
+<p>The end result is some nice free graphs out of Datadog:
+<img class="center" src="/images/datadog.png"></p>
+
+<p>The graphs for host CPU usage, threads active and java memory utilization are most interesting.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Minecraft and NewRelic]]></title>
+    <link href="http://jhmartin.github.io/site/blog/2015/01/16/minecraft-and-newrelic/"/>
+    <updated>2015-01-16T20:27:21-08:00</updated>
+    <id>http://jhmartin.github.io/site/blog/2015/01/16/minecraft-and-newrelic</id>
+    <content type="html"><![CDATA[<p><a href="http://www.newrelic.com">NewRelic</a> is an exceptionally useful tool for monitoring java applications, or at least those that deal with web or other transational workloads. I tried hooking it up to MineCraft and it doesn&rsquo;t report anything. The free version doesn&rsquo;t let me look at the JVM stats (threads and such) so it appears to be a waste. However, they also provide a general unix server agent that does provide some nifty dashboards. The procedure to install it is:</p>
+
+<p><code>bash
+rpm -Uvh https://yum.newrelic.com/pub/newrelic/el5/x86_64/newrelic-repo-5-3.noarch.rpm
+yum install newrelic-sysmond
+nrsysmond-config --set license_key=YourLicenseKey
+/etc/init.d/
+</code></p>
+
+<p>The RPM is EL5-era so doesn&rsquo;t understand SystemD, so I created a unit file:</p>
+
+<!-- more -->
+
+
+<p>```ini
+[Unit]
+Description=NewRelic service
+After=syslog.target</p>
+
+<p>[Service]
+ExecStart=/usr/sbin/nrsysmond -c /etc/newrelic/nrsysmond.cfg -f
+WorkingDirectory=/
+User=newrelic
+Group=newrelic
+PrivateTmp=true
+NoNewPrivileges=true</p>
+
+<p>[Install]
+WantedBy=multi-user.target
+```</p>
+
+<p>and installed it as /etc/systemd/system/newrelic.service, then:
+<code>bash
+systemctl daemon-reload
+systemctl restart newrelic
+systemctl enable newrelic
+</code></p>
+
+<p>NewRelic generates a pretty picture such as:
+<img class="center" src="/images/newrelic.PNG"></p>
+
+<p>However, NewRelic is not the only server/stats monitor in town so I&rsquo;ll check out some others another time.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Minecraft and SystemD]]></title>
+    <link href="http://jhmartin.github.io/site/blog/2015/01/11/minecraft-and-systemd/"/>
+    <updated>2015-01-11T20:21:33-08:00</updated>
+    <id>http://jhmartin.github.io/site/blog/2015/01/11/minecraft-and-systemd</id>
+    <content type="html"><![CDATA[<p>In the first installment I launched a basic Minecraft service on CentOS7. However, a proper service should not be run from the command line, instead it should be controlled by the system service daemon. In years past this would be by writing a &lsquo;sysV init script&rsquo; which would try to determine if the process was running, if not launch it and capture its PID for future reference, and capture its output to a file.  CentOS-7 has switched away from that model to one called SystemD which makes much of that easier.  There is some controversy over the SystemD model (is it UNIX-y? Too monolithic? Taking over everything?) but seems pretty handy for what it needs to do, plus has some nice security features.</p>
+
+<p>So I will create a Minecraft service definition for SystemD. I used <a href="http://0pointer.de/blog/projects/systemd-for-admins-3.html">http://0pointer.de/blog/projects/systemd-for-admins-3.html</a> to help me with this. The unit file will look like:</p>
+
+<!-- more -->
+
+
+<p>/etc/systemd/system/minecraft.service:
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/etc/systemd/system/minecraft.service <a href="https://github.com/jhmartin/minecraft-server-done-too-well/blob/master/systemd/minecraft.service">https://github.com/jhmartin/minecraft-server-done-too-well/blob/master/systemd/minecraft.service</a> </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='ini'><span class='line'><span class="k">[Unit]</span>
+</span><span class='line'><span class="na">Description</span><span class="o">=</span><span class="s">Minecraft server</span>
+</span><span class='line'><span class="na">After</span><span class="o">=</span><span class="s">syslog.target</span>
+</span><span class='line'><span class="na">RequiresMountsFor</span><span class="o">=</span><span class="s">/minecraft&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">&lt;p&gt;</span><span class="k">[Service]</span>
+</span><span class='line'><span class="na">ExecStart</span><span class="o">=</span><span class="s">/bin/java -Xmx1024M -Xms1024M -jar /minecraft/bin/minecraft_server.jar nogui</span>
+</span><span class='line'><span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/minecraft/var</span>
+</span><span class='line'><span class="na">User</span><span class="o">=</span><span class="s">minecraft</span>
+</span><span class='line'><span class="na">Group</span><span class="o">=</span><span class="s">minecraft</span>
+</span><span class='line'><span class="na">PrivateTmp</span><span class="o">=</span><span class="s">true</span>
+</span><span class='line'><span class="na">NoNewPrivileges</span><span class="o">=</span><span class="s">true</span>
+</span><span class='line'><span class="na">InaccessibleDirectories</span><span class="o">=</span><span class="s">/home</span>
+</span><span class='line'><span class="na">ReadOnlyDirectories</span><span class="o">=</span><span class="s">/bin /lib /usr /etc /</span>
+</span><span class='line'><span class="na">ReadWriteDirectories</span><span class="o">=</span><span class="s">/minecraft&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="err">&lt;p&gt;</span><span class="k">[Install]</span>
+</span><span class='line'><span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>What this does:</p>
+
+<ul>
+<li>Defines the service name</li>
+<li>Designates that it requires the /minecraft mount and should run after the logging daemon starts.</li>
+<li>Provides the startup command, working directory, user/group</li>
+<li>Designates that /tmp should be private for that process</li>
+<li>Prevents the process from gaining any privileges.</li>
+<li>Hides /home from the process</li>
+<li>Makes most system directories read-only (to protect against accidental permissions issues)</li>
+<li>Makes /minecraft read-writeable.</li>
+</ul>
+
+
+<p>The last few are for system protection &mdash; even if the java daemon is subverted to try to read the contents of /home, it can&rsquo;t see it.   Between the hidden and read-only directories, the limitation of privileges and the non-privileged launching user, there is much less chance of MineCraft causing system-wide havoc.</p>
+
+<p>After putting the service defintion into place, reload systemd, restart the daemon and check its output:
+<code>bash
+systemctl daemon-reload
+systemctl restart minecraft.service
+systemctl enable minecraft.service
+journalctl -u minecraft.service
+</code></p>
+
+<p>To stop the service:
+<code>bash
+systemctl stop minecraft.service
+</code></p>
+
+<p>Output will be:
+<code>
+Jan 12 04:18:02 ip-10-10-0-239.ec2.internal systemd[1]: Starting Daemon to detect crashing apps...
+Jan 12 04:18:02 ip-10-10-0-239.ec2.internal systemd[1]: Started Daemon to detect crashing apps.
+Jan 12 04:18:06 ip-10-10-0-239.ec2.internal java[2198]: [04:18:06] [Server thread/INFO]: Starting minecraft server version 1.8.1
+Jan 12 04:18:06 ip-10-10-0-239.ec2.internal java[2198]: [04:18:06] [Server thread/INFO]: Loading properties
+Jan 12 04:18:06 ip-10-10-0-239.ec2.internal java[2198]: [04:18:06] [Server thread/INFO]: Default game type: SURVIVAL
+Jan 12 04:18:06 ip-10-10-0-239.ec2.internal java[2198]: [04:18:06] [Server thread/INFO]: Generating keypair
+Jan 12 04:18:06 ip-10-10-0-239.ec2.internal java[2198]: [04:18:06] [Server thread/INFO]: Starting Minecraft server on *:25565
+Jan 12 04:18:06 ip-10-10-0-239.ec2.internal java[2198]: [04:18:06] [Server thread/INFO]: Using epoll channel type
+Jan 12 04:18:06 ip-10-10-0-239.ec2.internal java[2198]: [04:18:06] [Server thread/INFO]: Preparing level "world"
+Jan 12 04:18:06 ip-10-10-0-239.ec2.internal java[2198]: [04:18:06] [Server thread/INFO]: Preparing start region for level 0
+Jan 12 04:18:07 ip-10-10-0-239.ec2.internal java[2198]: [04:18:07] [Server thread/INFO]: Preparing spawn area: 94%
+Jan 12 04:18:07 ip-10-10-0-239.ec2.internal java[2198]: [04:18:07] [Server thread/INFO]: Done (1.192s)! For help, type "help" or "?"
+</code></p>
+
+<p>Update: <a href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#100;&#105;&#x65;&#x74;&#114;&#105;&#x63;&#x68;&#x40;&#116;&#101;&#105;&#x6c;&#x67;&#x65;&#x64;&#97;&#x6e;&#107;&#x65;&#110;&#x2e;&#100;&#x65;">&#100;&#105;&#x65;&#116;&#114;&#x69;&#99;&#104;&#x40;&#x74;&#x65;&#x69;&#108;&#103;&#101;&#x64;&#x61;&#110;&#x6b;&#101;&#x6e;&#x2e;&#x64;&#x65;</a> sent me a link to <a href="https://teilgedanken.de/Blog/post/8/">https://teilgedanken.de/Blog/post/8/</a> which takes this a step further and utilizes MCRCON to more gracefully control the servers shutdown state, and integrate with FirewallD if your system utilizes it.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Minecraft Server in AWS Done Too Well]]></title>
+    <link href="http://jhmartin.github.io/site/blog/2015/01/10/minecraft-server-in-aws-done-too-well/"/>
+    <updated>2015-01-10T22:03:40-08:00</updated>
+    <id>http://jhmartin.github.io/site/blog/2015/01/10/minecraft-server-in-aws-done-too-well</id>
+    <content type="html"><![CDATA[<h1>A new Server</h1>
+
+<p>This series will go through how to host a MineCraft server, and go totally overboard on the configuration/management of it. I&rsquo;ll be integrating a variety of management/monitoring tools that go far beyond the needs of the average &lsquo;friends &amp; family&rsquo; server, because it is fun.  I&rsquo;ll starting the basics and build up from there.</p>
+
+<p>So, first we need a machine. I&rsquo;m going to use a Amazon AWS machine for this.  I&rsquo;ll be using some AWS-specific features, but I don&rsquo;t think any of them will be critical.  In some cases I&rsquo;ll show the non-AWS alternative.</p>
+
+<!-- more -->
+
+
+<ul>
+<li>Go the the EC2 Portal and the IAM service and select Roles. Create a role named app-minecraft. The type should be EC2, and choose No Permissions (for now). We&rsquo;ll be using this later to allow the node to make backups of itself.</li>
+<li>We&rsquo;ll create a CentOS 7 machine on AWS. Visit <a href="https://aws.amazon.com/marketplace/pp/B00O7WM7QW">https://aws.amazon.com/marketplace/pp/B00O7WM7QW</a> and select Continue. CentOS is a free Linux distribution so you&rsquo;re only paying for AWS time, not the software.</li>
+<li>Select Launch with EC2 Console for US-EAST</li>
+<li>Choose <code>t2.medium</code> (for now) and select Configure Instance Details. Choose app-minecraft for the IAM role.</li>
+<li>Enable &lsquo;Protect against accidental termination&rsquo;, and choose Add Storage.</li>
+<li>Make the root device 15 GB and add an additional EBS volume at 20GB.  This is being done to protect the OS Select Delete On Termination for both. Select Tag Instance.</li>
+<li>Set the name to &lsquo;Minecraft Server #1&rsquo;. select Configure Security Group.</li>
+<li>Select Create a New Security Group. Call it sgMinecraft and allow All Traffic from &lsquo;My Ip&rsquo;. Choose Review and Launch.</li>
+<li>You&rsquo;ll be prompted to ensure you have access to your SSH keys and then choose Launch.</li>
+<li>Connect to your new instance with SSH at centos@YOURIP.</li>
+<li>First thing is to update the host and reboot:
+<code>bash
+sudo yum update -y; sudo shutdown -r now
+</code></li>
+</ul>
+
+
+<p>You&rsquo;ll get disconnected, wait a few minutes and reconnect.</p>
+
+<ul>
+<li><p>Install java and wget:
+<code>
+sudo yum install -y java-1.7.0 wget
+</code></p></li>
+<li><p>Format the 2nd drive.  AWS says it mounted the drive on /dev/sdb which means it ended up on /dev/xvdb. Lets format and mount it:
+<code>bash
+sudo mkfs.xfs /dev/xvdb
+</code></p></li>
+<li><p>Find out the device UUID. This is useful as you might move drives around and want reliable device mounting:
+<code>
+sudo xfs_admin -u /dev/xvdb
+UUID = 3a8921a8-1fa5-4a4d-aca9-9d46a6e83418
+</code></p></li>
+<li><p>Create the mountpoint for MineCraft:
+<code>
+sudo mkdir /minecraft
+</code></p></li>
+<li><p>Modify /etc/fstab:
+<code>
+sudo vi /etc/fstab
+</code></p></li>
+<li><p>Add the following (use your new UUID):
+<code>
+UUID=3a8921a8-1fa5-4a4d-aca9-9d46a6e83418 /minecraft xfs     defaults        1 1
+</code></p></li>
+<li><p>Save the file, and mount the drive
+<code>
+mount /minecraft
+</code></p></li>
+<li><p>Create a Minecraft user and proceed as that user:
+<code>
+useradd -d /minecraft minecraft
+chown -Rh minecraft:minecraft /minecraft
+sudo su - minecraft
+</code></p></li>
+<li><p>Create /minecraft/bin and download MineCraft to it.
+<code>
+mkdir /minecraft/bin /minecraft/log /minecraft/var
+wget https://s3.amazonaws.com/Minecraft.Download/versions/1.8.1/minecraft_server.1.8.1.jar -O /minecraft/bin/minecraft_server.jar
+</code></p></li>
+<li><p>Perform a trial-launch of the server:
+```
+cd /minecraft/var
+ln -s ../logs .</p>
+
+<h1>Assuming you have read the Minecraft EULA at <a href="https://account.mojang.com/documents/minecraft_eula">https://account.mojang.com/documents/minecraft_eula</a></h1>
+
+<p>echo eula=true >eula.txt
+java -Xmx1024M -Xms1024M -jar /minecraft/bin/minecraft_server.jar nogui
+```</p></li>
+</ul>
+
+
+<p>You will get some output indicating certain files were not found. That is OK as the server is generating them for you:
+```
+[05:55:11] [Server thread/INFO]: Starting minecraft server version 1.8.1
+[05:55:11] [Server thread/INFO]: Loading properties
+[05:55:11] [Server thread/WARN]: server.properties does not exist
+[05:55:11] [Server thread/INFO]: Generating new properties file
+[05:55:11] [Server thread/INFO]: Default game type: SURVIVAL
+[05:55:11] [Server thread/INFO]: Generating keypair
+[05:55:11] [Server thread/INFO]: Starting Minecraft server on *:25565
+[05:55:11] [Server thread/INFO]: Using epoll channel type
+[05:55:11] [Server thread/WARN]: Failed to load user banlist:
+java.io.FileNotFoundException: banned-players.json (No such file or directory)</p>
+
+<pre><code>    at java.io.FileInputStream.open(Native Method) ~[?:1.7.0_71]
+    at java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:146) ~[?:1.7.0_71]
+    at com.google.common.io.Files.newReader(Files.java:86) ~[minecraft_server.jar:?]
+    at su.g(SourceFile:124) ~[minecraft_server.jar:?]
+    at po.z(SourceFile:99) [minecraft_server.jar:?]
+    at po.&lt;init&gt;(SourceFile:25) [minecraft_server.jar:?]
+    at pp.i(SourceFile:172) [minecraft_server.jar:?]
+    at net.minecraft.server.MinecraftServer.run(SourceFile:418) [minecraft_server.jar:?]
+    at java.lang.Thread.run(Thread.java:745) [?:1.7.0_71]
+</code></pre>
+
+<p>[05:55:11] [Server thread/WARN]: Failed to load ip banlist:
+java.io.FileNotFoundException: banned-ips.json (No such file or directory)</p>
+
+<pre><code>    at java.io.FileInputStream.open(Native Method) ~[?:1.7.0_71]
+    at java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:146) ~[?:1.7.0_71]
+    at com.google.common.io.Files.newReader(Files.java:86) ~[minecraft_server.jar:?]
+    at su.g(SourceFile:124) ~[minecraft_server.jar:?]
+    at po.y(SourceFile:91) [minecraft_server.jar:?]
+    at po.&lt;init&gt;(SourceFile:27) [minecraft_server.jar:?]
+    at pp.i(SourceFile:172) [minecraft_server.jar:?]
+    at net.minecraft.server.MinecraftServer.run(SourceFile:418) [minecraft_server.jar:?]
+    at java.lang.Thread.run(Thread.java:745) [?:1.7.0_71]
+</code></pre>
+
+<p>[05:55:11] [Server thread/WARN]: Failed to load operators list:
+java.io.FileNotFoundException: ops.json (No such file or directory)</p>
+
+<pre><code>    at java.io.FileInputStream.open(Native Method) ~[?:1.7.0_71]
+    at java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:146) ~[?:1.7.0_71]
+    at com.google.common.io.Files.newReader(Files.java:86) ~[minecraft_server.jar:?]
+    at su.g(SourceFile:124) ~[minecraft_server.jar:?]
+    at po.A(SourceFile:107) [minecraft_server.jar:?]
+    at po.&lt;init&gt;(SourceFile:29) [minecraft_server.jar:?]
+    at pp.i(SourceFile:172) [minecraft_server.jar:?]
+    at net.minecraft.server.MinecraftServer.run(SourceFile:418) [minecraft_server.jar:?]
+    at java.lang.Thread.run(Thread.java:745) [?:1.7.0_71]
+</code></pre>
+
+<p>[05:55:11] [Server thread/WARN]: Failed to load white-list:
+java.io.FileNotFoundException: whitelist.json (No such file or directory)</p>
+
+<pre><code>    at java.io.FileInputStream.open(Native Method) ~[?:1.7.0_71]
+    at java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:146) ~[?:1.7.0_71]
+    at com.google.common.io.Files.newReader(Files.java:86) ~[minecraft_server.jar:?]
+    at su.g(SourceFile:124) ~[minecraft_server.jar:?]
+    at po.C(SourceFile:123) [minecraft_server.jar:?]
+    at po.&lt;init&gt;(SourceFile:30) [minecraft_server.jar:?]
+    at pp.i(SourceFile:172) [minecraft_server.jar:?]
+    at net.minecraft.server.MinecraftServer.run(SourceFile:418) [minecraft_server.jar:?]
+    at java.lang.Thread.run(Thread.java:745) [?:1.7.0_71]
+</code></pre>
+
+<p>[05:55:11] [Server thread/INFO]: Preparing level &ldquo;world&rdquo;
+[05:55:12] [Server thread/INFO]: Preparing start region for level 0
+[05:55:13] [Server thread/INFO]: Preparing spawn area: 7%
+[05:55:14] [Server thread/INFO]: Preparing spawn area: 14%
+[05:55:15] [Server thread/INFO]: Preparing spawn area: 27%
+[05:55:16] [Server thread/INFO]: Preparing spawn area: 43%
+[05:55:17] [Server thread/INFO]: Preparing spawn area: 59%
+[05:55:18] [Server thread/INFO]: Preparing spawn area: 74%
+[05:55:19] [Server thread/INFO]: Preparing spawn area: 88%
+[05:55:19] [Server thread/INFO]: Done (8.267s)! For help, type &ldquo;help&rdquo; or &ldquo;?&rdquo;
+```</p>
+
+<ul>
+<li>In your minecraft client, add the IP of your new host and connect to it.</li>
+</ul>
+
+
+<p>Hurray! You Minecraft sever works. It&rsquo;ll run until you hit Ctrl-C or close your window. I&rsquo;ll go on to making this more rubust in the next installment.</p>
+]]></content>
+  </entry>
+  
+</feed>

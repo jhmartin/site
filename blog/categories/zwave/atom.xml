@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Zwave | Toger Blog]]></title>
+  <link href="http://jhmartin.github.io/site/blog/categories/zwave/atom.xml" rel="self"/>
+  <link href="http://jhmartin.github.io/site/"/>
+  <updated>2018-09-18T06:55:48-07:00</updated>
+  <id>http://jhmartin.github.io/site/</id>
+  <author>
+    <name><![CDATA[Jason Martin jhmartin@toger.us]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Home Automation Ideas]]></title>
+    <link href="http://jhmartin.github.io/site/blog/2017/09/24/home-automation-ideas/"/>
+    <updated>2017-09-24T15:25:21-07:00</updated>
+    <id>http://jhmartin.github.io/site/blog/2017/09/24/home-automation-ideas</id>
+    <content type="html"><![CDATA[<p>My house has a bevy of Z-Wave devices, plus a few LiFX bulbs. This has allowed for some fairly fun automations:</p>
+
+<ul>
+<li><p>When the garage door opens, a tilt sensor attached to the door turns the external bulbs on to bright-white, and activates the garage internal lights.  The outside lights revert to normal &lsquo;dim 2700K&rsquo; after 3 minutes, and the garage lights goes off after about 10 minutes.</p></li>
+<li><p>A chime sounds upstairs whenever an exterior door is opened.</p></li>
+<li><p>The exterior lights come on at &lsquo;civil twilight&rsquo; and extinguish at &lsquo;civil dawn&rsquo;</p></li>
+<li><p>The exterior doors lock whenever the garage door closes. No more &lsquo;Did I lock the front door?&rsquo; doubts.</p></li>
+<li><p>The exterior doors lock at a certain time each night.</p></li>
+<li><p>The kids' room and desk lamps turn off at midnight.  Sometimes they get up after bedtime and &lsquo;play&rsquo; then fall asleep.</p></li>
+<li><p>The bathroom and downstairs hallway lights turn on concurrent with my morning alarm. It is much easier to get up and walk into a lit room then in pitch black.</p></li>
+<li><p>Telling Alexa to &lsquo;tell my house its bedtime&rsquo; locks all exterior doors, turns off all lights not in the kids rooms, turns on the stairway and master bath lights, then turns off the stairs light in 5 minutes.</p></li>
+<li><p>Alexa can be instructed to turn on or off any or all of the downstairs lights; individually or collectively.</p></li>
+<li><p>The Roku in the master bedroom, which inexplicibly has an audible fan, turns off at midnight.</p></li>
+<li><p>The outlet adjacent to the master bedroom turns off at 4am.  This used to control a window fan with the goal of pulling in cool air at night but turning off before anyone gets up to avoid blasting them with frigid air. This rule has been rendered moot with the installation of an AirScape whole-house fan.</p></li>
+<li><p>The pantry and coat-closet lights turn off after 5 minutes.</p></li>
+<li><p>A notification is sent each day during the summer when the exterior temperature crosses over the interior temperature, to either open or close the windows and to turn on the house fan.</p></li>
+</ul>
+
+
+<p>This is all accomplished with a combination of ZWave devices, a Zwave.me Razberry Pi, a few LiFX bulbs, Amazon Echo, and AirScape fan w/2nd gen controls.</p>
+
+<p>Home automation can be quite addicting &mdash; its impossible to install just one device!</p>
+]]></content>
+  </entry>
+  
+</feed>

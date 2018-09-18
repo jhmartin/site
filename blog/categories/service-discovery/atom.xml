@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Service-discovery | Toger Blog]]></title>
-  <link href="http://jhmartin.github.io/site/blog/categories/service-discovery/atom.xml" rel="self"/>
-  <link href="http://jhmartin.github.io/site/"/>
-  <updated>2018-09-18T06:55:48-07:00</updated>
-  <id>http://jhmartin.github.io/site/</id>
+  <link href="http://site.toger.us/blog/categories/service-discovery/atom.xml" rel="self"/>
+  <link href="http://site.toger.us/"/>
+  <updated>2018-09-18T06:59:40-07:00</updated>
+  <id>http://site.toger.us/</id>
   <author>
     <name><![CDATA[Jason Martin jhmartin@toger.us]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[DNS as a Service Discovery Load Balancer]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2018/08/19/dns-as-a-load-balancer/"/>
+    <link href="http://site.toger.us/blog/2018/08/19/dns-as-a-load-balancer/"/>
     <updated>2018-08-19T13:38:22-07:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2018/08/19/dns-as-a-load-balancer</id>
+    <id>http://site.toger.us/blog/2018/08/19/dns-as-a-load-balancer</id>
     <content type="html"><![CDATA[<p>DNS makes for a deceptively easy service-discovery platform. Various platforms (such as  <a href="https://docs.docker.com/network/overlay/">Docker swarm</a>, <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/overview-service-discovery.html">Amazon Auto-Naming</a> purport to provide a trivial to use service discovery mechanism. DNS is handled in most applications, so has the allure of working with legacy applications with zero integration work. Contrast DNS with purpose-built service discovery mechanisms such as <a href="https://technologyconversations.com/2015/09/08/service-discovery-zookeeper-vs-etcd-vs-consul/">Consul, Zookeeper, and Etcd</a> or <a href="https://github.com/Netflix/eureka">Netflix Eureka</a>. These tools require additional effort on the part of developers to integrate, but the result is much more robust. I tested several platforms below as to how they handle DNS round-robin loadbalancing.</p>
 
 <!-- more -->

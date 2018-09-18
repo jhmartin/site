@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Toger Blog]]></title>
-  <link href="http://jhmartin.github.io/site/atom.xml" rel="self"/>
-  <link href="http://jhmartin.github.io/site/"/>
-  <updated>2018-09-18T06:55:48-07:00</updated>
-  <id>http://jhmartin.github.io/site/</id>
+  <link href="http://site.toger.us/atom.xml" rel="self"/>
+  <link href="http://site.toger.us/"/>
+  <updated>2018-09-18T06:59:40-07:00</updated>
+  <id>http://site.toger.us/</id>
   <author>
     <name><![CDATA[Jason Martin jhmartin@toger.us]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[DNS as a Service Discovery Load Balancer]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2018/08/19/dns-as-a-load-balancer/"/>
+    <link href="http://site.toger.us/blog/2018/08/19/dns-as-a-load-balancer/"/>
     <updated>2018-08-19T13:38:22-07:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2018/08/19/dns-as-a-load-balancer</id>
+    <id>http://site.toger.us/blog/2018/08/19/dns-as-a-load-balancer</id>
     <content type="html"><![CDATA[<p>DNS makes for a deceptively easy service-discovery platform. Various platforms (such as  <a href="https://docs.docker.com/network/overlay/">Docker swarm</a>, <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/overview-service-discovery.html">Amazon Auto-Naming</a> purport to provide a trivial to use service discovery mechanism. DNS is handled in most applications, so has the allure of working with legacy applications with zero integration work. Contrast DNS with purpose-built service discovery mechanisms such as <a href="https://technologyconversations.com/2015/09/08/service-discovery-zookeeper-vs-etcd-vs-consul/">Consul, Zookeeper, and Etcd</a> or <a href="https://github.com/Netflix/eureka">Netflix Eureka</a>. These tools require additional effort on the part of developers to integrate, but the result is much more robust. I tested several platforms below as to how they handle DNS round-robin loadbalancing.</p>
 
 <!-- more -->
@@ -193,40 +193,40 @@ plot &quot;node.PERSIST.dat&quot;
 <p>The ideal result is a uniformlly distributed graph such that backend requests are splayed across available nodes.</p>
 
 <p>Java Simple LB:<br/>
-<img src="http://jhmartin.github.io/site/images/iptest/java.simple.png" width="240" height="160" title="Java Simple LB" ></p>
+<img src="http://site.toger.us/images/iptest/java.simple.png" width="240" height="160" title="Java Simple LB" ></p>
 
 <p>While not included here, setting the DNS cache to 0 resulted in all requests targeting one backend at a time, rotating every second.</p>
 
 <p>Java Persistent LB:<br/>
-<img src="http://jhmartin.github.io/site/images/iptest/java.persist.png" width="240" height="160" title="Java Persistent LB" ></p>
+<img src="http://site.toger.us/images/iptest/java.persist.png" width="240" height="160" title="Java Persistent LB" ></p>
 
 <p>NodeJS Simple LB:<br/>
-<img src="http://jhmartin.github.io/site/images/iptest/node.simple.png" width="240" height="160" title="NodeJS Simple LB" ></p>
+<img src="http://site.toger.us/images/iptest/node.simple.png" width="240" height="160" title="NodeJS Simple LB" ></p>
 
 <p>Great distribution here.</p>
 
 <p>NodeJS Persistent LB:<br/>
-<img src="http://jhmartin.github.io/site/images/iptest/node.persist.png" width="240" height="160" title="NodeJS Persistent LB" ></p>
+<img src="http://site.toger.us/images/iptest/node.persist.png" width="240" height="160" title="NodeJS Persistent LB" ></p>
 
 <p>Node w/connection pooling generally selects one backend for a short period and sends all traffic to it.</p>
 
 <p>PHP Simple LB:<br/>
-<img src="http://jhmartin.github.io/site/images/iptest/php.simple.png" width="240" height="160" title="PHP Simple LB" ></p>
+<img src="http://site.toger.us/images/iptest/php.simple.png" width="240" height="160" title="PHP Simple LB" ></p>
 
 <p>PHP Persistent LB:<br/>
-<img src="http://jhmartin.github.io/site/images/iptest/php.persist.png" width="240" height="160" title="PHP Persistent LB" ></p>
+<img src="http://site.toger.us/images/iptest/php.persist.png" width="240" height="160" title="PHP Persistent LB" ></p>
 
 <p>Python Simple LB:<br/>
-<img src="http://jhmartin.github.io/site/images/iptest/python.simple.png" width="240" height="160" title="Python Simple LB" ></p>
+<img src="http://site.toger.us/images/iptest/python.simple.png" width="240" height="160" title="Python Simple LB" ></p>
 
 <p>Python Persistent LB:<br/>
-<img src="http://jhmartin.github.io/site/images/iptest/python.persist.png" width="240" height="160" title="Python Persistent LB" ></p>
+<img src="http://site.toger.us/images/iptest/python.persist.png" width="240" height="160" title="Python Persistent LB" ></p>
 
 <p>Ruby Simple LB:<br/>
-<img src="http://jhmartin.github.io/site/images/iptest/ruby.simple.png" width="240" height="160" title="Ruby Simple LB" ></p>
+<img src="http://site.toger.us/images/iptest/ruby.simple.png" width="240" height="160" title="Ruby Simple LB" ></p>
 
 <p>Rubt Persistent LB:<br/>
-<img src="http://jhmartin.github.io/site/images/iptest/ruby.persist.png" width="240" height="160" title="Ruby Persistent LB" ></p>
+<img src="http://site.toger.us/images/iptest/ruby.persist.png" width="240" height="160" title="Ruby Persistent LB" ></p>
 
 <h2>Conclusion</h2>
 
@@ -238,9 +238,9 @@ plot &quot;node.PERSIST.dat&quot;
   
   <entry>
     <title type="html"><![CDATA[Home Automation Ideas]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2017/09/24/home-automation-ideas/"/>
+    <link href="http://site.toger.us/blog/2017/09/24/home-automation-ideas/"/>
     <updated>2017-09-24T15:25:21-07:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2017/09/24/home-automation-ideas</id>
+    <id>http://site.toger.us/blog/2017/09/24/home-automation-ideas</id>
     <content type="html"><![CDATA[<p>My house has a bevy of Z-Wave devices, plus a few LiFX bulbs. This has allowed for some fairly fun automations:</p>
 
 <ul>
@@ -268,9 +268,9 @@ plot &quot;node.PERSIST.dat&quot;
   
   <entry>
     <title type="html"><![CDATA[Jenkinsfile and Github Hooks]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2017/06/17/jenkins-and-github-hooks/"/>
+    <link href="http://site.toger.us/blog/2017/06/17/jenkins-and-github-hooks/"/>
     <updated>2017-06-17T14:58:34-07:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2017/06/17/jenkins-and-github-hooks</id>
+    <id>http://site.toger.us/blog/2017/06/17/jenkins-and-github-hooks</id>
     <content type="html"><![CDATA[<p>Jenkins is the juggernaut of the build pipeline ecosystem.  Its roots go back to bespoke local build pipelines and dedicated build engineers.  In present days the likes of CircleCI, CodeShip, Drone.io have started nipping at Jenkins heels.</p>
 
 <p>One of the significant differences is that, historically, Jenkins builds are configured inside Jenkins. The contemporary alternatives generally favor a SCM-managed configuration file (often YAML format).  This is useful as it removes the specialness of the Golden Build Host (ever had someone corrupt a Jenkins configuration? Getting back to par is a pain).</p>
@@ -317,9 +317,9 @@ plot &quot;node.PERSIST.dat&quot;
   
   <entry>
     <title type="html"><![CDATA[AWS Route53 Failover and ALB]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2017/04/20/aws-route53-failover-and-alb/"/>
+    <link href="http://site.toger.us/blog/2017/04/20/aws-route53-failover-and-alb/"/>
     <updated>2017-04-20T08:51:25-07:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2017/04/20/aws-route53-failover-and-alb</id>
+    <id>http://site.toger.us/blog/2017/04/20/aws-route53-failover-and-alb</id>
     <content type="html"><![CDATA[<p>I ran across this little gotcha recently.</p>
 
 <p>Scenario: A service hosted in two regions.  Each is fronted by either an ALB or ELB with an attached Autoscale group, that uses the LB healthcheck to determine instance health.  A Route53 configuration balances trafic between the two. Route53 &lsquo;Evaluate Target Health&rsquo; is set to yes and no healthcheck is attached.</p>
@@ -336,9 +336,9 @@ plot &quot;node.PERSIST.dat&quot;
   
   <entry>
     <title type="html"><![CDATA[Cloud-Init With CentOS7, Chef, and SELinux]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2016/06/08/cloud-init-with-centos7-and-chef/"/>
+    <link href="http://site.toger.us/blog/2016/06/08/cloud-init-with-centos7-and-chef/"/>
     <updated>2016-06-08T20:57:00-07:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2016/06/08/cloud-init-with-centos7-and-chef</id>
+    <id>http://site.toger.us/blog/2016/06/08/cloud-init-with-centos7-and-chef</id>
     <content type="html"><![CDATA[<p>The CentOS 7 AMI in Amazon comes with Cloud-Init (<code>cloud-init-0.7.5-10.el7.centos.1.x86_64</code>). This is quite handy as it assists in automating several bootup tasks. One of these tasks is to install and bootstrap Chef.  Unforunately, when SELinux is installed the Chef handler will fail.</p>
 
 <p>Sample error:</p>
@@ -419,9 +419,9 @@ Adding a label to the file_contents file works around the issue but likely break
   
   <entry>
     <title type="html"><![CDATA[Extending AWS Instance Trust]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2016/06/05/extending-aws-instance-trust/"/>
+    <link href="http://site.toger.us/blog/2016/06/05/extending-aws-instance-trust/"/>
     <updated>2016-06-05T20:39:53-07:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2016/06/05/extending-aws-instance-trust</id>
+    <id>http://site.toger.us/blog/2016/06/05/extending-aws-instance-trust</id>
     <content type="html"><![CDATA[<p>All nodes in EC2 can fetch their <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-identity-documents.html">Instance Identity Documents</a>. This returns an AWS-signed block containing data about the instance that requested it.  This data is only available to the instance that fetched it, so if it turns around and presents it to some other service you can be confident it originated from the machine in question.</p>
 
 <p>This is useful for secrets-enrollment processes where you want a node to be able to attest to its own identity in a secure fashion.  Your enrollment mechanism can ensure that the node is &lsquo;young&rsquo; enough to be making the request, and that the enrollment has never occured before.   Your enrollment tool can also look up other data about the instance (autoscale group, CloudFormation stack, etc) to determine what privileges it should be granted.</p>
@@ -432,18 +432,18 @@ Adding a label to the file_contents file works around the issue but likely break
   
   <entry>
     <title type="html"><![CDATA[Passing Host IP to ECS]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2016/06/05/passing-host-ip-to-ecs/"/>
+    <link href="http://site.toger.us/blog/2016/06/05/passing-host-ip-to-ecs/"/>
     <updated>2016-06-05T20:11:55-07:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2016/06/05/passing-host-ip-to-ecs</id>
+    <id>http://site.toger.us/blog/2016/06/05/passing-host-ip-to-ecs</id>
     <content type="html"><![CDATA[<p>I&rsquo;ve been looking for a way to run Consul &lsquo;standalone&rsquo; on a host and let multiple ECS containers connect to it.  I was hoping to find a macro I could put in a container definition but such does not yet exist.  Instead I realized that I can have my Docker instance query the <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html#instancedata-data-retrieval">instance metadata</a> service and get this information.  It is not quite as elegant docker-wise but it should work until something better comes along.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Chef Too Big for the Kitchen]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2016/04/18/chef-too-big-for-the-kitchen/"/>
+    <link href="http://site.toger.us/blog/2016/04/18/chef-too-big-for-the-kitchen/"/>
     <updated>2016-04-18T06:39:08-07:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2016/04/18/chef-too-big-for-the-kitchen</id>
+    <id>http://site.toger.us/blog/2016/04/18/chef-too-big-for-the-kitchen</id>
     <content type="html"><![CDATA[<p>While pondering running a full &lsquo;ride-the-wave&rsquo; auto-scaling solution in AWS, I looked closely at my Chef installation.  The environment is very Chef-heavy with fairly generic AMI that runs a slew of Chef recipes to bring it up to the needs of that particular role. The nodes are in Autoscale groups and get their role designation from the Launch Configuration.</p>
 
 <p>On average a node invoked approximately 55 recipes (as recorded by seen_recipes in the audit cookbook).  Several of those recipes bring in resources from (authenticated) remote locations that have very good availability but are not in my direct control. Ignoring the remote-based recipes there is still a significant number of moving parts that can be disrupted unexpectedly, such as by other cookbook / role / KV store changes.  This is acceptable-if-not-ideal when nodes are generally brought into being under the supervision of an operator who can resolve any issues, or for when the odd 1-of-x00 pooled nodes dies and is automatically replaced. This risk is manageable when the environment is perpetually scaled for peak traffic.</p>
@@ -467,9 +467,9 @@ Adding a label to the file_contents file works around the issue but likely break
   
   <entry>
     <title type="html"><![CDATA[AWS ECS and Docker Exit (137)]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2015/09/22/aws-ecs-and-docker-exit-137/"/>
+    <link href="http://site.toger.us/blog/2015/09/22/aws-ecs-and-docker-exit-137/"/>
     <updated>2015-09-22T19:19:40-07:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2015/09/22/aws-ecs-and-docker-exit-137</id>
+    <id>http://site.toger.us/blog/2015/09/22/aws-ecs-and-docker-exit-137</id>
     <content type="html"><![CDATA[<p>I ran into this the other day, my ECS instances were dieing off and <code>docker ps</code> showed <code>Exited (137) About a minute ago</code>. Looking at <code>docker inspect</code> I noticed:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -488,9 +488,9 @@ Adding a label to the file_contents file works around the issue but likely break
   
   <entry>
     <title type="html"><![CDATA[Carl's Jr, SPF and AWS]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2015/09/20/carl-jrs/"/>
+    <link href="http://site.toger.us/blog/2015/09/20/carl-jrs/"/>
     <updated>2015-09-20T20:34:01-07:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2015/09/20/carl-jrs</id>
+    <id>http://site.toger.us/blog/2015/09/20/carl-jrs</id>
     <content type="html"><![CDATA[<p>Carl&rsquo;s Jr has a nifty nutritional calculator / order planner at <a href="http://www.carlsjr.com/menu/nutritional_calculator.">http://www.carlsjr.com/menu/nutritional_calculator.</a>  It lets you fully customize your meal, then lets you print or email your order to yourself with all the magic words to say to get your meal as planned (subbing cheese, extra / 2x / no onion, etc).</p>
 
 <p>Tonight I used this to pre-assemble a highly customized meal for my family.  I triggered it to send me an email (easier to read on my phone at the order window) and anxiously awaited.</p>
@@ -547,9 +547,9 @@ Adding a label to the file_contents file works around the issue but likely break
   
   <entry>
     <title type="html"><![CDATA[Varnish Cache and req.backend.healthy]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2015/06/27/varnish-cache-and-req-dot-backend-dot-healthy/"/>
+    <link href="http://site.toger.us/blog/2015/06/27/varnish-cache-and-req-dot-backend-dot-healthy/"/>
     <updated>2015-06-27T15:39:50-07:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2015/06/27/varnish-cache-and-req-dot-backend-dot-healthy</id>
+    <id>http://site.toger.us/blog/2015/06/27/varnish-cache-and-req-dot-backend-dot-healthy</id>
     <content type="html"><![CDATA[<p>An odd issue I ran into the other day: I had a <a href="https://www.varnish-cache.org">Varnish 3</a> instance that had logic hinging on <code>req.backend.healthy</code> to show a special error page if all the backends were down. That logic inexpliciably triggered even though all my backends were up! After much head-scratching I identified the issue: one of my historical VCLs was still loaded that no longer had any healthy backends (due to repeated autoscaling up / down), and although the <em>current</em> definition of that director had healthy backends, the historical one did not.  Varnish has a habit of not letting go of old VCLs even if you specify <code>vcl.discard</code> on them.  So, <code>req.backend.healthy</code> will show the director as down if any prior definition of that director is down.  Since the only way to definitively remove VCLs from memory is a restart (which flushes the memory cache), this makes <code>req.backend.healthy</code> fairly unreliable.</p>
 
 <p>This is in v3 and may not apply to v4 anymore.</p>
@@ -558,9 +558,9 @@ Adding a label to the file_contents file works around the issue but likely break
   
   <entry>
     <title type="html"><![CDATA[2FA and Minecraft Server]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2015/06/27/2fa-and-minecraft-server/"/>
+    <link href="http://site.toger.us/blog/2015/06/27/2fa-and-minecraft-server/"/>
     <updated>2015-06-27T14:57:41-07:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2015/06/27/2fa-and-minecraft-server</id>
+    <id>http://site.toger.us/blog/2015/06/27/2fa-and-minecraft-server</id>
     <content type="html"><![CDATA[<p>Two Factor Authentication (2FA) is an additional layer of protection you can add to your Minecraft server. You should already be relying on SSH keys to access your server, but those keys can be lost or leaked if you use them on untrusted machines.  2FA protects you from hacks resulting from someone gaining access to your password or SSH key.</p>
 
 <p><a href="http://DuoSecurity.com">DuoSecurity</a> is a company that provides a 2FA service that is free for personal use. A Mobile Push notification is sent via their Android / iOS app whenever a login is attempted and requires an affirmative response before login can proceed.  There is also SMS and computer-generated voice calls, but those consume credits that have a cost to refill. There is also a cost for going over 10 users, which should not be an issue for adminstation of a Minecraft server.</p>
@@ -645,9 +645,9 @@ Adding a label to the file_contents file works around the issue but likely break
   
   <entry>
     <title type="html"><![CDATA[DSL Modem and Power Strips]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2015/01/27/dsl-modem-and-power-strips/"/>
+    <link href="http://site.toger.us/blog/2015/01/27/dsl-modem-and-power-strips/"/>
     <updated>2015-01-27T20:18:56-08:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2015/01/27/dsl-modem-and-power-strips</id>
+    <id>http://site.toger.us/blog/2015/01/27/dsl-modem-and-power-strips</id>
     <content type="html"><![CDATA[<p>I had cause to call CenturyLink support recently. As one of the troubleshooting steps they seriously claimed that a power strip is not capeable of providing sufficient power to a DSL modem, and that it <em>must</em> be connected directly to the wall to receive sufficient power.</p>
 
 <p>I suspect this was to force me to unplug and powercycle the modem, but I had done that several times already.  The idea that a DSL modem draws more power than will flow through a power strip is ridiculous.</p>
@@ -656,9 +656,9 @@ Adding a label to the file_contents file works around the issue but likely break
   
   <entry>
     <title type="html"><![CDATA[Minecraft and Datadog Monitoring]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2015/01/26/minecraft-and-datadog-monitoring/"/>
+    <link href="http://site.toger.us/blog/2015/01/26/minecraft-and-datadog-monitoring/"/>
     <updated>2015-01-26T16:53:08-08:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2015/01/26/minecraft-and-datadog-monitoring</id>
+    <id>http://site.toger.us/blog/2015/01/26/minecraft-and-datadog-monitoring</id>
     <content type="html"><![CDATA[<p><a href="http://www.datadoghq.com">DataDog</a> is a nifty monitoring / statistics gathering system. It is something like a akin to a combination of Graphite / Grafana, but with a social aspect so that your team can attach discussions to a given point in time. They have a free tier that retains data for a day, which is handy for visualizing the state of the Minecraft server.</p>
 
 <p>Java applications normally expose their statistics via JMX.  I did not see anything Minecraft-specific in my stock instance, but Java itself exposes several counters that are informative.</p>
@@ -831,7 +831,7 @@ Adding a label to the file_contents file works around the issue but likely break
 <p>The domain is the portion before the first : in the bean name.</p>
 
 <p>The end result is some nice free graphs out of Datadog:
-<img class="center" src="http://jhmartin.github.io/site/images/datadog.png"></p>
+<img class="center" src="http://site.toger.us/images/datadog.png"></p>
 
 <p>The graphs for host CPU usage, threads active and java memory utilization are most interesting.</p>
 ]]></content>
@@ -839,9 +839,9 @@ Adding a label to the file_contents file works around the issue but likely break
   
   <entry>
     <title type="html"><![CDATA[Minecraft and NewRelic]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2015/01/16/minecraft-and-newrelic/"/>
+    <link href="http://site.toger.us/blog/2015/01/16/minecraft-and-newrelic/"/>
     <updated>2015-01-16T20:27:21-08:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2015/01/16/minecraft-and-newrelic</id>
+    <id>http://site.toger.us/blog/2015/01/16/minecraft-and-newrelic</id>
     <content type="html"><![CDATA[<p><a href="http://www.newrelic.com">NewRelic</a> is an exceptionally useful tool for monitoring java applications, or at least those that deal with web or other transational workloads. I tried hooking it up to MineCraft and it doesn&rsquo;t report anything. The free version doesn&rsquo;t let me look at the JVM stats (threads and such) so it appears to be a waste. However, they also provide a general unix server agent that does provide some nifty dashboards. The procedure to install it is:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -903,7 +903,7 @@ Adding a label to the file_contents file works around the issue but likely break
 
 
 <p>NewRelic generates a pretty picture such as:
-<img class="center" src="http://jhmartin.github.io/site/images/newrelic.PNG"></p>
+<img class="center" src="http://site.toger.us/images/newrelic.PNG"></p>
 
 <p>However, NewRelic is not the only server/stats monitor in town so I&rsquo;ll check out some others another time.</p>
 ]]></content>
@@ -911,9 +911,9 @@ Adding a label to the file_contents file works around the issue but likely break
   
   <entry>
     <title type="html"><![CDATA[Minecraft and SystemD]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2015/01/11/minecraft-and-systemd/"/>
+    <link href="http://site.toger.us/blog/2015/01/11/minecraft-and-systemd/"/>
     <updated>2015-01-11T20:21:33-08:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2015/01/11/minecraft-and-systemd</id>
+    <id>http://site.toger.us/blog/2015/01/11/minecraft-and-systemd</id>
     <content type="html"><![CDATA[<p>In the first installment I launched a basic Minecraft service on CentOS7. However, a proper service should not be run from the command line, instead it should be controlled by the system service daemon. In years past this would be by writing a &lsquo;sysV init script&rsquo; which would try to determine if the process was running, if not launch it and capture its PID for future reference, and capture its output to a file.  CentOS-7 has switched away from that model to one called SystemD which makes much of that easier.  There is some controversy over the SystemD model (is it UNIX-y? Too monolithic? Taking over everything?) but seems pretty handy for what it needs to do, plus has some nice security features.</p>
 
 <p>So I will create a Minecraft service definition for SystemD. I used <a href="http://0pointer.de/blog/projects/systemd-for-admins-3.html">http://0pointer.de/blog/projects/systemd-for-admins-3.html</a> to help me with this. The unit file will look like:</p>
@@ -1027,15 +1027,15 @@ Adding a label to the file_contents file works around the issue but likely break
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Update: <a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x64;&#105;&#101;&#116;&#114;&#x69;&#99;&#x68;&#64;&#x74;&#x65;&#x69;&#108;&#x67;&#x65;&#100;&#x61;&#x6e;&#107;&#101;&#110;&#46;&#x64;&#x65;">&#x64;&#105;&#101;&#116;&#x72;&#x69;&#x63;&#104;&#64;&#x74;&#101;&#105;&#108;&#x67;&#x65;&#x64;&#97;&#110;&#107;&#x65;&#x6e;&#x2e;&#x64;&#x65;</a> sent me a link to <a href="https://teilgedanken.de/Blog/post/8/">https://teilgedanken.de/Blog/post/8/</a> which takes this a step further and utilizes MCRCON to more gracefully control the servers shutdown state, and integrate with FirewallD if your system utilizes it.</p>
+<p>Update: <a href="&#x6d;&#97;&#105;&#108;&#116;&#111;&#58;&#100;&#105;&#x65;&#x74;&#114;&#x69;&#x63;&#x68;&#x40;&#116;&#101;&#x69;&#x6c;&#103;&#101;&#x64;&#97;&#x6e;&#107;&#x65;&#x6e;&#x2e;&#100;&#x65;">&#x64;&#x69;&#x65;&#x74;&#x72;&#x69;&#99;&#104;&#64;&#x74;&#x65;&#105;&#108;&#x67;&#101;&#x64;&#x61;&#110;&#x6b;&#101;&#x6e;&#x2e;&#100;&#x65;</a> sent me a link to <a href="https://teilgedanken.de/Blog/post/8/">https://teilgedanken.de/Blog/post/8/</a> which takes this a step further and utilizes MCRCON to more gracefully control the servers shutdown state, and integrate with FirewallD if your system utilizes it.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Minecraft Server in AWS Done Too Well]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2015/01/10/minecraft-server-in-aws-done-too-well/"/>
+    <link href="http://site.toger.us/blog/2015/01/10/minecraft-server-in-aws-done-too-well/"/>
     <updated>2015-01-10T22:03:40-08:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2015/01/10/minecraft-server-in-aws-done-too-well</id>
+    <id>http://site.toger.us/blog/2015/01/10/minecraft-server-in-aws-done-too-well</id>
     <content type="html"><![CDATA[<h1>A new Server</h1>
 
 <p>This series will go through how to host a MineCraft server, and go totally overboard on the configuration/management of it. I&rsquo;ll be integrating a variety of management/monitoring tools that go far beyond the needs of the average &lsquo;friends &amp; family&rsquo; server, because it is fun.  I&rsquo;ll starting the basics and build up from there.</p>
@@ -1323,9 +1323,9 @@ Adding a label to the file_contents file works around the issue but likely break
   
   <entry>
     <title type="html"><![CDATA[Ec2 Classiclink and Elbs]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2015/01/09/ec2-classiclink-and-elbs/"/>
+    <link href="http://site.toger.us/blog/2015/01/09/ec2-classiclink-and-elbs/"/>
     <updated>2015-01-09T00:00:00-08:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2015/01/09/ec2-classiclink-and-elbs</id>
+    <id>http://site.toger.us/blog/2015/01/09/ec2-classiclink-and-elbs</id>
     <content type="html"><![CDATA[<p>&mdash;assiclink-and-elbs.markdown
 layout: post
 title: &ldquo;EC2 ClassicLink and ELBs&rdquo;
@@ -1348,9 +1348,9 @@ comments: true</p>
   
   <entry>
     <title type="html"><![CDATA[PaperTrailApp and RouterBOARD 750GL]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2015/01/07/papertrailapp-and-routerboard/"/>
+    <link href="http://site.toger.us/blog/2015/01/07/papertrailapp-and-routerboard/"/>
     <updated>2015-01-07T20:07:02-08:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2015/01/07/papertrailapp-and-routerboard</id>
+    <id>http://site.toger.us/blog/2015/01/07/papertrailapp-and-routerboard</id>
     <content type="html"><![CDATA[<p><a href="https://papertrailapp.com/?thank=ee28e2">PaperTrailApp</a> (Referral link) is a SaaS RSyslog host that currently offers 100MB/mo of capacity free.  In setting up my home network and servers I wanted to have my RouterBOARD 750GL send its logs to PaperTrail.  The RouterBoard supports syslog, so configuring it is pretty straightforward &mdash; with one exception. My ISP utilizes PPPoE and so I have an additional interface configured in my RouterBOARD for it.  It seems to get confused as to what source IP to use when talking to PaperTrail and the syslog packets go into the bitbucket.  I resolved this by hardcoding my source IP into the src-address for the syslog.  The resulting configuation is:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -1375,9 +1375,9 @@ comments: true</p>
   
   <entry>
     <title type="html"><![CDATA[Mesos, Docker and Consul]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2015/01/07/mesos/"/>
+    <link href="http://site.toger.us/blog/2015/01/07/mesos/"/>
     <updated>2015-01-07T19:55:10-08:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2015/01/07/mesos</id>
+    <id>http://site.toger.us/blog/2015/01/07/mesos</id>
     <content type="html"><![CDATA[<p>I was playing with Mesos/Marathon + Docker recently and tried to integrate Consul.  Mesos sets the Docker container &lsquo;name&rsquo; to a internal value that messes with the Consul <a href="https://github.com/progrium/registrator">Registrator</a>, something like <code>mesos-aa998abcabab</code>. Registrator can accept an environmental variable telling it what service name to register as instead. The format for that is:</p>
 
 <div><script src='https://gist.github.com/12209f78a592eaf98cfd.js'></script>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Ecs | Toger Blog]]></title>
-  <link href="http://jhmartin.github.io/site/blog/categories/ecs/atom.xml" rel="self"/>
-  <link href="http://jhmartin.github.io/site/"/>
-  <updated>2018-09-18T06:55:48-07:00</updated>
-  <id>http://jhmartin.github.io/site/</id>
+  <link href="http://site.toger.us/blog/categories/ecs/atom.xml" rel="self"/>
+  <link href="http://site.toger.us/"/>
+  <updated>2018-09-18T06:59:40-07:00</updated>
+  <id>http://site.toger.us/</id>
   <author>
     <name><![CDATA[Jason Martin jhmartin@toger.us]]></name>
     
@@ -15,18 +15,18 @@
   
   <entry>
     <title type="html"><![CDATA[Passing Host IP to ECS]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2016/06/05/passing-host-ip-to-ecs/"/>
+    <link href="http://site.toger.us/blog/2016/06/05/passing-host-ip-to-ecs/"/>
     <updated>2016-06-05T20:11:55-07:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2016/06/05/passing-host-ip-to-ecs</id>
+    <id>http://site.toger.us/blog/2016/06/05/passing-host-ip-to-ecs</id>
     <content type="html"><![CDATA[<p>I&rsquo;ve been looking for a way to run Consul &lsquo;standalone&rsquo; on a host and let multiple ECS containers connect to it.  I was hoping to find a macro I could put in a container definition but such does not yet exist.  Instead I realized that I can have my Docker instance query the <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html#instancedata-data-retrieval">instance metadata</a> service and get this information.  It is not quite as elegant docker-wise but it should work until something better comes along.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[AWS ECS and Docker Exit (137)]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2015/09/22/aws-ecs-and-docker-exit-137/"/>
+    <link href="http://site.toger.us/blog/2015/09/22/aws-ecs-and-docker-exit-137/"/>
     <updated>2015-09-22T19:19:40-07:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2015/09/22/aws-ecs-and-docker-exit-137</id>
+    <id>http://site.toger.us/blog/2015/09/22/aws-ecs-and-docker-exit-137</id>
     <content type="html"><![CDATA[<p>I ran into this the other day, my ECS instances were dieing off and <code>docker ps</code> showed <code>Exited (137) About a minute ago</code>. Looking at <code>docker inspect</code> I noticed:</p>
 
 <p>```</p>

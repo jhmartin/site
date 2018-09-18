@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://jhmartin.github.io/site/sitemap.xml 
+Sitemap: http://site.toger.us/sitemap.xml 

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Zwave | Toger Blog]]></title>
-  <link href="http://jhmartin.github.io/site/blog/categories/zwave/atom.xml" rel="self"/>
-  <link href="http://jhmartin.github.io/site/"/>
-  <updated>2018-09-18T06:55:48-07:00</updated>
-  <id>http://jhmartin.github.io/site/</id>
+  <link href="http://site.toger.us/blog/categories/zwave/atom.xml" rel="self"/>
+  <link href="http://site.toger.us/"/>
+  <updated>2018-09-18T06:59:40-07:00</updated>
+  <id>http://site.toger.us/</id>
   <author>
     <name><![CDATA[Jason Martin jhmartin@toger.us]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Home Automation Ideas]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2017/09/24/home-automation-ideas/"/>
+    <link href="http://site.toger.us/blog/2017/09/24/home-automation-ideas/"/>
     <updated>2017-09-24T15:25:21-07:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2017/09/24/home-automation-ideas</id>
+    <id>http://site.toger.us/blog/2017/09/24/home-automation-ideas</id>
     <content type="html"><![CDATA[<p>My house has a bevy of Z-Wave devices, plus a few LiFX bulbs. This has allowed for some fairly fun automations:</p>
 
 <ul>

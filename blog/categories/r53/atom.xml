@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: R53 | Toger Blog]]></title>
-  <link href="http://jhmartin.github.io/site/blog/categories/r53/atom.xml" rel="self"/>
-  <link href="http://jhmartin.github.io/site/"/>
-  <updated>2018-09-18T06:55:48-07:00</updated>
-  <id>http://jhmartin.github.io/site/</id>
+  <link href="http://site.toger.us/blog/categories/r53/atom.xml" rel="self"/>
+  <link href="http://site.toger.us/"/>
+  <updated>2018-09-18T06:59:40-07:00</updated>
+  <id>http://site.toger.us/</id>
   <author>
     <name><![CDATA[Jason Martin jhmartin@toger.us]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[AWS Route53 Failover and ALB]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2017/04/20/aws-route53-failover-and-alb/"/>
+    <link href="http://site.toger.us/blog/2017/04/20/aws-route53-failover-and-alb/"/>
     <updated>2017-04-20T08:51:25-07:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2017/04/20/aws-route53-failover-and-alb</id>
+    <id>http://site.toger.us/blog/2017/04/20/aws-route53-failover-and-alb</id>
     <content type="html"><![CDATA[<p>I ran across this little gotcha recently.</p>
 
 <p>Scenario: A service hosted in two regions.  Each is fronted by either an ALB or ELB with an attached Autoscale group, that uses the LB healthcheck to determine instance health.  A Route53 configuration balances trafic between the two. Route53 &lsquo;Evaluate Target Health&rsquo; is set to yes and no healthcheck is attached.</p>

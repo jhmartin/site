@@ -3,149 +3,149 @@
   
   
   <url>
-    <loc>http://jhmartin.github.io/site/blog/2018/08/19/dns-as-a-load-balancer/</loc>
+    <loc>http://site.toger.us/blog/2018/08/19/dns-as-a-load-balancer/</loc>
     <lastmod>2018-08-19T13:38:22-07:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://jhmartin.github.io/site/blog/2017/09/24/home-automation-ideas/</loc>
+    <loc>http://site.toger.us/blog/2017/09/24/home-automation-ideas/</loc>
     <lastmod>2017-09-24T15:25:21-07:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://jhmartin.github.io/site/blog/2017/06/17/jenkins-and-github-hooks/</loc>
+    <loc>http://site.toger.us/blog/2017/06/17/jenkins-and-github-hooks/</loc>
     <lastmod>2017-06-17T14:58:34-07:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://jhmartin.github.io/site/blog/2017/04/20/aws-route53-failover-and-alb/</loc>
+    <loc>http://site.toger.us/blog/2017/04/20/aws-route53-failover-and-alb/</loc>
     <lastmod>2017-04-20T08:51:25-07:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://jhmartin.github.io/site/blog/2016/06/08/cloud-init-with-centos7-and-chef/</loc>
+    <loc>http://site.toger.us/blog/2016/06/08/cloud-init-with-centos7-and-chef/</loc>
     <lastmod>2016-06-08T20:57:00-07:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://jhmartin.github.io/site/blog/2016/06/05/extending-aws-instance-trust/</loc>
+    <loc>http://site.toger.us/blog/2016/06/05/extending-aws-instance-trust/</loc>
     <lastmod>2016-06-05T20:39:53-07:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://jhmartin.github.io/site/blog/2016/06/05/passing-host-ip-to-ecs/</loc>
+    <loc>http://site.toger.us/blog/2016/06/05/passing-host-ip-to-ecs/</loc>
     <lastmod>2016-06-05T20:11:55-07:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://jhmartin.github.io/site/blog/2016/04/18/chef-too-big-for-the-kitchen/</loc>
+    <loc>http://site.toger.us/blog/2016/04/18/chef-too-big-for-the-kitchen/</loc>
     <lastmod>2016-04-18T06:39:08-07:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://jhmartin.github.io/site/blog/2015/09/22/aws-ecs-and-docker-exit-137/</loc>
+    <loc>http://site.toger.us/blog/2015/09/22/aws-ecs-and-docker-exit-137/</loc>
     <lastmod>2015-09-22T19:19:40-07:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://jhmartin.github.io/site/blog/2015/09/20/carl-jrs/</loc>
+    <loc>http://site.toger.us/blog/2015/09/20/carl-jrs/</loc>
     <lastmod>2015-09-20T20:34:01-07:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://jhmartin.github.io/site/blog/2015/06/27/varnish-cache-and-req-dot-backend-dot-healthy/</loc>
+    <loc>http://site.toger.us/blog/2015/06/27/varnish-cache-and-req-dot-backend-dot-healthy/</loc>
     <lastmod>2015-06-27T15:39:50-07:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://jhmartin.github.io/site/blog/2015/06/27/2fa-and-minecraft-server/</loc>
+    <loc>http://site.toger.us/blog/2015/06/27/2fa-and-minecraft-server/</loc>
     <lastmod>2015-06-27T14:57:41-07:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://jhmartin.github.io/site/blog/2015/01/27/dsl-modem-and-power-strips/</loc>
+    <loc>http://site.toger.us/blog/2015/01/27/dsl-modem-and-power-strips/</loc>
     <lastmod>2015-01-27T20:18:56-08:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://jhmartin.github.io/site/blog/2015/01/26/minecraft-and-datadog-monitoring/</loc>
+    <loc>http://site.toger.us/blog/2015/01/26/minecraft-and-datadog-monitoring/</loc>
     <lastmod>2015-01-26T16:53:08-08:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://jhmartin.github.io/site/blog/2015/01/16/minecraft-and-newrelic/</loc>
+    <loc>http://site.toger.us/blog/2015/01/16/minecraft-and-newrelic/</loc>
     <lastmod>2015-01-16T20:27:21-08:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://jhmartin.github.io/site/blog/2015/01/11/minecraft-and-systemd/</loc>
+    <loc>http://site.toger.us/blog/2015/01/11/minecraft-and-systemd/</loc>
     <lastmod>2015-01-11T20:21:33-08:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://jhmartin.github.io/site/blog/2015/01/10/minecraft-server-in-aws-done-too-well/</loc>
+    <loc>http://site.toger.us/blog/2015/01/10/minecraft-server-in-aws-done-too-well/</loc>
     <lastmod>2015-01-10T22:03:40-08:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://jhmartin.github.io/site/blog/2015/01/09/ec2-classiclink-and-elbs/</loc>
+    <loc>http://site.toger.us/blog/2015/01/09/ec2-classiclink-and-elbs/</loc>
     <lastmod>2015-01-09T00:00:00-08:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://jhmartin.github.io/site/blog/2015/01/07/papertrailapp-and-routerboard/</loc>
+    <loc>http://site.toger.us/blog/2015/01/07/papertrailapp-and-routerboard/</loc>
     <lastmod>2015-01-07T20:07:02-08:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://jhmartin.github.io/site/blog/2015/01/07/mesos/</loc>
+    <loc>http://site.toger.us/blog/2015/01/07/mesos/</loc>
     <lastmod>2015-01-07T19:55:10-08:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>http://jhmartin.github.io/site/blog/2015/01/03/home-network-plan/</loc>
+    <loc>http://site.toger.us/blog/2015/01/03/home-network-plan/</loc>
     <lastmod>2015-01-03T20:17:22-08:00</lastmod>
     <priority>0.8</priority>
   </url>
   
   
   <url>
-    <loc>http://jhmartin.github.io/site/blog/archives/</loc>
-    <lastmod>2018-09-18T06:55:48-07:00</lastmod>
+    <loc>http://site.toger.us/blog/archives/</loc>
+    <lastmod>2018-09-18T06:59:40-07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>http://jhmartin.github.io/site/</loc>
-    <lastmod>2018-09-18T06:55:48-07:00</lastmod>
+    <loc>http://site.toger.us/</loc>
+    <lastmod>2018-09-18T06:59:40-07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
-    <loc>http://jhmartin.github.io/site/gpg-pgp-key/</loc>
-    <lastmod>2018-09-18T06:55:48-07:00</lastmod>
+    <loc>http://site.toger.us/gpg-pgp-key/</loc>
+    <lastmod>2018-09-18T06:59:40-07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

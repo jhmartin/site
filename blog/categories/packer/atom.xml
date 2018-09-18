@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Packer | Toger Blog]]></title>
-  <link href="http://jhmartin.github.io/site/blog/categories/packer/atom.xml" rel="self"/>
-  <link href="http://jhmartin.github.io/site/"/>
-  <updated>2018-09-18T06:55:48-07:00</updated>
-  <id>http://jhmartin.github.io/site/</id>
+  <link href="http://site.toger.us/blog/categories/packer/atom.xml" rel="self"/>
+  <link href="http://site.toger.us/"/>
+  <updated>2018-09-18T06:59:40-07:00</updated>
+  <id>http://site.toger.us/</id>
   <author>
     <name><![CDATA[Jason Martin jhmartin@toger.us]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Chef Too Big for the Kitchen]]></title>
-    <link href="http://jhmartin.github.io/site/blog/2016/04/18/chef-too-big-for-the-kitchen/"/>
+    <link href="http://site.toger.us/blog/2016/04/18/chef-too-big-for-the-kitchen/"/>
     <updated>2016-04-18T06:39:08-07:00</updated>
-    <id>http://jhmartin.github.io/site/blog/2016/04/18/chef-too-big-for-the-kitchen</id>
+    <id>http://site.toger.us/blog/2016/04/18/chef-too-big-for-the-kitchen</id>
     <content type="html"><![CDATA[<p>While pondering running a full &lsquo;ride-the-wave&rsquo; auto-scaling solution in AWS, I looked closely at my Chef installation.  The environment is very Chef-heavy with fairly generic AMI that runs a slew of Chef recipes to bring it up to the needs of that particular role. The nodes are in Autoscale groups and get their role designation from the Launch Configuration.</p>
 
 <p>On average a node invoked approximately 55 recipes (as recorded by seen_recipes in the audit cookbook).  Several of those recipes bring in resources from (authenticated) remote locations that have very good availability but are not in my direct control. Ignoring the remote-based recipes there is still a significant number of moving parts that can be disrupted unexpectedly, such as by other cookbook / role / KV store changes.  This is acceptable-if-not-ideal when nodes are generally brought into being under the supervision of an operator who can resolve any issues, or for when the odd 1-of-x00 pooled nodes dies and is automatically replaced. This risk is manageable when the environment is perpetually scaled for peak traffic.</p>

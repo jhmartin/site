@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Varnish | Toger Blog]]></title>
-  <link href="http://site.toger.us/blog/categories/varnish/atom.xml" rel="self"/>
-  <link href="http://site.toger.us/"/>
-  <updated>2018-09-18T07:01:48-07:00</updated>
-  <id>http://site.toger.us/</id>
+  <link href="http://www.toger.us/blog/categories/varnish/atom.xml" rel="self"/>
+  <link href="http://www.toger.us/"/>
+  <updated>2018-09-18T07:09:38-07:00</updated>
+  <id>http://www.toger.us/</id>
   <author>
     <name><![CDATA[Jason Martin jhmartin@toger.us]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Varnish Cache and req.backend.healthy]]></title>
-    <link href="http://site.toger.us/blog/2015/06/27/varnish-cache-and-req-dot-backend-dot-healthy/"/>
+    <link href="http://www.toger.us/blog/2015/06/27/varnish-cache-and-req-dot-backend-dot-healthy/"/>
     <updated>2015-06-27T15:39:50-07:00</updated>
-    <id>http://site.toger.us/blog/2015/06/27/varnish-cache-and-req-dot-backend-dot-healthy</id>
+    <id>http://www.toger.us/blog/2015/06/27/varnish-cache-and-req-dot-backend-dot-healthy</id>
     <content type="html"><![CDATA[<p>An odd issue I ran into the other day: I had a <a href="https://www.varnish-cache.org">Varnish 3</a> instance that had logic hinging on <code>req.backend.healthy</code> to show a special error page if all the backends were down. That logic inexpliciably triggered even though all my backends were up! After much head-scratching I identified the issue: one of my historical VCLs was still loaded that no longer had any healthy backends (due to repeated autoscaling up / down), and although the <em>current</em> definition of that director had healthy backends, the historical one did not.  Varnish has a habit of not letting go of old VCLs even if you specify <code>vcl.discard</code> on them.  So, <code>req.backend.healthy</code> will show the director as down if any prior definition of that director is down.  Since the only way to definitively remove VCLs from memory is a restart (which flushes the memory cache), this makes <code>req.backend.healthy</code> fairly unreliable.</p>
 
 <p>This is in v3 and may not apply to v4 anymore.</p>

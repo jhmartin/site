@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Jenkins | Toger Blog]]></title>
-  <link href="http://site.toger.us/blog/categories/jenkins/atom.xml" rel="self"/>
-  <link href="http://site.toger.us/"/>
-  <updated>2018-09-18T07:01:48-07:00</updated>
-  <id>http://site.toger.us/</id>
+  <link href="http://www.toger.us/blog/categories/jenkins/atom.xml" rel="self"/>
+  <link href="http://www.toger.us/"/>
+  <updated>2018-09-18T07:09:38-07:00</updated>
+  <id>http://www.toger.us/</id>
   <author>
     <name><![CDATA[Jason Martin jhmartin@toger.us]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Jenkinsfile and Github Hooks]]></title>
-    <link href="http://site.toger.us/blog/2017/06/17/jenkins-and-github-hooks/"/>
+    <link href="http://www.toger.us/blog/2017/06/17/jenkins-and-github-hooks/"/>
     <updated>2017-06-17T14:58:34-07:00</updated>
-    <id>http://site.toger.us/blog/2017/06/17/jenkins-and-github-hooks</id>
+    <id>http://www.toger.us/blog/2017/06/17/jenkins-and-github-hooks</id>
     <content type="html"><![CDATA[<p>Jenkins is the juggernaut of the build pipeline ecosystem.  Its roots go back to bespoke local build pipelines and dedicated build engineers.  In present days the likes of CircleCI, CodeShip, Drone.io have started nipping at Jenkins heels.</p>
 
 <p>One of the significant differences is that, historically, Jenkins builds are configured inside Jenkins. The contemporary alternatives generally favor a SCM-managed configuration file (often YAML format).  This is useful as it removes the specialness of the Golden Build Host (ever had someone corrupt a Jenkins configuration? Getting back to par is a pain).</p>

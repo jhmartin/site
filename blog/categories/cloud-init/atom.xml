@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Cloud-init | Toger Blog]]></title>
-  <link href="http://site.toger.us/blog/categories/cloud-init/atom.xml" rel="self"/>
-  <link href="http://site.toger.us/"/>
-  <updated>2018-09-18T07:01:48-07:00</updated>
-  <id>http://site.toger.us/</id>
+  <link href="http://www.toger.us/blog/categories/cloud-init/atom.xml" rel="self"/>
+  <link href="http://www.toger.us/"/>
+  <updated>2018-09-18T07:09:38-07:00</updated>
+  <id>http://www.toger.us/</id>
   <author>
     <name><![CDATA[Jason Martin jhmartin@toger.us]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Cloud-Init With CentOS7, Chef, and SELinux]]></title>
-    <link href="http://site.toger.us/blog/2016/06/08/cloud-init-with-centos7-and-chef/"/>
+    <link href="http://www.toger.us/blog/2016/06/08/cloud-init-with-centos7-and-chef/"/>
     <updated>2016-06-08T20:57:00-07:00</updated>
-    <id>http://site.toger.us/blog/2016/06/08/cloud-init-with-centos7-and-chef</id>
+    <id>http://www.toger.us/blog/2016/06/08/cloud-init-with-centos7-and-chef</id>
     <content type="html"><![CDATA[<p>The CentOS 7 AMI in Amazon comes with Cloud-Init (<code>cloud-init-0.7.5-10.el7.centos.1.x86_64</code>). This is quite handy as it assists in automating several bootup tasks. One of these tasks is to install and bootstrap Chef.  Unforunately, when SELinux is installed the Chef handler will fail.</p>
 
 <p>Sample error:

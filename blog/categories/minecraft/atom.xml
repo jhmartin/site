@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Minecraft | Toger Blog]]></title>
-  <link href="http://site.toger.us/blog/categories/minecraft/atom.xml" rel="self"/>
-  <link href="http://site.toger.us/"/>
-  <updated>2018-09-18T07:01:48-07:00</updated>
-  <id>http://site.toger.us/</id>
+  <link href="http://www.toger.us/blog/categories/minecraft/atom.xml" rel="self"/>
+  <link href="http://www.toger.us/"/>
+  <updated>2018-09-18T07:09:38-07:00</updated>
+  <id>http://www.toger.us/</id>
   <author>
     <name><![CDATA[Jason Martin jhmartin@toger.us]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[2FA and Minecraft Server]]></title>
-    <link href="http://site.toger.us/blog/2015/06/27/2fa-and-minecraft-server/"/>
+    <link href="http://www.toger.us/blog/2015/06/27/2fa-and-minecraft-server/"/>
     <updated>2015-06-27T14:57:41-07:00</updated>
-    <id>http://site.toger.us/blog/2015/06/27/2fa-and-minecraft-server</id>
+    <id>http://www.toger.us/blog/2015/06/27/2fa-and-minecraft-server</id>
     <content type="html"><![CDATA[<p>Two Factor Authentication (2FA) is an additional layer of protection you can add to your Minecraft server. You should already be relying on SSH keys to access your server, but those keys can be lost or leaked if you use them on untrusted machines.  2FA protects you from hacks resulting from someone gaining access to your password or SSH key.</p>
 
 <p><a href="http://DuoSecurity.com">DuoSecurity</a> is a company that provides a 2FA service that is free for personal use. A Mobile Push notification is sent via their Android / iOS app whenever a login is attempted and requires an affirmative response before login can proceed.  There is also SMS and computer-generated voice calls, but those consume credits that have a cost to refill. There is also a cost for going over 10 users, which should not be an issue for adminstation of a Minecraft server.</p>
@@ -79,9 +79,9 @@ Duo two-factor login for centos</p>
   
   <entry>
     <title type="html"><![CDATA[Minecraft and Datadog Monitoring]]></title>
-    <link href="http://site.toger.us/blog/2015/01/26/minecraft-and-datadog-monitoring/"/>
+    <link href="http://www.toger.us/blog/2015/01/26/minecraft-and-datadog-monitoring/"/>
     <updated>2015-01-26T16:53:08-08:00</updated>
-    <id>http://site.toger.us/blog/2015/01/26/minecraft-and-datadog-monitoring</id>
+    <id>http://www.toger.us/blog/2015/01/26/minecraft-and-datadog-monitoring</id>
     <content type="html"><![CDATA[<p><a href="http://www.datadoghq.com">DataDog</a> is a nifty monitoring / statistics gathering system. It is something like a akin to a combination of Graphite / Grafana, but with a social aspect so that your team can attach discussions to a given point in time. They have a free tier that retains data for a day, which is handy for visualizing the state of the Minecraft server.</p>
 
 <p>Java applications normally expose their statistics via JMX.  I did not see anything Minecraft-specific in my stock instance, but Java itself exposes several counters that are informative.</p>
@@ -198,9 +198,9 @@ init_config:</p>
   
   <entry>
     <title type="html"><![CDATA[Minecraft and NewRelic]]></title>
-    <link href="http://site.toger.us/blog/2015/01/16/minecraft-and-newrelic/"/>
+    <link href="http://www.toger.us/blog/2015/01/16/minecraft-and-newrelic/"/>
     <updated>2015-01-16T20:27:21-08:00</updated>
-    <id>http://site.toger.us/blog/2015/01/16/minecraft-and-newrelic</id>
+    <id>http://www.toger.us/blog/2015/01/16/minecraft-and-newrelic</id>
     <content type="html"><![CDATA[<p><a href="http://www.newrelic.com">NewRelic</a> is an exceptionally useful tool for monitoring java applications, or at least those that deal with web or other transational workloads. I tried hooking it up to MineCraft and it doesn&rsquo;t report anything. The free version doesn&rsquo;t let me look at the JVM stats (threads and such) so it appears to be a waste. However, they also provide a general unix server agent that does provide some nifty dashboards. The procedure to install it is:</p>
 
 <p><code>bash
@@ -248,9 +248,9 @@ systemctl enable newrelic
   
   <entry>
     <title type="html"><![CDATA[Minecraft and SystemD]]></title>
-    <link href="http://site.toger.us/blog/2015/01/11/minecraft-and-systemd/"/>
+    <link href="http://www.toger.us/blog/2015/01/11/minecraft-and-systemd/"/>
     <updated>2015-01-11T20:21:33-08:00</updated>
-    <id>http://site.toger.us/blog/2015/01/11/minecraft-and-systemd</id>
+    <id>http://www.toger.us/blog/2015/01/11/minecraft-and-systemd</id>
     <content type="html"><![CDATA[<p>In the first installment I launched a basic Minecraft service on CentOS7. However, a proper service should not be run from the command line, instead it should be controlled by the system service daemon. In years past this would be by writing a &lsquo;sysV init script&rsquo; which would try to determine if the process was running, if not launch it and capture its PID for future reference, and capture its output to a file.  CentOS-7 has switched away from that model to one called SystemD which makes much of that easier.  There is some controversy over the SystemD model (is it UNIX-y? Too monolithic? Taking over everything?) but seems pretty handy for what it needs to do, plus has some nice security features.</p>
 
 <p>So I will create a Minecraft service definition for SystemD. I used <a href="http://0pointer.de/blog/projects/systemd-for-admins-3.html">http://0pointer.de/blog/projects/systemd-for-admins-3.html</a> to help me with this. The unit file will look like:</p>
@@ -343,15 +343,15 @@ Jan 12 04:18:07 ip-10-10-0-239.ec2.internal java[2198]: [04:18:07] [Server threa
 Jan 12 04:18:07 ip-10-10-0-239.ec2.internal java[2198]: [04:18:07] [Server thread/INFO]: Done (1.192s)! For help, type "help" or "?"
 </code></p>
 
-<p>Update: <a href="&#x6d;&#97;&#105;&#x6c;&#116;&#x6f;&#58;&#100;&#x69;&#101;&#x74;&#114;&#x69;&#99;&#x68;&#x40;&#116;&#101;&#x69;&#108;&#x67;&#x65;&#x64;&#x61;&#x6e;&#x6b;&#101;&#110;&#x2e;&#100;&#101;">&#100;&#x69;&#x65;&#116;&#x72;&#105;&#99;&#x68;&#64;&#116;&#101;&#105;&#108;&#103;&#x65;&#x64;&#x61;&#110;&#x6b;&#x65;&#x6e;&#46;&#x64;&#101;</a> sent me a link to <a href="https://teilgedanken.de/Blog/post/8/">https://teilgedanken.de/Blog/post/8/</a> which takes this a step further and utilizes MCRCON to more gracefully control the servers shutdown state, and integrate with FirewallD if your system utilizes it.</p>
+<p>Update: <a href="&#109;&#97;&#105;&#x6c;&#116;&#x6f;&#x3a;&#x64;&#105;&#101;&#116;&#114;&#105;&#x63;&#x68;&#64;&#116;&#101;&#105;&#108;&#103;&#101;&#100;&#x61;&#x6e;&#x6b;&#x65;&#x6e;&#x2e;&#x64;&#x65;">&#x64;&#x69;&#x65;&#x74;&#114;&#x69;&#99;&#x68;&#x40;&#116;&#x65;&#x69;&#108;&#103;&#101;&#100;&#97;&#110;&#107;&#x65;&#110;&#x2e;&#x64;&#101;</a> sent me a link to <a href="https://teilgedanken.de/Blog/post/8/">https://teilgedanken.de/Blog/post/8/</a> which takes this a step further and utilizes MCRCON to more gracefully control the servers shutdown state, and integrate with FirewallD if your system utilizes it.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Minecraft Server in AWS Done Too Well]]></title>
-    <link href="http://site.toger.us/blog/2015/01/10/minecraft-server-in-aws-done-too-well/"/>
+    <link href="http://www.toger.us/blog/2015/01/10/minecraft-server-in-aws-done-too-well/"/>
     <updated>2015-01-10T22:03:40-08:00</updated>
-    <id>http://site.toger.us/blog/2015/01/10/minecraft-server-in-aws-done-too-well</id>
+    <id>http://www.toger.us/blog/2015/01/10/minecraft-server-in-aws-done-too-well</id>
     <content type="html"><![CDATA[<h1>A new Server</h1>
 
 <p>This series will go through how to host a MineCraft server, and go totally overboard on the configuration/management of it. I&rsquo;ll be integrating a variety of management/monitoring tools that go far beyond the needs of the average &lsquo;friends &amp; family&rsquo; server, because it is fun.  I&rsquo;ll starting the basics and build up from there.</p>

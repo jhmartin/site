@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Aws | Toger Blog]]></title>
-  <link href="http://site.toger.us/blog/categories/aws/atom.xml" rel="self"/>
-  <link href="http://site.toger.us/"/>
-  <updated>2018-09-18T07:01:48-07:00</updated>
-  <id>http://site.toger.us/</id>
+  <link href="http://www.toger.us/blog/categories/aws/atom.xml" rel="self"/>
+  <link href="http://www.toger.us/"/>
+  <updated>2018-09-18T07:09:38-07:00</updated>
+  <id>http://www.toger.us/</id>
   <author>
     <name><![CDATA[Jason Martin jhmartin@toger.us]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[AWS Route53 Failover and ALB]]></title>
-    <link href="http://site.toger.us/blog/2017/04/20/aws-route53-failover-and-alb/"/>
+    <link href="http://www.toger.us/blog/2017/04/20/aws-route53-failover-and-alb/"/>
     <updated>2017-04-20T08:51:25-07:00</updated>
-    <id>http://site.toger.us/blog/2017/04/20/aws-route53-failover-and-alb</id>
+    <id>http://www.toger.us/blog/2017/04/20/aws-route53-failover-and-alb</id>
     <content type="html"><![CDATA[<p>I ran across this little gotcha recently.</p>
 
 <p>Scenario: A service hosted in two regions.  Each is fronted by either an ALB or ELB with an attached Autoscale group, that uses the LB healthcheck to determine instance health.  A Route53 configuration balances trafic between the two. Route53 &lsquo;Evaluate Target Health&rsquo; is set to yes and no healthcheck is attached.</p>
@@ -34,9 +34,9 @@
   
   <entry>
     <title type="html"><![CDATA[Cloud-Init With CentOS7, Chef, and SELinux]]></title>
-    <link href="http://site.toger.us/blog/2016/06/08/cloud-init-with-centos7-and-chef/"/>
+    <link href="http://www.toger.us/blog/2016/06/08/cloud-init-with-centos7-and-chef/"/>
     <updated>2016-06-08T20:57:00-07:00</updated>
-    <id>http://site.toger.us/blog/2016/06/08/cloud-init-with-centos7-and-chef</id>
+    <id>http://www.toger.us/blog/2016/06/08/cloud-init-with-centos7-and-chef</id>
     <content type="html"><![CDATA[<p>The CentOS 7 AMI in Amazon comes with Cloud-Init (<code>cloud-init-0.7.5-10.el7.centos.1.x86_64</code>). This is quite handy as it assists in automating several bootup tasks. One of these tasks is to install and bootstrap Chef.  Unforunately, when SELinux is installed the Chef handler will fail.</p>
 
 <p>Sample error:
@@ -93,9 +93,9 @@ Adding a label to the file_contents file works around the issue but likely break
   
   <entry>
     <title type="html"><![CDATA[Extending AWS Instance Trust]]></title>
-    <link href="http://site.toger.us/blog/2016/06/05/extending-aws-instance-trust/"/>
+    <link href="http://www.toger.us/blog/2016/06/05/extending-aws-instance-trust/"/>
     <updated>2016-06-05T20:39:53-07:00</updated>
-    <id>http://site.toger.us/blog/2016/06/05/extending-aws-instance-trust</id>
+    <id>http://www.toger.us/blog/2016/06/05/extending-aws-instance-trust</id>
     <content type="html"><![CDATA[<p>All nodes in EC2 can fetch their <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-identity-documents.html">Instance Identity Documents</a>. This returns an AWS-signed block containing data about the instance that requested it.  This data is only available to the instance that fetched it, so if it turns around and presents it to some other service you can be confident it originated from the machine in question.</p>
 
 <p>This is useful for secrets-enrollment processes where you want a node to be able to attest to its own identity in a secure fashion.  Your enrollment mechanism can ensure that the node is &lsquo;young&rsquo; enough to be making the request, and that the enrollment has never occured before.   Your enrollment tool can also look up other data about the instance (autoscale group, CloudFormation stack, etc) to determine what privileges it should be granted.</p>
@@ -106,18 +106,18 @@ Adding a label to the file_contents file works around the issue but likely break
   
   <entry>
     <title type="html"><![CDATA[Passing Host IP to ECS]]></title>
-    <link href="http://site.toger.us/blog/2016/06/05/passing-host-ip-to-ecs/"/>
+    <link href="http://www.toger.us/blog/2016/06/05/passing-host-ip-to-ecs/"/>
     <updated>2016-06-05T20:11:55-07:00</updated>
-    <id>http://site.toger.us/blog/2016/06/05/passing-host-ip-to-ecs</id>
+    <id>http://www.toger.us/blog/2016/06/05/passing-host-ip-to-ecs</id>
     <content type="html"><![CDATA[<p>I&rsquo;ve been looking for a way to run Consul &lsquo;standalone&rsquo; on a host and let multiple ECS containers connect to it.  I was hoping to find a macro I could put in a container definition but such does not yet exist.  Instead I realized that I can have my Docker instance query the <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html#instancedata-data-retrieval">instance metadata</a> service and get this information.  It is not quite as elegant docker-wise but it should work until something better comes along.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[AWS ECS and Docker Exit (137)]]></title>
-    <link href="http://site.toger.us/blog/2015/09/22/aws-ecs-and-docker-exit-137/"/>
+    <link href="http://www.toger.us/blog/2015/09/22/aws-ecs-and-docker-exit-137/"/>
     <updated>2015-09-22T19:19:40-07:00</updated>
-    <id>http://site.toger.us/blog/2015/09/22/aws-ecs-and-docker-exit-137</id>
+    <id>http://www.toger.us/blog/2015/09/22/aws-ecs-and-docker-exit-137</id>
     <content type="html"><![CDATA[<p>I ran into this the other day, my ECS instances were dieing off and <code>docker ps</code> showed <code>Exited (137) About a minute ago</code>. Looking at <code>docker inspect</code> I noticed:</p>
 
 <p>```</p>

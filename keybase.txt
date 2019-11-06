@@ -1,0 +1,85 @@
+==================================================================
+https://keybase.io/toger
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://toger.us
+  * I am toger (https://keybase.io/toger) on keybase.
+  * I have a public key with fingerprint C79F 0853 C15A C7E9 E798  C97E D81C 9326 A979 840A
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0101d08dbad95415a46566e0ecc8d127833ece7e7fe58f5dc93011a12beef3ae333d0a",
+      "fingerprint": "c79f0853c15ac7e9e798c97ed81c9326a979840a",
+      "host": "keybase.io",
+      "key_id": "d81c9326a979840a",
+      "kid": "0101d08dbad95415a46566e0ecc8d127833ece7e7fe58f5dc93011a12beef3ae333d0a",
+      "uid": "3d515d2dd8b69d55d24df82dacf30e19",
+      "username": "toger"
+    },
+    "merkle_root": {
+      "ctime": 1573074328,
+      "hash_meta": "c17c569ede22036f5b003f1f54cee73aca60d5e2c43c493fcecd3751f1ac69c9",
+      "seqno": 8850356
+    },
+    "revoke": {
+      "sig_ids": [
+        "b478d81cbcf2ef40e5d6df4ae04932b56147df4470262b067e5304b9c05c02b50f"
+      ]
+    },
+    "service": {
+      "hostname": "toger.us",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1573074329,
+  "expire_in": 157680000,
+  "prev": "5d228a3a321f458edac000147e34a0b8088b38d3e0573b2d7542990f7e2671c9",
+  "seqno": 24,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+
+owGtU21QFVUYBhFSxFAQsxvOyJLmMFc6u2c/r0aSjgM6Zmo6FsFl95yzcPm4S7vL
+RUNGJ0VUdFKc0j4YnED7kAgzHb9QR1IxSxwKqIgBU2tMFFMboPLWWaZmnKaf7Z/d
+877P+7zP+7x7to0NC4kMrX3yMHO3oHVO6IXrWkhms9BaymgGXsV4Spl8MvwiBZhY
+tjffhxkPA1jAYiBjTcWKwLOCyouCKBJAEJIxy0kyhAQRiUg6EWRdwEiBgGVVltMI
+0aFKIIQYqIyb0X3+HGIWmT6/TWmRpOhAFiCijEgiCpEUGSkSwTJLGThRVWiAHy7M
+NSyngorTVIsk+wwaowfvsLz/wP/PuouH6SAWWAFzGMuaqGCBfvJYlzmsIh0CwioO
+0CKmXy0kFG0bdFSmzM0UEjO/gHhNw7AdZ5Htc/KsIEEg8ZCT6XSqlestJLbqmMJK
+SBAVggnHASjqggYA1Fld4BEhElSRKgIsEA7xEPEK1BFBGEoCq7MqEhXkiLDIy36D
+8ciyAKAgUgUmCRj5xGlu+XKoZxbjyWA0XpKpc6eKkIZ0jug8IAIWsc6rBFBiThNE
+lpfomZcAJ3IaECUiQMBrCgICAjQPdCazzGlnBnxomN5Z04PjJxdbVE+RadgGMgpo
+NNe2iyyP44q9qsiBlRDN+zeBV/P5Mf1BaEWAmJbP8FOXKPLfhiluhqws8pnE6/MP
+h0UZ0MfpQwKUku6Fk1WoQo7VeUEmdD80TWchkFeBJgNZ1qCMIQGUUeOwJPCcogBd
+IpwosQ86yPFUp5pDOalvftUuNglTFrlpRPzIkNDIkIjwEc7VCYkcPe6f+2T+Hh1M
+2V0XnDJjQVXS/N72+1veDX16aMELY16Z0nRzfVjqMxGzr8z84GBVXHTfqPa100lw
+c9OKoTXRWb0NI25dmJam3kyJjWmv31eT9ur93vR2I2ZiRCVKrNuYMW/uupkZvS99
+GN+/fu6LY117YHhzRl7EOkL2bQvkZX8638r2umOi12Z3/VryRPzWa1+GfRYZXzVQ
+Maen4XLFPtfr2Vt7Vk6+NLYy8FBD6xRxUlz+oavdI/vv3fnzx0UtX0++Wn36ZM+z
+M3Yu/Hn5yoSci0Ze4tLqe+XXH95h75+0+BumceBYxrdVi6MuJG+IbUrd2nHAbTZM
+2HFEVrijfd+VvXX4SuPq5dUtbeX1qZ6W5O3jC+F5ubrmTHfbro4N3LngrKbyP9JX
+McHM1fbSzNeaw7lHl8U/8tiuzunYGDz/3Pdnoz4WrcWD44qHDi1zNddWfnIj7fZP
+b3xxujava7Orze3PapnX8fya6pKsiaXmb18t87guhq+YmhIs/wUmnRj9ef2dS4Eb
+tSkZE7qHwq72Xe7mWyv2rr9+972JH5Umz7s0yNUf7Zw9xpXwTnl2/4nUlE3JJ3Oy
+zoWOOhZbWxm+63il/cOtiwffPtV0u2b/2QOdR8493lWy8xqKWbTH3ZR57EBkUn3C
+3tSZu2HU+EYUNss18ObCJSfrpvYvkbYfn5GYHhdsq0l0xx55P6pn41O5ZzrjV9zc
+GRdRMa1w1F8=
+=54A+
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/toger
+
+==================================================================

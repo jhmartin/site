@@ -1055,6 +1055,17 @@
 
       
     
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
 
     
   
@@ -1157,7 +1168,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="821 words"
+  title="824 words"
 >
   <em>4 min</em> read</span>
 
@@ -1206,6 +1217,8 @@
 <p>The aGate configuration app uses confusing and nonstandard network nomenclature.  “Auto-connecting” and “Manual connect” is not how one normally describes configuration values. Phones and laptops have been connecting to WiFi for years, so using the same UI terms as them will reduce confusion. ‘Automatic Connection’ == ‘DHCP’ (Dynamic Network Configuration Protocol), ‘Manual Connection’ == ‘Static’.</p>
 
 <p><a href="/images/appconfig1.jpg" class="popup img-link shimmer"><img src="/images/appconfig1.jpg" alt="appconfig1" width="250" loading="lazy"></a> <a href="/images/phoneconfig2.jpg" class="popup img-link shimmer"><img src="/images/phoneconfig2.jpg" alt="phoneconfig2" width="250" loading="lazy"></a>  <a href="/images/phoneconfig3.jpg" class="popup img-link shimmer"><img src="/images/phoneconfig3.jpg" alt="phoneconfig3" width="250" loading="lazy"></a></p>
+
+<h3 id="netmask-lack-thereof"><span class="me-2">Netmask, lack thereof</span><a href="#netmask-lack-thereof" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 
 <p>There is no place in the app to configure the network size, aka the ‘network prefix length’ aka ‘netmask’.  If an aGate is installed onto a network that is using a less common (but entirely valid) prefix length it may not be able to communicate with Franklin. There is no way to calculate the the correct value, it either has to be supplied by the network via DHCP or by the user when configuring manually. I don’t know if it is honoring the DHCP-supplied value but it definitely doesn’t let me manually configure it. On a phone it shows up as Network prefix length:</p>
 

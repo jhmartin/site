@@ -34,16 +34,17 @@
 <meta property="og:locale" content="en" />
 <meta name="description" content="Random posts about tech" />
 <meta property="og:description" content="Random posts about tech" />
-<link rel="canonical" href="/" />
-<meta property="og:url" content="/" />
+<link rel="canonical" href="/page2/" />
+<meta property="og:url" content="/page2/" />
 <meta property="og:site_name" content="Toger Blog" />
 <meta property="og:type" content="website" />
-<link rel="next" href="/page2" />
+<link rel="prev" href="/" />
+<link rel="next" href="/page3" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Toger Blog" />
 <meta name="twitter:site" content="@twitter_username" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","description":"Random posts about tech","headline":"Toger Blog","name":"Jason Martin","sameAs":["https://github.com/jhmartin","https://www.linkedin.com/in/jasonhmartin"],"url":"/"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"Random posts about tech","headline":"Toger Blog","url":"/page2/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -536,17 +537,17 @@
 <div id="post-list" class="flex-grow-1 px-xl-1">
   
     <article class="card-wrapper card">
-      <a href="/posts/dns-as-a-load-balancer/" class="post-preview row g-0 flex-md-row-reverse">
+      <a href="/posts/varnish-cache-and-req-dot-backend-dot-healthy/" class="post-preview row g-0 flex-md-row-reverse">
         
 
         
 
         <div class="col-md-12">
           <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">DNS as a Service Discovery load balancer</h1>
+            <h1 class="card-title my-2 mt-md-0">Varnish Cache and req.backend.healthy</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>DNS makes for a deceptively easy service-discovery platform. Various platforms (such as  Docker swarm, Amazon Auto-Naming purport to provide a trivial to use service discovery mechanism. DNS is han...</p>
+              <p>An odd issue I ran into the other day: I had a Varnish 3 instance that had logic hinging on req.backend.healthy to show a special error page if all the backends were down. That logic inexpliciably ...</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -563,11 +564,11 @@
 
 <time
   
-  data-ts="1534711102"
+  data-ts="1435444790"
   data-df="ll"
   
 >
-  Aug 19, 2018
+  Jun 27, 2015
 </time>
 
 
@@ -576,8 +577,7 @@
                   <i class="far fa-folder-open fa-fw me-1"></i>
                   <span class="categories">
                     
-                      service-discovery,
-                      DNS
+                      Varnish
                   </span>
                 
               </div>
@@ -592,17 +592,17 @@
     </article>
   
     <article class="card-wrapper card">
-      <a href="/posts/home-automation-ideas/" class="post-preview row g-0 flex-md-row-reverse">
+      <a href="/posts/2fa-and-minecraft-server/" class="post-preview row g-0 flex-md-row-reverse">
         
 
         
 
         <div class="col-md-12">
           <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">Home Automation Ideas</h1>
+            <h1 class="card-title my-2 mt-md-0">2FA and Minecraft Server</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>My house has a bevy of Z-Wave devices, plus a few LiFX bulbs. This has allowed for some fairly fun automations:          When the garage door opens, a tilt sensor attached to the door turns the ext...</p>
+              <p>Two Factor Authentication (2FA) is an additional layer of protection you can add to your Minecraft server. You should already be relying on SSH keys to access your server, but those keys can be los...</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -619,11 +619,11 @@
 
 <time
   
-  data-ts="1506291921"
+  data-ts="1435442261"
   data-df="ll"
   
 >
-  Sep 24, 2017
+  Jun 27, 2015
 </time>
 
 
@@ -632,7 +632,7 @@
                   <i class="far fa-folder-open fa-fw me-1"></i>
                   <span class="categories">
                     
-                      zwave
+                      minecraft
                   </span>
                 
               </div>
@@ -647,17 +647,17 @@
     </article>
   
     <article class="card-wrapper card">
-      <a href="/posts/jenkins-and-github-hooks/" class="post-preview row g-0 flex-md-row-reverse">
+      <a href="/posts/dsl-modem-and-power-strips/" class="post-preview row g-0 flex-md-row-reverse">
         
 
         
 
         <div class="col-md-12">
           <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">Jenkinsfile and Github hooks</h1>
+            <h1 class="card-title my-2 mt-md-0">DSL Modem and Power Strips</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>Jenkins is the juggernaut of the build pipeline ecosystem.  Its roots go back to bespoke local build pipelines and dedicated build engineers.  In present days the likes of CircleCI, CodeShip, Drone...</p>
+              <p>I had cause to call CenturyLink support recently. As one of the troubleshooting steps they seriously claimed that a power strip is not capeable of providing sufficient power to a DSL modem, and tha...</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -674,11 +674,60 @@
 
 <time
   
-  data-ts="1497736714"
+  data-ts="1422418736"
   data-df="ll"
   
 >
-  Jun 17, 2017
+  Jan 27, 2015
+</time>
+
+
+                <!-- categories -->
+                
+              </div>
+
+              
+            </div>
+            <!-- .post-meta -->
+          </div>
+          <!-- .card-body -->
+        </div>
+      </a>
+    </article>
+  
+    <article class="card-wrapper card">
+      <a href="/posts/minecraft-and-datadog-monitoring/" class="post-preview row g-0 flex-md-row-reverse">
+        
+
+        
+
+        <div class="col-md-12">
+          <div class="card-body d-flex flex-column">
+            <h1 class="card-title my-2 mt-md-0">Minecraft and Datadog Monitoring</h1>
+
+            <div class="card-text content mt-0 mb-3">
+              <p>DataDog is a nifty monitoring / statistics gathering system. It is something like a akin to a combination of Graphite / Grafana, but with a social aspect so that your team can attach discussions to...</p>
+            </div>
+
+            <div class="post-meta flex-grow-1 d-flex align-items-end">
+              <div class="me-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw me-1"></i>
+                <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1422319988"
+  data-df="ll"
+  
+>
+  Jan 26, 2015
 </time>
 
 
@@ -687,9 +736,7 @@
                   <i class="far fa-folder-open fa-fw me-1"></i>
                   <span class="categories">
                     
-                      Jenkins,
-                      Github,
-                      Jenkinsfile
+                      Minecraft
                   </span>
                 
               </div>
@@ -704,17 +751,17 @@
     </article>
   
     <article class="card-wrapper card">
-      <a href="/posts/aws-route53-failover-and-alb/" class="post-preview row g-0 flex-md-row-reverse">
+      <a href="/posts/minecraft-and-newrelic/" class="post-preview row g-0 flex-md-row-reverse">
         
 
         
 
         <div class="col-md-12">
           <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">AWS Route53 Failover and ALB</h1>
+            <h1 class="card-title my-2 mt-md-0">Minecraft and NewRelic</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>I ran across this little gotcha recently.  Scenario: A service hosted in two regions.  Each is fronted by either an ALB or ELB with an attached Autoscale group, that uses the LB healthcheck to dete...</p>
+              <p>NewRelic is an exceptionally useful tool for monitoring java applications, or at least those that deal with web or other transational workloads. I tried hooking it up to MineCraft and it doesn’t re...</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -731,11 +778,11 @@
 
 <time
   
-  data-ts="1492703485"
+  data-ts="1421468841"
   data-df="ll"
   
 >
-  Apr 20, 2017
+  Jan 16, 2015
 </time>
 
 
@@ -744,9 +791,7 @@
                   <i class="far fa-folder-open fa-fw me-1"></i>
                   <span class="categories">
                     
-                      aws,
-                      r53,
-                      alb
+                      Minecraft
                   </span>
                 
               </div>
@@ -761,17 +806,17 @@
     </article>
   
     <article class="card-wrapper card">
-      <a href="/posts/cloud-init-with-centos7-and-chef/" class="post-preview row g-0 flex-md-row-reverse">
+      <a href="/posts/minecraft-and-systemd/" class="post-preview row g-0 flex-md-row-reverse">
         
 
         
 
         <div class="col-md-12">
           <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">Cloud-Init with CentOS7, Chef, and SELinux</h1>
+            <h1 class="card-title my-2 mt-md-0">Minecraft and SystemD</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>The CentOS 7 AMI in Amazon comes with Cloud-Init (cloud-init-0.7.5-10.el7.centos.1.x86_64). This is quite handy as it assists in automating several bootup tasks. One of these tasks is to install an...</p>
+              <p>In the first installment I launched a basic Minecraft service on CentOS7. However, a proper service should not be run from the command line, instead it should be controlled by the system service da...</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -788,11 +833,121 @@
 
 <time
   
-  data-ts="1465444620"
+  data-ts="1421036493"
   data-df="ll"
   
 >
-  Jun  8, 2016
+  Jan 11, 2015
+</time>
+
+
+                <!-- categories -->
+                
+                  <i class="far fa-folder-open fa-fw me-1"></i>
+                  <span class="categories">
+                    
+                      minecraft
+                  </span>
+                
+              </div>
+
+              
+            </div>
+            <!-- .post-meta -->
+          </div>
+          <!-- .card-body -->
+        </div>
+      </a>
+    </article>
+  
+    <article class="card-wrapper card">
+      <a href="/posts/minecraft-server-in-aws-done-too-well/" class="post-preview row g-0 flex-md-row-reverse">
+        
+
+        
+
+        <div class="col-md-12">
+          <div class="card-body d-flex flex-column">
+            <h1 class="card-title my-2 mt-md-0">Minecraft Server in AWS Done Too Well</h1>
+
+            <div class="card-text content mt-0 mb-3">
+              <p>A new Server  This series will go through how to host a MineCraft server, and go totally overboard on the configuration/management of it. I’ll be integrating a variety of management/monitoring tool...</p>
+            </div>
+
+            <div class="post-meta flex-grow-1 d-flex align-items-end">
+              <div class="me-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw me-1"></i>
+                <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1420956220"
+  data-df="ll"
+  
+>
+  Jan 10, 2015
+</time>
+
+
+                <!-- categories -->
+                
+                  <i class="far fa-folder-open fa-fw me-1"></i>
+                  <span class="categories">
+                    
+                      Minecraft
+                  </span>
+                
+              </div>
+
+              
+            </div>
+            <!-- .post-meta -->
+          </div>
+          <!-- .card-body -->
+        </div>
+      </a>
+    </article>
+  
+    <article class="card-wrapper card">
+      <a href="/posts/ec2-classiclink-and-elbs/" class="post-preview row g-0 flex-md-row-reverse">
+        
+
+        
+
+        <div class="col-md-12">
+          <div class="card-body d-flex flex-column">
+            <h1 class="card-title my-2 mt-md-0">EC2 ClassicLink and ELBs</h1>
+
+            <div class="card-text content mt-0 mb-3">
+              <p>I was looking at EC2 ClassicLink today. It is going to make VPC migrations much easier.  Some things I noticed:     Connectivity to external-facing ELBs only works if the ELBs have ‘world’ incoming...</p>
+            </div>
+
+            <div class="post-meta flex-grow-1 d-flex align-items-end">
+              <div class="me-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw me-1"></i>
+                <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1420848482"
+  data-df="ll"
+  
+>
+  Jan  9, 2015
 </time>
 
 
@@ -802,8 +957,7 @@
                   <span class="categories">
                     
                       AWS,
-                      Chef,
-                      Cloud-Init
+                      VPC
                   </span>
                 
               </div>
@@ -818,17 +972,17 @@
     </article>
   
     <article class="card-wrapper card">
-      <a href="/posts/extending-aws-instance-trust/" class="post-preview row g-0 flex-md-row-reverse">
+      <a href="/posts/papertrailapp-and-routerboard/" class="post-preview row g-0 flex-md-row-reverse">
         
 
         
 
         <div class="col-md-12">
           <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">Extending AWS Instance trust</h1>
+            <h1 class="card-title my-2 mt-md-0">PaperTrailApp and RouterBOARD 750GL</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>All nodes in EC2 can fetch their Instance Identity Documents. This returns an AWS-signed block containing data about the instance that requested it.  This data is only available to the instance tha...</p>
+              <p>PaperTrailApp (Referral link) is a SaaS RSyslog host that currently offers 100MB/mo of capacity free.  In setting up my home network and servers I wanted to have my RouterBOARD 750GL send its logs ...</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -845,22 +999,15 @@
 
 <time
   
-  data-ts="1465184393"
+  data-ts="1420690022"
   data-df="ll"
   
 >
-  Jun  5, 2016
+  Jan  7, 2015
 </time>
 
 
                 <!-- categories -->
-                
-                  <i class="far fa-folder-open fa-fw me-1"></i>
-                  <span class="categories">
-                    
-                      AWS,
-                      Vault
-                  </span>
                 
               </div>
 
@@ -874,17 +1021,17 @@
     </article>
   
     <article class="card-wrapper card">
-      <a href="/posts/passing-host-ip-to-ecs/" class="post-preview row g-0 flex-md-row-reverse">
+      <a href="/posts/mesos/" class="post-preview row g-0 flex-md-row-reverse">
         
 
         
 
         <div class="col-md-12">
           <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">Passing Host IP to ECS</h1>
+            <h1 class="card-title my-2 mt-md-0">Mesos, Docker and Consul</h1>
 
             <div class="card-text content mt-0 mb-3">
-              <p>I’ve been looking for a way to run Consul ‘standalone’ on a host and let multiple ECS containers connect to it.  I was hoping to find a macro I could put in a container definition but such does not...</p>
+              <p>I was playing with Mesos/Marathon + Docker recently and tried to integrate Consul.  Mesos sets the Docker container ‘name’ to a internal value that messes with the Consul Registrator, something lik...</p>
             </div>
 
             <div class="post-meta flex-grow-1 d-flex align-items-end">
@@ -901,193 +1048,15 @@
 
 <time
   
-  data-ts="1465182715"
+  data-ts="1420689310"
   data-df="ll"
   
 >
-  Jun  5, 2016
+  Jan  7, 2015
 </time>
 
 
                 <!-- categories -->
-                
-                  <i class="far fa-folder-open fa-fw me-1"></i>
-                  <span class="categories">
-                    
-                      AWS,
-                      ECS,
-                      CONSUL
-                  </span>
-                
-              </div>
-
-              
-            </div>
-            <!-- .post-meta -->
-          </div>
-          <!-- .card-body -->
-        </div>
-      </a>
-    </article>
-  
-    <article class="card-wrapper card">
-      <a href="/posts/chef-too-big-for-the-kitchen/" class="post-preview row g-0 flex-md-row-reverse">
-        
-
-        
-
-        <div class="col-md-12">
-          <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">Chef too big for the Kitchen</h1>
-
-            <div class="card-text content mt-0 mb-3">
-              <p>While pondering running a full ‘ride-the-wave’ auto-scaling solution in AWS, I looked closely at my Chef installation.  The environment is very Chef-heavy with fairly generic AMI that runs a slew o...</p>
-            </div>
-
-            <div class="post-meta flex-grow-1 d-flex align-items-end">
-              <div class="me-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw me-1"></i>
-                <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1460986748"
-  data-df="ll"
-  
->
-  Apr 18, 2016
-</time>
-
-
-                <!-- categories -->
-                
-                  <i class="far fa-folder-open fa-fw me-1"></i>
-                  <span class="categories">
-                    
-                      chef,
-                      packer,
-                      docker
-                  </span>
-                
-              </div>
-
-              
-            </div>
-            <!-- .post-meta -->
-          </div>
-          <!-- .card-body -->
-        </div>
-      </a>
-    </article>
-  
-    <article class="card-wrapper card">
-      <a href="/posts/aws-ecs-and-docker-exit-137/" class="post-preview row g-0 flex-md-row-reverse">
-        
-
-        
-
-        <div class="col-md-12">
-          <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">AWS ECS and Docker exit (137)</h1>
-
-            <div class="card-text content mt-0 mb-3">
-              <p>I ran into this the other day, my ECS instances were dieing off and docker ps showed Exited (137) About a minute ago. Looking at docker inspect I noticed:      &quot;State&quot;: { 	 &quot;FinishedAt&quot;: &quot;2015-09-2...</p>
-            </div>
-
-            <div class="post-meta flex-grow-1 d-flex align-items-end">
-              <div class="me-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw me-1"></i>
-                <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1442974780"
-  data-df="ll"
-  
->
-  Sep 22, 2015
-</time>
-
-
-                <!-- categories -->
-                
-                  <i class="far fa-folder-open fa-fw me-1"></i>
-                  <span class="categories">
-                    
-                      AWS,
-                      Docker,
-                      ECS
-                  </span>
-                
-              </div>
-
-              
-            </div>
-            <!-- .post-meta -->
-          </div>
-          <!-- .card-body -->
-        </div>
-      </a>
-    </article>
-  
-    <article class="card-wrapper card">
-      <a href="/posts/carl-jrs/" class="post-preview row g-0 flex-md-row-reverse">
-        
-
-        
-
-        <div class="col-md-12">
-          <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">Carl's Jr, SPF and AWS</h1>
-
-            <div class="card-text content mt-0 mb-3">
-              <p>Carl’s Jr has a nifty nutritional calculator / order planner at http://www.carlsjr.com/menu/nutritional_calculator.  It lets you fully customize your meal, then lets you print or email your order t...</p>
-            </div>
-
-            <div class="post-meta flex-grow-1 d-flex align-items-end">
-              <div class="me-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw me-1"></i>
-                <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-<time
-  
-  data-ts="1442806441"
-  data-df="ll"
-  
->
-  Sep 20, 2015
-</time>
-
-
-                <!-- categories -->
-                
-                  <i class="far fa-folder-open fa-fw me-1"></i>
-                  <span class="categories">
-                    
-                      SPF,
-                      AWS
-                  </span>
                 
               </div>
 
@@ -1111,8 +1080,8 @@
     <!-- left arrow -->
     
 
-    <li class="page-item disabled">
-      <a class="page-link" href="#" aria-label="previous-page">
+    <li class="page-item ">
+      <a class="page-link" href="/" aria-label="previous-page">
         <i class="fas fa-angle-left"></i>
       </a>
     </li>
@@ -1132,7 +1101,7 @@
 
       
         <!-- show number -->
-        <li class="page-item  active">
+        <li class="page-item ">
           <a
             class="page-link"
             href="/"
@@ -1150,7 +1119,7 @@
 
       
         <!-- show number -->
-        <li class="page-item ">
+        <li class="page-item  active">
           <a
             class="page-link"
             href="/page2"
@@ -1179,7 +1148,7 @@
 
     <!-- mobile pagination -->
     <li class="page-index align-middle">
-      <span>1</span>
+      <span>2</span>
       <span class="text-muted">/ 3</span>
     </li>
 
@@ -1187,7 +1156,7 @@
     
 
     <li class="page-item ">
-      <a class="page-link" href="/page2" aria-label="next-page">
+      <a class="page-link" href="/page3" aria-label="next-page">
         <i class="fas fa-angle-right"></i>
       </a>
     </li>

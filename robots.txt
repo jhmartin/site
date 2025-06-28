@@ -1,4 +1,5 @@
 User-agent: *
-Disallow: 
 
-Sitemap: http://www.toger.us/sitemap.xml 
+Disallow: /norobots/
+
+Sitemap: /sitemap.xml

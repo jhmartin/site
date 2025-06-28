@@ -1,0 +1,157 @@
+
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>/</id>
+  <title>Toger Blog</title>
+  <subtitle>Random posts about tech</subtitle>
+  <updated>2025-06-27T17:39:46-07:00</updated>
+  <author>
+    <name>Jason Martin</name>
+    <uri>/</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="/feed.xml"/>
+  <link rel="alternate" type="text/html" hreflang="en"
+    href="/"/>
+  <generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator>
+  <rights> © 2025 Jason Martin </rights>
+  <icon>/assets/img/favicons/favicon.ico</icon>
+  <logo>/assets/img/favicons/favicon-96x96.png</logo>
+
+
+  
+  <entry>
+    <title>DNS as a Service Discovery load balancer</title>
+    <link href="/posts/dns-as-a-load-balancer/" rel="alternate" type="text/html" title="DNS as a Service Discovery load balancer" />
+    <published>2018-08-19T13:38:22-07:00</published>
+  
+    <updated>2018-08-19T13:38:22-07:00</updated>
+  
+    <id>/posts/dns-as-a-load-balancer/</id>
+    <content type="text/html" src="/posts/dns-as-a-load-balancer/" />
+    <author>
+      <name>Jason Martin</name>
+    </author>
+
+  
+    
+    <category term="service-discovery" />
+    
+    <category term="DNS" />
+    
+  
+
+  <summary>DNS makes for a deceptively easy service-discovery platform. Various platforms (such as  Docker swarm, Amazon Auto-Naming purport to provide a trivial to use service discovery mechanism. DNS is handled in most applications, so has the allure of working with legacy applications with zero integration work. Contrast DNS with purpose-built service discovery mechanisms such as Consul, Zookeeper, and...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>Home Automation Ideas</title>
+    <link href="/posts/home-automation-ideas/" rel="alternate" type="text/html" title="Home Automation Ideas" />
+    <published>2017-09-24T15:25:21-07:00</published>
+  
+    <updated>2017-09-24T15:25:21-07:00</updated>
+  
+    <id>/posts/home-automation-ideas/</id>
+    <content type="text/html" src="/posts/home-automation-ideas/" />
+    <author>
+      <name>Jason Martin</name>
+    </author>
+
+  
+    
+    <category term="zwave" />
+    
+  
+
+  <summary>My house has a bevy of Z-Wave devices, plus a few LiFX bulbs. This has allowed for some fairly fun automations:          When the garage door opens, a tilt sensor attached to the door turns the external bulbs on to bright-white, and activates the garage internal lights.  The outside lights revert to normal ‘dim 2700K’ after 3 minutes, and the garage lights goes off after about 10 minutes.      ...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>Jenkinsfile and Github hooks</title>
+    <link href="/posts/jenkins-and-github-hooks/" rel="alternate" type="text/html" title="Jenkinsfile and Github hooks" />
+    <published>2017-06-17T14:58:34-07:00</published>
+  
+    <updated>2017-06-17T14:58:34-07:00</updated>
+  
+    <id>/posts/jenkins-and-github-hooks/</id>
+    <content type="text/html" src="/posts/jenkins-and-github-hooks/" />
+    <author>
+      <name>Jason Martin</name>
+    </author>
+
+  
+    
+    <category term="Jenkins" />
+    
+    <category term="Github" />
+    
+    <category term="Jenkinsfile" />
+    
+  
+
+  <summary>Jenkins is the juggernaut of the build pipeline ecosystem.  Its roots go back to bespoke local build pipelines and dedicated build engineers.  In present days the likes of CircleCI, CodeShip, Drone.io have started nipping at Jenkins heels.  One of the significant differences is that, historically, Jenkins builds are configured inside Jenkins. The contemporary alternatives generally favor a SCM-...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>AWS Route53 Failover and ALB</title>
+    <link href="/posts/aws-route53-failover-and-alb/" rel="alternate" type="text/html" title="AWS Route53 Failover and ALB" />
+    <published>2017-04-20T08:51:25-07:00</published>
+  
+    <updated>2017-04-20T08:51:25-07:00</updated>
+  
+    <id>/posts/aws-route53-failover-and-alb/</id>
+    <content type="text/html" src="/posts/aws-route53-failover-and-alb/" />
+    <author>
+      <name>Jason Martin</name>
+    </author>
+
+  
+    
+    <category term="aws" />
+    
+    <category term="r53" />
+    
+    <category term="alb" />
+    
+  
+
+  <summary>I ran across this little gotcha recently.  Scenario: A service hosted in two regions.  Each is fronted by either an ALB or ELB with an attached Autoscale group, that uses the LB healthcheck to determine instance health.  A Route53 configuration balances trafic between the two. Route53 ‘Evaluate Target Health’ is set to yes and no healthcheck is attached.  Under the ELB, if the backend applicati...</summary>
+
+  </entry>
+
+  
+  <entry>
+    <title>Cloud-Init with CentOS7, Chef, and SELinux</title>
+    <link href="/posts/cloud-init-with-centos7-and-chef/" rel="alternate" type="text/html" title="Cloud-Init with CentOS7, Chef, and SELinux" />
+    <published>2016-06-08T20:57:00-07:00</published>
+  
+    <updated>2016-06-08T20:57:00-07:00</updated>
+  
+    <id>/posts/cloud-init-with-centos7-and-chef/</id>
+    <content type="text/html" src="/posts/cloud-init-with-centos7-and-chef/" />
+    <author>
+      <name>Jason Martin</name>
+    </author>
+
+  
+    
+    <category term="AWS" />
+    
+    <category term="Chef" />
+    
+    <category term="Cloud-Init" />
+    
+  
+
+  <summary>The CentOS 7 AMI in Amazon comes with Cloud-Init (cloud-init-0.7.5-10.el7.centos.1.x86_64). This is quite handy as it assists in automating several bootup tasks. One of these tasks is to install and bootstrap Chef.  Unforunately, when SELinux is installed the Chef handler will fail.  Sample error: [CLOUDINIT] util.py[DEBUG]: Restoring selinux mode for /var/lib (recursive=True) [CLOUDINIT] util....</summary>
+
+  </entry>
+
+</feed>
+
+

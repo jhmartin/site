@@ -1,17 +1,17 @@
 
 
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <id>http://0.0.0.0:4000/</id>
+  <id>https://www.toger.us/</id>
   <title>Toger Blog</title>
   <subtitle>Random posts about tech</subtitle>
-  <updated>2025-06-27T18:51:27-07:00</updated>
+  <updated>2025-06-27T19:43:28-07:00</updated>
   <author>
     <name>Jason Martin</name>
-    <uri>http://0.0.0.0:4000/</uri>
+    <uri>https://www.toger.us/</uri>
   </author>
-  <link rel="self" type="application/atom+xml" href="http://0.0.0.0:4000/feed.xml"/>
+  <link rel="self" type="application/atom+xml" href="https://www.toger.us/feed.xml"/>
   <link rel="alternate" type="text/html" hreflang="en"
-    href="http://0.0.0.0:4000/"/>
+    href="https://www.toger.us/"/>
   <generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator>
   <rights> © 2025 Jason Martin </rights>
   <icon>/assets/img/favicons/favicon.ico</icon>
@@ -21,13 +21,13 @@
   
   <entry>
     <title>Franklin Whole Home network behavior</title>
-    <link href="http://0.0.0.0:4000/posts/franklinwholehome-network-behavior/" rel="alternate" type="text/html" title="Franklin Whole Home network behavior" />
+    <link href="https://www.toger.us/posts/franklinwholehome-network-behavior/" rel="alternate" type="text/html" title="Franklin Whole Home network behavior" />
     <published>2025-06-27T13:38:22-07:00</published>
   
     <updated>2025-06-27T13:38:22-07:00</updated>
   
-    <id>http://0.0.0.0:4000/posts/franklinwholehome-network-behavior/</id>
-    <content type="text/html" src="http://0.0.0.0:4000/posts/franklinwholehome-network-behavior/" />
+    <id>https://www.toger.us/posts/franklinwholehome-network-behavior/</id>
+    <content type="text/html" src="https://www.toger.us/posts/franklinwholehome-network-behavior/" />
     <author>
       <name>Jason Martin</name>
     </author>
@@ -47,13 +47,13 @@
   
   <entry>
     <title>DNS as a Service Discovery load balancer</title>
-    <link href="http://0.0.0.0:4000/posts/dns-as-a-load-balancer/" rel="alternate" type="text/html" title="DNS as a Service Discovery load balancer" />
+    <link href="https://www.toger.us/posts/dns-as-a-load-balancer/" rel="alternate" type="text/html" title="DNS as a Service Discovery load balancer" />
     <published>2018-08-19T13:38:22-07:00</published>
   
     <updated>2018-08-19T13:38:22-07:00</updated>
   
-    <id>http://0.0.0.0:4000/posts/dns-as-a-load-balancer/</id>
-    <content type="text/html" src="http://0.0.0.0:4000/posts/dns-as-a-load-balancer/" />
+    <id>https://www.toger.us/posts/dns-as-a-load-balancer/</id>
+    <content type="text/html" src="https://www.toger.us/posts/dns-as-a-load-balancer/" />
     <author>
       <name>Jason Martin</name>
     </author>
@@ -73,13 +73,13 @@
   
   <entry>
     <title>Home Automation Ideas</title>
-    <link href="http://0.0.0.0:4000/posts/home-automation-ideas/" rel="alternate" type="text/html" title="Home Automation Ideas" />
+    <link href="https://www.toger.us/posts/home-automation-ideas/" rel="alternate" type="text/html" title="Home Automation Ideas" />
     <published>2017-09-24T15:25:21-07:00</published>
   
     <updated>2017-09-24T15:25:21-07:00</updated>
   
-    <id>http://0.0.0.0:4000/posts/home-automation-ideas/</id>
-    <content type="text/html" src="http://0.0.0.0:4000/posts/home-automation-ideas/" />
+    <id>https://www.toger.us/posts/home-automation-ideas/</id>
+    <content type="text/html" src="https://www.toger.us/posts/home-automation-ideas/" />
     <author>
       <name>Jason Martin</name>
     </author>
@@ -97,13 +97,13 @@
   
   <entry>
     <title>Jenkinsfile and Github hooks</title>
-    <link href="http://0.0.0.0:4000/posts/jenkins-and-github-hooks/" rel="alternate" type="text/html" title="Jenkinsfile and Github hooks" />
+    <link href="https://www.toger.us/posts/jenkins-and-github-hooks/" rel="alternate" type="text/html" title="Jenkinsfile and Github hooks" />
     <published>2017-06-17T14:58:34-07:00</published>
   
     <updated>2017-06-17T14:58:34-07:00</updated>
   
-    <id>http://0.0.0.0:4000/posts/jenkins-and-github-hooks/</id>
-    <content type="text/html" src="http://0.0.0.0:4000/posts/jenkins-and-github-hooks/" />
+    <id>https://www.toger.us/posts/jenkins-and-github-hooks/</id>
+    <content type="text/html" src="https://www.toger.us/posts/jenkins-and-github-hooks/" />
     <author>
       <name>Jason Martin</name>
     </author>
@@ -125,13 +125,13 @@
   
   <entry>
     <title>AWS Route53 Failover and ALB</title>
-    <link href="http://0.0.0.0:4000/posts/aws-route53-failover-and-alb/" rel="alternate" type="text/html" title="AWS Route53 Failover and ALB" />
+    <link href="https://www.toger.us/posts/aws-route53-failover-and-alb/" rel="alternate" type="text/html" title="AWS Route53 Failover and ALB" />
     <published>2017-04-20T08:51:25-07:00</published>
   
     <updated>2017-04-20T08:51:25-07:00</updated>
   
-    <id>http://0.0.0.0:4000/posts/aws-route53-failover-and-alb/</id>
-    <content type="text/html" src="http://0.0.0.0:4000/posts/aws-route53-failover-and-alb/" />
+    <id>https://www.toger.us/posts/aws-route53-failover-and-alb/</id>
+    <content type="text/html" src="https://www.toger.us/posts/aws-route53-failover-and-alb/" />
     <author>
       <name>Jason Martin</name>
     </author>

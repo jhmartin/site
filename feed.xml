@@ -1,17 +1,17 @@
 
 
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <id>/</id>
+  <id>http://0.0.0.0:4000/</id>
   <title>Toger Blog</title>
   <subtitle>Random posts about tech</subtitle>
-  <updated>2025-06-27T17:39:46-07:00</updated>
+  <updated>2025-06-27T18:51:27-07:00</updated>
   <author>
     <name>Jason Martin</name>
-    <uri>/</uri>
+    <uri>http://0.0.0.0:4000/</uri>
   </author>
-  <link rel="self" type="application/atom+xml" href="/feed.xml"/>
+  <link rel="self" type="application/atom+xml" href="http://0.0.0.0:4000/feed.xml"/>
   <link rel="alternate" type="text/html" hreflang="en"
-    href="/"/>
+    href="http://0.0.0.0:4000/"/>
   <generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator>
   <rights> © 2025 Jason Martin </rights>
   <icon>/assets/img/favicons/favicon.ico</icon>
@@ -20,14 +20,40 @@
 
   
   <entry>
+    <title>Franklin Whole Home network behavior</title>
+    <link href="http://0.0.0.0:4000/posts/franklinwholehome-network-behavior/" rel="alternate" type="text/html" title="Franklin Whole Home network behavior" />
+    <published>2025-06-27T13:38:22-07:00</published>
+  
+    <updated>2025-06-27T13:38:22-07:00</updated>
+  
+    <id>http://0.0.0.0:4000/posts/franklinwholehome-network-behavior/</id>
+    <content type="text/html" src="http://0.0.0.0:4000/posts/franklinwholehome-network-behavior/" />
+    <author>
+      <name>Jason Martin</name>
+    </author>
+
+  
+    
+    <category term="solar" />
+    
+    <category term="franklinwh" />
+    
+  
+
+  <summary>I recently had a PV solar + Franklin Whole Home battery system installed. Electrically I have no complaints, working fine. However the battery connects to my WiFi, and I have complaints.    While none of these are deal-breakers, they definitely qualify as something of which I expect better for a not-inexpensive utility-certified profesionally-installed system.  The nexus of the system is the (F...</summary>
+
+  </entry>
+
+  
+  <entry>
     <title>DNS as a Service Discovery load balancer</title>
-    <link href="/posts/dns-as-a-load-balancer/" rel="alternate" type="text/html" title="DNS as a Service Discovery load balancer" />
+    <link href="http://0.0.0.0:4000/posts/dns-as-a-load-balancer/" rel="alternate" type="text/html" title="DNS as a Service Discovery load balancer" />
     <published>2018-08-19T13:38:22-07:00</published>
   
     <updated>2018-08-19T13:38:22-07:00</updated>
   
-    <id>/posts/dns-as-a-load-balancer/</id>
-    <content type="text/html" src="/posts/dns-as-a-load-balancer/" />
+    <id>http://0.0.0.0:4000/posts/dns-as-a-load-balancer/</id>
+    <content type="text/html" src="http://0.0.0.0:4000/posts/dns-as-a-load-balancer/" />
     <author>
       <name>Jason Martin</name>
     </author>
@@ -47,13 +73,13 @@
   
   <entry>
     <title>Home Automation Ideas</title>
-    <link href="/posts/home-automation-ideas/" rel="alternate" type="text/html" title="Home Automation Ideas" />
+    <link href="http://0.0.0.0:4000/posts/home-automation-ideas/" rel="alternate" type="text/html" title="Home Automation Ideas" />
     <published>2017-09-24T15:25:21-07:00</published>
   
     <updated>2017-09-24T15:25:21-07:00</updated>
   
-    <id>/posts/home-automation-ideas/</id>
-    <content type="text/html" src="/posts/home-automation-ideas/" />
+    <id>http://0.0.0.0:4000/posts/home-automation-ideas/</id>
+    <content type="text/html" src="http://0.0.0.0:4000/posts/home-automation-ideas/" />
     <author>
       <name>Jason Martin</name>
     </author>
@@ -71,13 +97,13 @@
   
   <entry>
     <title>Jenkinsfile and Github hooks</title>
-    <link href="/posts/jenkins-and-github-hooks/" rel="alternate" type="text/html" title="Jenkinsfile and Github hooks" />
+    <link href="http://0.0.0.0:4000/posts/jenkins-and-github-hooks/" rel="alternate" type="text/html" title="Jenkinsfile and Github hooks" />
     <published>2017-06-17T14:58:34-07:00</published>
   
     <updated>2017-06-17T14:58:34-07:00</updated>
   
-    <id>/posts/jenkins-and-github-hooks/</id>
-    <content type="text/html" src="/posts/jenkins-and-github-hooks/" />
+    <id>http://0.0.0.0:4000/posts/jenkins-and-github-hooks/</id>
+    <content type="text/html" src="http://0.0.0.0:4000/posts/jenkins-and-github-hooks/" />
     <author>
       <name>Jason Martin</name>
     </author>
@@ -99,13 +125,13 @@
   
   <entry>
     <title>AWS Route53 Failover and ALB</title>
-    <link href="/posts/aws-route53-failover-and-alb/" rel="alternate" type="text/html" title="AWS Route53 Failover and ALB" />
+    <link href="http://0.0.0.0:4000/posts/aws-route53-failover-and-alb/" rel="alternate" type="text/html" title="AWS Route53 Failover and ALB" />
     <published>2017-04-20T08:51:25-07:00</published>
   
     <updated>2017-04-20T08:51:25-07:00</updated>
   
-    <id>/posts/aws-route53-failover-and-alb/</id>
-    <content type="text/html" src="/posts/aws-route53-failover-and-alb/" />
+    <id>http://0.0.0.0:4000/posts/aws-route53-failover-and-alb/</id>
+    <content type="text/html" src="http://0.0.0.0:4000/posts/aws-route53-failover-and-alb/" />
     <author>
       <name>Jason Martin</name>
     </author>
@@ -121,34 +147,6 @@
   
 
   <summary>I ran across this little gotcha recently.  Scenario: A service hosted in two regions.  Each is fronted by either an ALB or ELB with an attached Autoscale group, that uses the LB healthcheck to determine instance health.  A Route53 configuration balances trafic between the two. Route53 ‘Evaluate Target Health’ is set to yes and no healthcheck is attached.  Under the ELB, if the backend applicati...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>Cloud-Init with CentOS7, Chef, and SELinux</title>
-    <link href="/posts/cloud-init-with-centos7-and-chef/" rel="alternate" type="text/html" title="Cloud-Init with CentOS7, Chef, and SELinux" />
-    <published>2016-06-08T20:57:00-07:00</published>
-  
-    <updated>2016-06-08T20:57:00-07:00</updated>
-  
-    <id>/posts/cloud-init-with-centos7-and-chef/</id>
-    <content type="text/html" src="/posts/cloud-init-with-centos7-and-chef/" />
-    <author>
-      <name>Jason Martin</name>
-    </author>
-
-  
-    
-    <category term="AWS" />
-    
-    <category term="Chef" />
-    
-    <category term="Cloud-Init" />
-    
-  
-
-  <summary>The CentOS 7 AMI in Amazon comes with Cloud-Init (cloud-init-0.7.5-10.el7.centos.1.x86_64). This is quite handy as it assists in automating several bootup tasks. One of these tasks is to install and bootstrap Chef.  Unforunately, when SELinux is installed the Chef handler will fail.  Sample error: [CLOUDINIT] util.py[DEBUG]: Restoring selinux mode for /var/lib (recursive=True) [CLOUDINIT] util....</summary>
 
   </entry>
 

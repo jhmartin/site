@@ -1,5 +1,13 @@
 [
   {
+    "title": "Franklin Whole Home network behavior",
+    "url": "/posts/franklinwholehome-network-behavior/",
+    "categories": "solar, franklinwh",
+    "tags": "",
+    "date": "2025-06-27 13:38:22 -0700",
+    "content": "I recently had a PV solar + Franklin Whole Home battery system installed. Electrically I have no complaints, working fine. However the battery connects to my WiFi, and I have complaints.    While n..."
+  },
+  {
     "title": "DNS as a Service Discovery load balancer",
     "url": "/posts/dns-as-a-load-balancer/",
     "categories": "service-discovery, DNS",

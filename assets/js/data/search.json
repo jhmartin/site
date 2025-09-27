@@ -1,0 +1,180 @@
+[
+  {
+    "title": "Franklin Whole Home network behavior",
+    "url": "/posts/franklinwholehome-network-behavior/",
+    "categories": "solar, franklinwh",
+    "tags": "",
+    "date": "2025-06-27 13:38:22 -0700",
+    "content": "I recently had a PV solar + Franklin Whole Home battery system installed. Electrically I have no complaints, working fine. However the battery connects to my WiFi, and I have complaints.    While n..."
+  },
+  {
+    "title": "DNS as a Service Discovery load balancer",
+    "url": "/posts/dns-as-a-load-balancer/",
+    "categories": "service-discovery, DNS",
+    "tags": "",
+    "date": "2018-08-19 13:38:22 -0700",
+    "content": "DNS makes for a deceptively easy service-discovery platform. Various platforms (such as  Docker swarm, Amazon Auto-Naming purport to provide a trivial to use service discovery mechanism. DNS is han..."
+  },
+  {
+    "title": "Home Automation Ideas",
+    "url": "/posts/home-automation-ideas/",
+    "categories": "zwave",
+    "tags": "",
+    "date": "2017-09-24 15:25:21 -0700",
+    "content": "My house has a bevy of Z-Wave devices, plus a few LiFX bulbs. This has allowed for some fairly fun automations:          When the garage door opens, a tilt sensor attached to the door turns the ext..."
+  },
+  {
+    "title": "Jenkinsfile and Github hooks",
+    "url": "/posts/jenkins-and-github-hooks/",
+    "categories": "Jenkins, Github, Jenkinsfile",
+    "tags": "",
+    "date": "2017-06-17 14:58:34 -0700",
+    "content": "Jenkins is the juggernaut of the build pipeline ecosystem.  Its roots go back to bespoke local build pipelines and dedicated build engineers.  In present days the likes of CircleCI, CodeShip, Drone..."
+  },
+  {
+    "title": "AWS Route53 Failover and ALB",
+    "url": "/posts/aws-route53-failover-and-alb/",
+    "categories": "aws, r53, alb",
+    "tags": "",
+    "date": "2017-04-20 08:51:25 -0700",
+    "content": "I ran across this little gotcha recently.  Scenario: A service hosted in two regions.  Each is fronted by either an ALB or ELB with an attached Autoscale group, that uses the LB healthcheck to dete..."
+  },
+  {
+    "title": "Cloud-Init with CentOS7, Chef, and SELinux",
+    "url": "/posts/cloud-init-with-centos7-and-chef/",
+    "categories": "AWS, Chef, Cloud-Init",
+    "tags": "",
+    "date": "2016-06-08 20:57:00 -0700",
+    "content": "The CentOS 7 AMI in Amazon comes with Cloud-Init (cloud-init-0.7.5-10.el7.centos.1.x86_64). This is quite handy as it assists in automating several bootup tasks. One of these tasks is to install an..."
+  },
+  {
+    "title": "Extending AWS Instance trust",
+    "url": "/posts/extending-aws-instance-trust/",
+    "categories": "AWS, Vault",
+    "tags": "",
+    "date": "2016-06-05 20:39:53 -0700",
+    "content": "All nodes in EC2 can fetch their Instance Identity Documents. This returns an AWS-signed block containing data about the instance that requested it.  This data is only available to the instance tha..."
+  },
+  {
+    "title": "Passing Host IP to ECS",
+    "url": "/posts/passing-host-ip-to-ecs/",
+    "categories": "AWS, ECS, CONSUL",
+    "tags": "",
+    "date": "2016-06-05 20:11:55 -0700",
+    "content": "I’ve been looking for a way to run Consul ‘standalone’ on a host and let multiple ECS containers connect to it.  I was hoping to find a macro I could put in a container definition but such does not..."
+  },
+  {
+    "title": "Chef too big for the Kitchen",
+    "url": "/posts/chef-too-big-for-the-kitchen/",
+    "categories": "chef, packer, docker",
+    "tags": "",
+    "date": "2016-04-18 06:39:08 -0700",
+    "content": "While pondering running a full ‘ride-the-wave’ auto-scaling solution in AWS, I looked closely at my Chef installation.  The environment is very Chef-heavy with fairly generic AMI that runs a slew o..."
+  },
+  {
+    "title": "AWS ECS and Docker exit (137)",
+    "url": "/posts/aws-ecs-and-docker-exit-137/",
+    "categories": "AWS, Docker, ECS",
+    "tags": "",
+    "date": "2015-09-22 19:19:40 -0700",
+    "content": "I ran into this the other day, my ECS instances were dieing off and docker ps showed Exited (137) About a minute ago. Looking at docker inspect I noticed:      &quot;State&quot;: { 	 &quot;FinishedAt&quot;: &quot;2015-09-2..."
+  },
+  {
+    "title": "Carl's Jr, SPF and AWS",
+    "url": "/posts/carl-jrs/",
+    "categories": "SPF, AWS",
+    "tags": "",
+    "date": "2015-09-20 20:34:01 -0700",
+    "content": "Carl’s Jr has a nifty nutritional calculator / order planner at http://www.carlsjr.com/menu/nutritional_calculator.  It lets you fully customize your meal, then lets you print or email your order t..."
+  },
+  {
+    "title": "Varnish Cache and req.backend.healthy",
+    "url": "/posts/varnish-cache-and-req-dot-backend-dot-healthy/",
+    "categories": "Varnish",
+    "tags": "",
+    "date": "2015-06-27 15:39:50 -0700",
+    "content": "An odd issue I ran into the other day: I had a Varnish 3 instance that had logic hinging on req.backend.healthy to show a special error page if all the backends were down. That logic inexpliciably ..."
+  },
+  {
+    "title": "2FA and Minecraft Server",
+    "url": "/posts/2fa-and-minecraft-server/",
+    "categories": "minecraft",
+    "tags": "",
+    "date": "2015-06-27 14:57:41 -0700",
+    "content": "Two Factor Authentication (2FA) is an additional layer of protection you can add to your Minecraft server. You should already be relying on SSH keys to access your server, but those keys can be los..."
+  },
+  {
+    "title": "DSL Modem and Power Strips",
+    "url": "/posts/dsl-modem-and-power-strips/",
+    "categories": "",
+    "tags": "",
+    "date": "2015-01-27 20:18:56 -0800",
+    "content": "I had cause to call CenturyLink support recently. As one of the troubleshooting steps they seriously claimed that a power strip is not capeable of providing sufficient power to a DSL modem, and tha..."
+  },
+  {
+    "title": "Minecraft and Datadog Monitoring",
+    "url": "/posts/minecraft-and-datadog-monitoring/",
+    "categories": "Minecraft",
+    "tags": "",
+    "date": "2015-01-26 16:53:08 -0800",
+    "content": "DataDog is a nifty monitoring / statistics gathering system. It is something like a akin to a combination of Graphite / Grafana, but with a social aspect so that your team can attach discussions to..."
+  },
+  {
+    "title": "Minecraft and NewRelic",
+    "url": "/posts/minecraft-and-newrelic/",
+    "categories": "Minecraft",
+    "tags": "",
+    "date": "2015-01-16 20:27:21 -0800",
+    "content": "NewRelic is an exceptionally useful tool for monitoring java applications, or at least those that deal with web or other transational workloads. I tried hooking it up to MineCraft and it doesn’t re..."
+  },
+  {
+    "title": "Minecraft and SystemD",
+    "url": "/posts/minecraft-and-systemd/",
+    "categories": "minecraft",
+    "tags": "",
+    "date": "2015-01-11 20:21:33 -0800",
+    "content": "In the first installment I launched a basic Minecraft service on CentOS7. However, a proper service should not be run from the command line, instead it should be controlled by the system service da..."
+  },
+  {
+    "title": "Minecraft Server in AWS Done Too Well",
+    "url": "/posts/minecraft-server-in-aws-done-too-well/",
+    "categories": "Minecraft",
+    "tags": "",
+    "date": "2015-01-10 22:03:40 -0800",
+    "content": "A new Server  This series will go through how to host a MineCraft server, and go totally overboard on the configuration/management of it. I’ll be integrating a variety of management/monitoring tool..."
+  },
+  {
+    "title": "EC2 ClassicLink and ELBs",
+    "url": "/posts/ec2-classiclink-and-elbs/",
+    "categories": "AWS, VPC",
+    "tags": "",
+    "date": "2015-01-09 16:08:02 -0800",
+    "content": "I was looking at EC2 ClassicLink today. It is going to make VPC migrations much easier.  Some things I noticed:     Connectivity to external-facing ELBs only works if the ELBs have ‘world’ incoming..."
+  },
+  {
+    "title": "PaperTrailApp and RouterBOARD 750GL",
+    "url": "/posts/papertrailapp-and-routerboard/",
+    "categories": "",
+    "tags": "",
+    "date": "2015-01-07 20:07:02 -0800",
+    "content": "PaperTrailApp (Referral link) is a SaaS RSyslog host that currently offers 100MB/mo of capacity free.  In setting up my home network and servers I wanted to have my RouterBOARD 750GL send its logs ..."
+  },
+  {
+    "title": "Mesos, Docker and Consul",
+    "url": "/posts/mesos/",
+    "categories": "",
+    "tags": "",
+    "date": "2015-01-07 19:55:10 -0800",
+    "content": "I was playing with Mesos/Marathon + Docker recently and tried to integrate Consul.  Mesos sets the Docker container ‘name’ to a internal value that messes with the Consul Registrator, something lik..."
+  },
+  {
+    "title": "Home Network Plan",
+    "url": "/posts/home-network-plan/",
+    "categories": "",
+    "tags": "",
+    "date": "2015-01-03 20:17:22 -0800",
+    "content": "I have several daughters, the oldest of which is just becoming familiar with the Internet.  Her grandparents also bought her a WiFi tablet for Christmas.  I know that keeping an eye on her usage is..."
+  }
+  
+]
+

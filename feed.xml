@@ -4,7 +4,7 @@
   <id>https://www.toger.us/</id>
   <title>Toger Blog</title>
   <subtitle>Random posts about tech</subtitle>
-  <updated>2025-09-27T08:49:27-07:00</updated>
+  <updated>2025-09-27T14:09:01-07:00</updated>
   <author>
     <name>Jason Martin</name>
     <uri>https://www.toger.us/</uri>
@@ -17,6 +17,30 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>'Just' is banned as a unit of effort</title>
+    <link href="https://www.toger.us/posts/just-a-unit-of-effort/" rel="alternate" type="text/html" title="&amp;apos;Just&amp;apos; is banned as a unit of effort" />
+    <published>2025-09-27T13:38:22-07:00</published>
+  
+    <updated>2025-09-27T13:38:22-07:00</updated>
+  
+    <id>https://www.toger.us/posts/just-a-unit-of-effort/</id>
+    <content type="text/html" src="https://www.toger.us/posts/just-a-unit-of-effort/" />
+    <author>
+      <name>Jason Martin</name>
+    </author>
+
+  
+    
+    <category term="scrum" />
+    
+  
+
+  <summary>Sitting in a SCRUM meeting, I hear my pet peeve. “I just have to …” someone says. My internal alarm bells go off – NO!  I have heard this refrain many times. It rarely ends well.    “Just” is a word we use to trick ourselves that our environment is not complicated.  Yes, the concept of the change is simple. The core logic that needs to change is not cimplicated. However the implementation rarel...</summary>
+
+  </entry>
 
   
   <entry>
@@ -119,34 +143,6 @@
   
 
   <summary>Jenkins is the juggernaut of the build pipeline ecosystem.  Its roots go back to bespoke local build pipelines and dedicated build engineers.  In present days the likes of CircleCI, CodeShip, Drone.io have started nipping at Jenkins heels.  One of the significant differences is that, historically, Jenkins builds are configured inside Jenkins. The contemporary alternatives generally favor a SCM-...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>AWS Route53 Failover and ALB</title>
-    <link href="https://www.toger.us/posts/aws-route53-failover-and-alb/" rel="alternate" type="text/html" title="AWS Route53 Failover and ALB" />
-    <published>2017-04-20T08:51:25-07:00</published>
-  
-    <updated>2017-04-20T08:51:25-07:00</updated>
-  
-    <id>https://www.toger.us/posts/aws-route53-failover-and-alb/</id>
-    <content type="text/html" src="https://www.toger.us/posts/aws-route53-failover-and-alb/" />
-    <author>
-      <name>Jason Martin</name>
-    </author>
-
-  
-    
-    <category term="aws" />
-    
-    <category term="r53" />
-    
-    <category term="alb" />
-    
-  
-
-  <summary>I ran across this little gotcha recently.  Scenario: A service hosted in two regions.  Each is fronted by either an ALB or ELB with an attached Autoscale group, that uses the LB healthcheck to determine instance health.  A Route53 configuration balances trafic between the two. Route53 ‘Evaluate Target Health’ is set to yes and no healthcheck is attached.  Under the ELB, if the backend applicati...</summary>
 
   </entry>
 

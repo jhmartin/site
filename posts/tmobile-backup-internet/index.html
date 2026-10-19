@@ -635,7 +635,7 @@
   class="readtime"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="739 words"
+  title="741 words"
 >
   <em>4 min</em> read</span>
 
@@ -666,7 +666,7 @@
   <li>I configured static routes for the two ISP DNS servers destined for ISP.</li>
 </ul>
 
-<p>I then Claude’d a script that runs every 30s and attempts DNS resolution via the ISP DNS servers. If both fail it enables the 5GBackupRoute which causes traffic to be routed out to TMO instead of ISP. The static routes are there to avoid Mikrotik hitting ISP DNS servers via TMO and flap the connection. When ISP fails the DNS resolution act fails, the new 0/0 route is activated, it has a lowe distance than ISP, so traffic is routed to TMO. With masquerading, as far as the TMO device knows, there is just one device connected.</p>
+<p>I then Claude’d a script that runs every 30s and attempts DNS resolution via the ISP DNS servers. If both fail it enables the 5GBackupRoute which causes traffic to be routed out to TMO instead of ISP. The static routes are there to avoid Mikrotik hitting ISP DNS servers via TMO and flap the connection. When ISP fails the DNS resolution fails, the TMO 0/0 route is activated, it has a lower distance than ISP, so traffic is routed to TMO. With masquerading the TMO only sees one device, as it is not aware of any advanced routing options.</p>
 
 <h1 id="caveats">Caveats</h1>
 <ul>

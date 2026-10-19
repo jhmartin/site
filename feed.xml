@@ -4,7 +4,7 @@
   <id>https://www.toger.us/</id>
   <title>Toger Blog</title>
   <subtitle>Random posts about tech</subtitle>
-  <updated>2025-09-27T14:09:01-07:00</updated>
+  <updated>2026-10-18T17:23:16-07:00</updated>
   <author>
     <name>Jason Martin</name>
     <uri>https://www.toger.us/</uri>
@@ -13,10 +13,34 @@
   <link rel="alternate" type="text/html" hreflang="en"
     href="https://www.toger.us/"/>
   <generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator>
-  <rights> © 2025 Jason Martin </rights>
+  <rights> © 2026 Jason Martin </rights>
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Tmobile backup internet failover and Mikrotik</title>
+    <link href="https://www.toger.us/posts/tmobile-backup-internet/" rel="alternate" type="text/html" title="Tmobile backup internet failover and Mikrotik" />
+    <published>2026-10-18T13:28:22-07:00</published>
+  
+    <updated>2026-10-18T13:28:22-07:00</updated>
+  
+    <id>https://www.toger.us/posts/tmobile-backup-internet/</id>
+    <content type="text/html" src="https://www.toger.us/posts/tmobile-backup-internet/" />
+    <author>
+      <name>Jason Martin</name>
+    </author>
+
+  
+    
+    <category term="mikrotik" />
+    
+  
+
+  <summary>Internet is all but a necessity today. For a home office it is even more important.  I recently set up a TMobile Backup Internet gateway and enabled automatic failover with my Mikrotik home network. The mechanism below allows for automatic failover for all devices on the network to use the backup internet, though there is a approximate minute gap when the ISP goes down.    I wanted the network ...</summary>
+
+  </entry>
 
   
   <entry>
@@ -115,34 +139,6 @@
   
 
   <summary>My house has a bevy of Z-Wave devices, plus a few LiFX bulbs. This has allowed for some fairly fun automations:          When the garage door opens, a tilt sensor attached to the door turns the external bulbs on to bright-white, and activates the garage internal lights.  The outside lights revert to normal ‘dim 2700K’ after 3 minutes, and the garage lights goes off after about 10 minutes.      ...</summary>
-
-  </entry>
-
-  
-  <entry>
-    <title>Jenkinsfile and Github hooks</title>
-    <link href="https://www.toger.us/posts/jenkins-and-github-hooks/" rel="alternate" type="text/html" title="Jenkinsfile and Github hooks" />
-    <published>2017-06-17T14:58:34-07:00</published>
-  
-    <updated>2017-06-17T14:58:34-07:00</updated>
-  
-    <id>https://www.toger.us/posts/jenkins-and-github-hooks/</id>
-    <content type="text/html" src="https://www.toger.us/posts/jenkins-and-github-hooks/" />
-    <author>
-      <name>Jason Martin</name>
-    </author>
-
-  
-    
-    <category term="Jenkins" />
-    
-    <category term="Github" />
-    
-    <category term="Jenkinsfile" />
-    
-  
-
-  <summary>Jenkins is the juggernaut of the build pipeline ecosystem.  Its roots go back to bespoke local build pipelines and dedicated build engineers.  In present days the likes of CircleCI, CodeShip, Drone.io have started nipping at Jenkins heels.  One of the significant differences is that, historically, Jenkins builds are configured inside Jenkins. The contemporary alternatives generally favor a SCM-...</summary>
 
   </entry>
 

@@ -1,5 +1,13 @@
 [
   {
+    "title": "Tmobile backup internet failover and Mikrotik",
+    "url": "/posts/tmobile-backup-internet/",
+    "categories": "mikrotik",
+    "tags": "",
+    "date": "2026-10-18 13:28:22 -0700",
+    "content": "Internet is all but a necessity today. For a home office it is even more important.  I recently set up a TMobile Backup Internet gateway and enabled automatic failover with my Mikrotik home network..."
+  },
+  {
     "title": "'Just' is banned as a unit of effort",
     "url": "/posts/just-a-unit-of-effort/",
     "categories": "scrum",
